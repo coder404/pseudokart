@@ -19,5 +19,13 @@
 			<result name="trial" type="tiles">/placeorder.tiles</result>
 		</action>
 		
+				<action name="paymentGateway" class="com.flipkart.action.gatewayAction">
+			<result name="success">/bankProxy.jsp</result>
+		</action>
+		
+		<action name="checkAccount" class="com.flipkart.action.bankAction">
+			<result name="success">/bankProxy.jsp</result>
+		</action>
+		
 	</package>
 </struts>
