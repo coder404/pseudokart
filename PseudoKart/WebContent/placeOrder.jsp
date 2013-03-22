@@ -124,7 +124,7 @@
 						<div class="tab-content">
 
 							<div id="netbank"  class="tab-pane active in">
-							<s:form theme="bootstrap" cssClass="form-horizontal" label="Pay With Net Banking">
+							<s:form theme="bootstrap" cssClass="form-horizontal" label="Pay With Net Banking" action="paymentGateway">
 							     <br/><br/>
 								<center></center><s:submit cssClass="btn btn-warning" value="Payment Gateway" /></center>
 							</s:form>
