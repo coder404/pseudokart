@@ -34,7 +34,7 @@
 	<s:fielderror theme="bootstrap" />
 	
 	
-	<s:form action="index" theme="simple"
+	<s:form action="checkAccount" theme="simple"
 		label="Please Enter the following details:"
 		cssClass="well form-vertical">
 	<table >
@@ -46,7 +46,7 @@
 		</tr>
 	</table>
 	</s:form>
-	<s:form action="index" theme="simple"
+	<s:form action="checkAccount" theme="simple"
 		label="Please Enter the following details:"
 		cssClass="well form-vertical">
 	
@@ -66,14 +66,25 @@
 <br>
 <br>
 	Expiry Date :
-	<s:select list="{'', '', ''}" name="expiryDate" headerKey="None" />
-	<s:select list="{'', '', ''}" name="expiryDate" headerKey="None" />
+	<s:select label="Expiry Date"
+													list="{'1','2','3','4','5','6','7','8','9','10','11','12'}"
+													name="month" emptyOption="false" headerKey="-1"
+													headerValue="Month"/>
+													
+											<s:select
+													list="{'13','14','15','16','17','18','19','20',
+													'21','22','23','24','25','26','27','28','29','30',
+													'31','32','33','34','35','36','37','38','39','40',
+													'41','42','43','44','45','46','47','48','49','50',
+													'51','52'}"
+													name="year" emptyOption="false" headerKey="-1"
+													headerValue="Year" />
 <br>
 	<br> IPIN for your Account :
-	<input type="text" value="" class="keyboardInput">
+	<input type="text" value="" name="ipin" class="keyboardInput">
 	<br>
 	<br>
-	 <s:submit cssClass="btn" action="index" align="center" cssStyle="background : #900 ;color : white" />
+	 <s:submit cssClass="btn"  align="center" cssStyle="background : #900 ;color : white" />
 	</s:form>
 
 </body>
