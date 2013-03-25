@@ -72,14 +72,15 @@
 				<table>	
 				<tr>
 				<td></td>
-				<td>Not You?</td><td><td></td><td>
-				<td></td><td></td><td><td></td><td></td><td></td><td></td>
+				<td>Not You?</td>
+				<td></td>
 				<td><a>Logout</a></td>
-				<td></td><td></td><td></td><td></td><td>
-				<td>	
-				<s:textarea cols="5" rows="3" readonly="true" value="Your Order Details will be sent to the email address"></s:textarea>
-				</td></tr>
-				</table>
+				<td></td>
+				</tr></table>
+				<br/><br/>
+				<pre>Your Order Details will be sent to the email address</pre>
+				
+				
 				</s:form>
 					
 				</div>
@@ -208,7 +209,7 @@
 									<pre>Note : After Clicking "pay",you will be redirected to a secure payment Gateway.</pre>
 									<br />
 									<center>
-									<s:submit cssClass="btn btn-warning" value="Payment Gateway" />
+									<s:submit cssClass="btn btn-warning" value="Pay" />
 									</center>
 								</s:form>
 							</div>
