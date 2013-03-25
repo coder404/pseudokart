@@ -67,7 +67,21 @@
 			<div class="tab-content">
 
 				<div id="Emaillogin" class="tab-pane active in">
-					<s:form id="tab1"></s:form>
+				<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+						label="">
+				<table>	
+				<tr>
+				<td></td>
+				<td>Not You?</td><td><td></td><td>
+				<td></td><td></td><td><td></td><td></td><td></td><td></td>
+				<td><a>Logout</a></td>
+				<td></td><td></td><td></td><td></td><td>
+				<td>	
+				<s:textarea cols="5" rows="3" readonly="true" value="Your Order Details will be sent to the email address"></s:textarea>
+				</td></tr>
+				</table>
+				</s:form>
+					
 				</div>
 
 				<div id="shippingaddress" class="tab-pane">
@@ -84,7 +98,7 @@
 								</div>
 							</div>
 						</a>
-					</div>
+					
 					<script type="text/javascript">
 					$(function() {
 					    $('.tickSign').hide();
@@ -97,7 +111,7 @@
 						);
 					});
 					</script>	
-		
+		      </div>
 
 					<div style="width: 60%; float: right">
 						<div
@@ -141,7 +155,7 @@
 							<s:textfield label="Phone*" name="phone" />
 
 							<s:submit cssClass="btn btn-warning" value="Save and Continue"
-								align="right" />
+								align="right"></s:submit>
 
 
 						</s:form>
@@ -191,8 +205,9 @@
 								<s:form theme="bootstrap" cssClass="form-horizontal"
 									label="Pay With Net Banking" action="paymentGateway">
 									<br />
+									<pre>Note : After Clicking "pay",you will be redirected to a secure payment Gateway.</pre>
 									<br />
-									<center></center>
+									<center>
 									<s:submit cssClass="btn btn-warning" value="Payment Gateway" />
 									</center>
 								</s:form>
@@ -247,7 +262,24 @@
 									<s:submit cssClass="btn btn-warning" value="Pay" />
 								</s:form>
 							</div>
-							<div id="wallet" class="tab-pane"></div>
+							<div id="wallet" class="tab-pane">
+							<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+									label="Pay Using e-Wallet ">
+									<table class="table table-hover">
+									<tr class="info">
+									<td><strong>Amount payable :</strong> </td>
+									</tr>
+									<tr class="success">
+									<td><strong>Wallet Balance Used :</strong> </td>
+									</tr>
+									<tr class="warning">
+									<td><strong>Remaining Wallet Balance :</strong> </td>
+									</tr>
+									</table>
+									<s:submit cssClass="btn btn-warning" value="Pay" />
+								</s:form>
+							
+							</div>
 						</div>
 					</div>
 					<!-- End here -->
