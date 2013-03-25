@@ -8,6 +8,13 @@
  
 </head>
 <body>
-Footer
+<table>
+<tr>
+<td>
+<img src="./images/lock.png"/>
+</td>
+<td>Safe and Secure Shopping Guarantee</td>
+</tr>
+</table>
 </body>
 </html>
