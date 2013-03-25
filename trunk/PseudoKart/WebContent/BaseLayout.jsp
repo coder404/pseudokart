@@ -19,7 +19,7 @@
     <tr>
     </tr>
     <tr>
-        <td valign="baseline" width="1500" height="1000"><tiles:insertAttribute name="menu" /></td>
+        <td valign="baseline" width="1500" ><tiles:insertAttribute name="menu" /></td>
         <td valign="top"><tiles:insertAttribute name="body"/></td>
     </tr>
   
