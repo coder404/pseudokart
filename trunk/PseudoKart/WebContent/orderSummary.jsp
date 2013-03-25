@@ -12,7 +12,7 @@
 	<s:form action="index" theme="bootstrap" cssClass="form-vertical"
 		label="Order Summary">
 
-	<s:textarea name="summary" cols="5" rows="10" />
+	<s:textarea name="summary" cols="3" rows="10" />
 
 
 	</s:form>
