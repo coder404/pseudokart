@@ -22,12 +22,12 @@
 	<s:form>
 		<table>
 	        <tr><td><h2>Login</h2></td></tr>
-	        <tr><td><s:textfield name="Username" key="Username" size="20"
+	        <tr><td><s:textfield name="email" key="email" size="20"
 					label="Email Address" /></td></tr>
-	        <tr><td><s:password name="Password" key="Password" size="20"
+	        <tr><td><s:password name="password" key="password" size="20"
 						label="Password" /></td></tr>
-	        <tr><td><s:submit class="btn-primary btn-large" method="execute" value="LOGIN"/></td>
-	        	<td><s:a href="" class="forgotPwd" onclick="hide()">Forgot your password?</s:a></td>
+	        <tr><td><button class="btn-primary btn-large">LOGIN</button></td>
+	        	<td><a href="" class="forgotPwd" onclick="hide()">Forgot your password?</a></td>
 	        </tr>
 		</table>
 	</s:form>
@@ -35,9 +35,10 @@
 		<table>
 	      	<tr><td><h3>Forgot your Password?</h3></td></tr>
 	      	<tr><td>Enter your Email Address here to receive a link to change password.</td></tr>
-	      	<tr><td><s:textfield name="Username" key="Username" label="Email Address"/></td></tr>
-	      	<tr><td><s:submit class="btn-primary btn-large" method="execute" value="Send Email"/></td></tr>
-	      	<tr><td>Don't have an account? <s:a href="">Sign Up</s:a></td></tr>
+			<tr><td><s:textfield name="email2" key="email2" size="20"
+					label="Email Address" /></td></tr>
+	      	<tr><td><button class="btn-primary btn-large">Send Email</button></td></tr>
+	      	<tr><td>Don't have an account? <a href="">Sign Up</a></td></tr>
 		</table>
 	</s:form>
 </body>
