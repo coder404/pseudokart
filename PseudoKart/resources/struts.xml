@@ -15,11 +15,23 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
-		<action name="dummy" class="com.flipkart.action.dummyAction">
+		<action name="dummy" class="com.flipkart.action.placeorderAction" method="initial">
 			<result name="trial" type="tiles">/placeorder.tiles</result>
 		</action>
 		
-				<action name="paymentGateway" class="com.flipkart.action.gatewayAction">
+		<action name="nextTab" class="com.flipkart.action.placeorderAction" method="emailLogin">
+			<result name="ok" type="tiles">/placeorder.tiles</result>
+		</action>
+		
+		<action  name="newShipAddr" class="com.flipkart.action.placeorderAction">
+		  <result name="success" type="tiles">/placeorder.tiles</result>
+		</action>
+	
+	<action  name="orderReview" class="com.flipkart.action.placeorderAction" method="reviewOrder">
+		  <result name="ok" type="tiles">/placeorder.tiles</result>
+		</action>
+	
+	<action name="paymentGateway" class="com.flipkart.action.gatewayAction">
 			<result name="success">/bankProxy.jsp</result>
 		</action>
 		

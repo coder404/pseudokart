@@ -21,7 +21,7 @@
 #addressBox{
 	border: 2px solid #a5a296; 
 	width: 150px; 
-	height: 60px; 
+	height: 110px; 
 	margin: 5px; 
 	padding: 10px; 
 	color: #333; 
@@ -47,7 +47,26 @@
 
 <sb:head />
 </head>
+
+<%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.placeorderAction,com.flipkart.model.Address"%>
+
 <body>
+
+<script>
+$(window).load(function(){
+   var tabno = <%=ActionContext.getContext().getSession().get("tabno") %>
+  
+  if(tabno == 0)
+	  $('#myTab li:eq(0) a').tab('show');
+ if(tabno == 1)
+	  $('#myTab li:eq(1) a').tab('show');
+   if(tabno == 2)
+	  $('#myTab li:eq(2) a').tab('show');
+   if(tabno == 3)
+		$('#myTab li:eq(3) a').tab('show');
+
+});
+    </script>
 
 
 	<div class="tabbable">
@@ -55,10 +74,9 @@
 			<ul class="nav nav-tabs" id="myTab">
 				<li class="active"><a data-toggle="tab" href="#Emaillogin">Email
 						Login</a></li>
-				<li><a href="#shippingaddress" data-toggle="tab">Shipping
-						Address</a></li>
-				<li><a href="#ordersummary" data-toggle="tab">Order Summary</a></li>
-				<li><a href="#paymentoptions" data-toggle="tab">Payment
+				<li><a href="#shippingaddress" >Shipping Address</a></li>
+				<li><a href="#ordersummary" >Order Summary</a></li>
+				<li><a href="#paymentoptions" >Payment
 						Options</a></li>
 			</ul>
 
@@ -67,11 +85,12 @@
 			<div class="tab-content">
 
 				<div id="Emaillogin" class="tab-pane active in">
-				<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+				<s:form action="nextTab" theme="bootstrap" cssClass="form-horizontal"
 						label="">
 				<table>	
 				<tr>
-				<td></td>
+				<td><%=ActionContext.getContext().getSession().get("email") %></td>
+				<td></td><td></td>
 				<td>Not You?</td>
 				<td></td>
 				<td><a>Logout</a></td>
@@ -80,32 +99,42 @@
 				<br/><br/>
 				<pre>Your Order Details will be sent to the email address</pre>
 				
-				
+				<s:submit cssClass="btn btn-warning" value="Continue"
+								align="right" ></s:submit>
 				</s:form>
-					
+						
 				</div>
 
 				<div id="shippingaddress" class="tab-pane">
-
+		
+		     
 					<div style="width: 40%; float: left">
 						<center>
 							<h5>Select Previous Address</h5>
 						</center>
+						
 						<a id="refs" style="color: #004b91; text-decoration: none;">
+						<s:iterator value="addr_list">
 							<div id="addressBox">
-								
-								<div class="tickSign" style="width: 120px; height: 20px; line-height: 20px; no-repeat; border: 1px solid #ccc; -moz-border-radius: 2px; border-radius: 2px; -moz-box-shadow: 1px 1px .3px #9d9d9d; -webkit-box-shadow: 1px 1px .3px #9d9d9d; box-shadow: 1px 1px .3px #9d9d9d; color: #555; font-size: 13px; padding: 1px 18px 1px 5px; background-color: #cecdcd;">	
-								
+								<b><s:property value="name" /></b><br />
+								<s:property value="streetAddress" /><br/>
+								<s:property value="city" /> &nbsp;<s:property value="state" /><br />
+								<s:property value="pin" /><br />
+								<s:property value="phone" /><br/>
+								<b style=" border: 1px solid #ccc;padding: 1px 18px 1px 30px; box-shadow: 1px 1px .3px #9d9d9d; background-color: #cecdcd;">Click to select</b>
+								<!--  <div class="tickSign" style="width: 120px; height: 15px; line-height: 0.1px; no-repeat; border: 1px solid #ccc; -moz-border-radius: 1px; border-radius: 1px; -moz-box-shadow: .5px .5px .3px #9d9d9d; -webkit-box-shadow: .5px .5px .3px #9d9d9d; box-shadow: .5px .5px .3px #9d9d9d; color: #555; font-size: 14px; padding: 1px 18px 1px 5px; background-color: #cecdcd;"></div>-->	
 								</div>
-							</div>
+								<br/>
+						</s:iterator>
 						</a>
+				      	
 					
 					<script type="text/javascript">
 					$(function() {
 					    $('.tickSign').hide();
 					    $('#refs').hover(
 						    function() {
-						        $('.tickSign').show().append("&nbsp;&nbsp;&nbsp;&nbsp; Click to select");
+						        $('.tickSign').show();
 						    }, function() {
 						        $('.tickSign').hide().empty();
 						    }
@@ -113,11 +142,12 @@
 					});
 					</script>	
 		      </div>
-
+		      
+		      
+      
 					<div style="width: 60%; float: right">
 						<div
-							style="width: 1px; height: 450px; background-color: black; float: left;"></div>
-						<center>
+							style="width: 1px; height: 450px; background-color: black; float: left;"></div>						<center>
 							<h5>Enter New Shipping Address</h5>
 						</center>
 						<br /> <br />
@@ -127,7 +157,7 @@
 						<s:fielderror theme="bootstrap" />
 
 
-						<s:form action=" " theme="bootstrap" cssClass="form-horizontal">
+						<s:form action="newShipAddr" theme="bootstrap" cssClass="form-horizontal">
 							<s:textfield label="Name*" name="name" size="15" />
 
 							<s:textarea label="Address*" name="address" cols="20" rows="3" />
@@ -166,7 +196,7 @@
 
 
 				<div id="ordersummary" class="tab-pane">
-					<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+					<s:form action="orderReview" theme="bootstrap" cssClass="form-horizontal"
 						label="Review Your Order">
 						<table class="table table-striped">
 							<tr>
