@@ -21,7 +21,7 @@
 #addressBox{
 	border: 2px solid #a5a296; 
 	width: 150px; 
-	height: 110px; 
+	height: 120px; 
 	margin: 5px; 
 	padding: 10px; 
 	color: #333; 
@@ -32,9 +32,9 @@
 }
 .tickSign{
     width: 30px;
-    height: 15px;
-    float: right;
-    position: relative; top: 25px;right: 1px;
+    height: 20px;
+    float: left;
+    position: relative; right: 1px;
     background-image: url('./images/tickk.png');
     background-repeat: no-repeat;
 }
@@ -63,8 +63,19 @@ $(window).load(function(){
    if(tabno == 2)
 	  $('#myTab li:eq(2) a').tab('show');
    if(tabno == 3)
-		$('#myTab li:eq(3) a').tab('show');
-
+   {	
+	   $('#myTab li:eq(3) a').tab('show');
+        var sub = <%=ActionContext.getContext().getSession().get("paytabno") %>
+        if(sub == 0)
+        	 $('#newTab li:eq(0) a').tab('show');
+        if(sub == 1)
+       	 $('#newTab li:eq(1) a').tab('show');
+        if(sub == 2)
+       	 $('#newTab li:eq(2) a').tab('show');
+        if(sub == 3)
+       	 $('#newTab li:eq(3) a').tab('show');
+   }
+   
 });
     </script>
 
@@ -115,14 +126,16 @@ $(window).load(function(){
 						
 						<a id="refs" style="color: #004b91; text-decoration: none;">
 						<s:iterator value="addr_list">
-							<div id="addressBox">
+							<div id="addressBox" >
+							
 								<b><s:property value="name" /></b><br />
 								<s:property value="streetAddress" /><br/>
-								<s:property value="city" /> &nbsp;<s:property value="state" /><br />
+								<s:property value="city" /> , &nbsp;<s:property value="state" /><br />
 								<s:property value="pin" /><br />
 								<s:property value="phone" /><br/>
 								<b style=" border: 1px solid #ccc;padding: 1px 18px 1px 30px; box-shadow: 1px 1px .3px #9d9d9d; background-color: #cecdcd;">Click to select</b>
-								<!--  <div class="tickSign" style="width: 120px; height: 15px; line-height: 0.1px; no-repeat; border: 1px solid #ccc; -moz-border-radius: 1px; border-radius: 1px; -moz-box-shadow: .5px .5px .3px #9d9d9d; -webkit-box-shadow: .5px .5px .3px #9d9d9d; box-shadow: .5px .5px .3px #9d9d9d; color: #555; font-size: 14px; padding: 1px 18px 1px 5px; background-color: #cecdcd;"></div>-->	
+								<!-- <div class="tickSign" id=""></div>-->
+								
 								</div>
 								<br/>
 						</s:iterator>
@@ -130,9 +143,11 @@ $(window).load(function(){
 				      	
 					
 					<script type="text/javascript">
-					$(function() {
+					
+				$(function() {
 					    $('.tickSign').hide();
-					    $('#refs').hover(
+			
+					    $(id).hover(
 						    function() {
 						        $('.tickSign').show();
 						    }, function() {
@@ -140,6 +155,8 @@ $(window).load(function(){
 						    }
 						);
 					});
+					
+					
 					</script>	
 		      </div>
 		      
@@ -151,13 +168,11 @@ $(window).load(function(){
 							<h5>Enter New Shipping Address</h5>
 						</center>
 						<br /> <br />
-
-						<s:actionerror theme="bootstrap" />
-						<s:actionmessage theme="bootstrap" />
-						<s:fielderror theme="bootstrap" />
-
-
-						<s:form action="newShipAddr" theme="bootstrap" cssClass="form-horizontal">
+						<s:actionerror theme="bootstrap"/>
+						<s:fielderror/>
+						<s:actionmessage/>
+						<s:form action="newShipAddr" theme="bootstrap" cssClass="form-horizontal"  method="post">
+						 
 							<s:textfield label="Name*" name="name" size="15" />
 
 							<s:textarea label="Address*" name="address" cols="20" rows="3" />
@@ -181,15 +196,56 @@ $(window).load(function(){
 							<s:textfield label="Country" name="country" value="India"
 								disabled="true" />
 
-							<s:textfield label="Pincode*" name="pincode" />
+							<s:textfield label="Pincode*" name="pincode" id="pin"/>
 
-							<s:textfield label="Phone*" name="phone" />
+							<s:textfield label="Phone*" name="phone" id="contactnumber"/>
 
 							<s:submit cssClass="btn btn-warning" value="Save and Continue"
 								align="right"></s:submit>
-
-
-						</s:form>
+								</s:form>	
+						<!--<script language="JavaScript">
+							function chkMobile() {
+								var mobile = document
+										.getElementById("contactnumber");
+								var pos = contactnumber.value
+										.search(/^(\+91-|\+91|0)?\d{10}$/);
+								if (mobile.value == "") {
+									alert("You did not enter a Contact Number. Enter one now");
+									init.focus();
+									return false;
+								}
+								if (mobile.value.length != 10) {
+									alert("Number should be of length 10 like[9740019599]");
+									return false;
+								}
+								if (pos != 0) {
+									alert("Contact number does not contain numbers");
+									return false;
+								} else
+									return true;
+							}
+							
+						function chckPin() {
+							var pin = document.getelementById("pin");
+							var pos = pin.value.search( /^([1-9])([0-9]){5}$/);
+							if(pin.value == "")
+								{
+								alert("You did not enter a PIN Number. Enter one now");
+								init.focus();
+								return false;
+								}
+							if (pin.value.length != 6) {
+								alert("Number should be of length 6 like[600107]");
+								return false;
+							}
+							if (pos != 0) {
+								alert("PIN number does not contain numbers");
+								return false;
+							} else
+								return true;
+							}	
+						</script>-->
+						
 					</div>
 				</div>
 
@@ -222,6 +278,9 @@ $(window).load(function(){
 
 				<div id="paymentoptions" class="tab-pane">
 
+					
+
+
 					<div class="tabbable tabs-left">
 						<ul class="nav nav-tabs" id="newTab">
 							<li class="active"><a data-toggle="tab" href="#netbank">Net
@@ -230,8 +289,10 @@ $(window).load(function(){
 							<li><a href="#gift" data-toggle="tab">e-Gift Voucher</a></li>
 							<li><a href="#wallet" data-toggle="tab">e-Wallet</a></li>
 						</ul>
+                         
+                         
+				
 						<div class="tab-content">
-
 							<div id="netbank" class="tab-pane active in">
 								<s:form theme="bootstrap" cssClass="form-horizontal"
 									label="Pay With Net Banking" action="paymentGateway">
@@ -248,7 +309,7 @@ $(window).load(function(){
 								<s:actionerror theme="bootstrap" />
 								<s:actionmessage theme="bootstrap" />
 								<s:fielderror theme="bootstrap" />
-								<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+								<s:form action="creditdebitPay" theme="bootstrap" cssClass="form-horizontal"
 									label="Pay Using Credit/Debit Cards ">
 									<pre>Enter your Card Details</pre>
 									<br />
@@ -266,7 +327,7 @@ $(window).load(function(){
 													'31','32','33','34','35','36','37','38','39','40',
 													'41','42','43','44','45','46','47','48','49','50',
 													'51','52'}"
-										name="month" emptyOption="false" headerKey="-1"
+										name="year" emptyOption="false" headerKey="-1"
 										headerValue="Year" />
 
 									<s:textfield label="CVV No" name="cvv"
@@ -282,13 +343,13 @@ $(window).load(function(){
 								<s:actionerror theme="bootstrap" />
 								<s:actionmessage theme="bootstrap" />
 								<s:fielderror theme="bootstrap" />
-								<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+								<s:form action="voucherpay" theme="bootstrap" cssClass="form-horizontal"
 									label="Pay Using e-Gift Voucher ">
 									<pre>Enter the Gift Voucher Details</pre>
 									<br />
 									<br />
-									<s:textfield label="Card Number" name="cardno" />
-									<s:textfield label="PIN Number" name="pinno" />
+									<s:textfield label="Card Number" name="vcardnum" />
+									<s:password label="PIN Number" name="vpinno" />
 
 									<s:submit cssClass="btn btn-warning" value="Pay" />
 								</s:form>

@@ -15,21 +15,42 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
-		<action name="dummy" class="com.flipkart.action.placeorderAction" method="initial">
+		<action name="dummy" class="com.flipkart.action.startPlaceOrderAction">
 			<result name="trial" type="tiles">/placeorder.tiles</result>
 		</action>
 		
-		<action name="nextTab" class="com.flipkart.action.placeorderAction" method="emailLogin">
+		<action name="nextTab" class="com.flipkart.action.startPlaceOrderAction" method="emailLogin">
 			<result name="ok" type="tiles">/placeorder.tiles</result>
 		</action>
 		
 		<action  name="newShipAddr" class="com.flipkart.action.placeorderAction">
-		  <result name="success" type="tiles">/placeorder.tiles</result>
+		 		  <result name="success" type="tiles">/placeorder.tiles</result>
+		 		  <result name="input" type="chain">nextTab</result>
 		</action>
 	
-	<action  name="orderReview" class="com.flipkart.action.placeorderAction" method="reviewOrder">
+	<action  name="orderReview" class="com.flipkart.action.reviewPlaceOrderAction" method="navigate" >
 		  <result name="ok" type="tiles">/placeorder.tiles</result>
 		</action>
+	
+	<action name="crediterror" class="com.flipkart.action.reviewPlaceOrderAction" method="creditdebiterror">
+	      <result name="ok" type="tiles">/placeorder.tiles</result>
+	</action>
+	
+	<action  name="creditdebitPay" class="com.flipkart.action.reviewPlaceOrderAction" >
+	      <result name="fail" type="chain">crediterror</result>
+		  <result name="success" type="redirect">paymentGateway</result>
+		</action>
+		
+		
+	<action name="vouchererror" class="com.flipkart.action.reviewPlaceOrderAction" method="vouchererror">
+	      <result name="ok" type="tiles">/placeorder.tiles</result>
+	</action>
+	
+	<action  name="voucherpay" class="com.flipkart.action.reviewPlaceOrderAction" method="payVoucher" >
+	      <result name="fail" type="chain">vouchererror</result>
+		  <result name="success" type="redirect">paymentGateway</result>
+		</action>	
+	
 	
 	<action name="paymentGateway" class="com.flipkart.action.gatewayAction">
 			<result name="success">/bankProxy.jsp</result>
@@ -39,5 +60,31 @@
 			<result name="success">/bankProxy.jsp</result>
 		</action>
 		
+
+		 <action name="account" class="com.flipkart.action.accountManagementAction">
+			<result name="success" type="tiles">/accountManagement.tiles</result>
+		</action>
+		
+		 <action name="order_status" class="com.flipkart.action.accountManagementAction" method="orderStatus">
+			<result name="success" type="tiles">/orderStatus.tiles</result>
+		</action>
+		
+		 <action name="change_password" class="com.flipkart.action.accountManagementAction" method="changePassword">
+			<result name="success" type="tiles">/changePassword.tiles</result>
+		</action>
+		
+		 <action name="addresses" class="com.flipkart.action.accountManagementAction" method="addresses">
+			<result name="success" type="tiles">/addresses.tiles</result>
+		</action>
+		
+		<action name="update_email" class="com.flipkart.action.accountManagementAction" method="updateEmail">
+			<result name="success" type="tiles">/updateEmail.tiles</result>
+		</action>
+		
+		<action name="profile_settings" class="com.flipkart.action.accountManagementAction" method="profileSettings">
+			<result name="success" type="tiles">/profileSettings.tiles</result>
+		</action>
+				
+
 	</package>
 </struts>
