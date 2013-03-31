@@ -50,6 +50,7 @@ public static ArrayList<Address> findAll()
 	try {
 		while (resultSet.next()) {
 			Address addr=new Address();
+			addr.setAddress_id(resultSet.getInt("address_id"));
 			addr.setName(resultSet.getString("name"));
 			addr.setStreetAddress(resultSet.getString("streetAdress"));
 			addr.setLandmark(resultSet.getString("landmark"));
