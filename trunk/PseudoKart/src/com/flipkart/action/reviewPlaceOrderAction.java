@@ -1,7 +1,9 @@
 package com.flipkart.action;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import com.flipkart.model.voucher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -87,6 +89,8 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	public String payVoucher()
 	{
 		error="";
+		int flag=0;
+		ArrayList<voucher> list;
 		if(vcardnum.isEmpty())
 		{
 			error+="Voucher Card Number is required.";
@@ -104,6 +108,20 @@ public class reviewPlaceOrderAction extends ActionSupport {
 		{
 			error+="Voucher PIN has to be 4 digits.";
 		}
+		
+		list=voucher.findAll();
+		if(list!=null && !(vpinno.isEmpty()) && !(vcardnum.isEmpty()))
+		{
+			for(int i=0;i<list.size();i++)
+			{
+				
+					if( list.get(i).getVoucher_number().equals(vcardnum) && list.get(i).getVoucher_pin().equals(vpinno) )
+				      {flag=1;break;}		
+						
+			}
+		}
+		if(flag==0)
+			error+="Invalid Voucher Details";
 		 if(error.isEmpty())
 			  return SUCCESS;
 		  else
