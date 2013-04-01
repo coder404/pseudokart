@@ -13,7 +13,7 @@
 </tr>
 
  <tr>
-        <td height="30" colspan="2"><tiles:insertAttribute name="header" />
+        <td height="30"  bgcolor="#005575"  colspan="2"><tiles:insertAttribute name="header" />
         </td>
     </tr>  
     <tr>
