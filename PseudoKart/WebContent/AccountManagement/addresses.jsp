@@ -105,7 +105,18 @@
 				<br />
 				<s:submit name="commandButton" id="mysubmit" value="Save Changes"
 					cssClass="btn btn-primary" theme="simple" style="margin-left:120px" />
-			</s:form>
+<%-- 
+				<div class="address-box">
+				<s:if test="customerAddressList.size() != 0">
+					<s:iterator value="customerAddressList">
+						<s:property value="name"/>
+						<s:property value="streetAddress"/>
+						<s:property value="landmark"/>
+						<s:property value="city"/>
+					</s:iterator>
+				</s:if>
+				</div>
+ --%>			</s:form>
 		</div>
 	</div>
 	<!-- </div> -->
