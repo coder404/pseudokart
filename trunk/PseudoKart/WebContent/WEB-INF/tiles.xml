@@ -12,6 +12,14 @@
         <put-attribute name="body" value=""/>
         <put-attribute name="footer" value="/Footer.jsp" />
     </definition>
+    
+     <definition name="baseLayout1" template="/BaseLayout1.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/Header.jsp" />
+        <put-attribute name="menu" value="/menu.jsp" />
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/Footer.jsp" />
+    </definition>
    
     <definition name="/placeorder.tiles" extends="baseLayout">
 		<put-attribute name="header" value="/Header.jsp"/>  <!-- just for checking -->
@@ -20,7 +28,7 @@
        <put-attribute name="footer" value="/Footer.jsp"/>
     </definition>
 
-<definition name="/accountManagement.tiles" extends="baseLayout">
+<definition name="/accountManagement.tiles" extends="baseLayout1">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/personalInformation.jsp" />
@@ -28,34 +36,34 @@
     </definition>
     
     
-    <definition name="/orderStatus.tiles" extends="baseLayout">
+    <definition name="/orderStatus.tiles" extends="baseLayout1">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/orderStatus.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
-     <definition name="/changePassword.tiles" extends="baseLayout">
+     <definition name="/changePassword.tiles" extends="baseLayout1">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/changePassword.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
-    <definition name="/addresses.tiles" extends="baseLayout">
+    <definition name="/addresses.tiles" extends="baseLayout1">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/addresses.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
-    <definition name="/updateEmail.tiles" extends="baseLayout">
+    <definition name="/updateEmail.tiles" extends="baseLayout1">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/updateEmail.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
-    <definition name="/profileSettings.tiles" extends="baseLayout">
+    <definition name="/profileSettings.tiles" extends="baseLayout1">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/profileSettings.jsp" />
