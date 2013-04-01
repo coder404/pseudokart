@@ -17,6 +17,21 @@ public class voucher {
 	double balance;
 	
 	
+	public static int update(String voucherno,double bal) {
+
+		int no = Integer.parseInt(voucherno);
+		String updateSQL = 
+				"update voucher "
+						+ "set balance=" + bal +   
+						" where voucher_number = " +no+";" ;
+		System.out.println("query = " + updateSQL);
+		return DB.update(updateSQL);
+	}
+
+
+	
+	
+	
 	public static ArrayList<voucher> findAll()
 	{
 		ArrayList<voucher> list=new ArrayList<voucher>();
