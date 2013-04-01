@@ -141,6 +141,23 @@ public class Customer {
 			return null;
 		}
 
+		public int updatePersonalInformation() {
+			// TODO Auto-generated method stub
+			String updateSQL = 
+					"update customer "
+							+ "set firstName= '" + firstName + "',"
+							+ "lastName= '" + lastName + "',"
+							+ "mobileNumber= '" + mobileNumber + "',"
+							+ "landlineNumber= '" + landlineNumber + "',"
+							+" gender = '" + gender +"'" 
+							+" where email='"+email +"'";
+			System.out.println("query = " + updateSQL);
+			return DB.update(updateSQL);
+		
+			
+		}
+
+
 
 
 
