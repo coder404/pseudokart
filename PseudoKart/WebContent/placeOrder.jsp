@@ -122,7 +122,7 @@ $(window).load(function(){
 							<h5>Select Previous Address</h5>
 						</center>
 						<s:iterator value="addr_list">
-						<a style="color: #004b91; text-decoration: none;" href="multiAddr">
+						<a style="color: #004b91; text-decoration: none;" href="multiAddr?address_id=<s:property value="address_id"/>">
 							<div class="addressBox" >
 								<b><s:property value="name" /></b><br />
 								<s:property value="streetAddress" /><br/>
