@@ -1,5 +1,6 @@
 package com.flipkart.action;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.flipkart.model.Address;
@@ -21,6 +22,9 @@ public class addressAction extends ActionSupport {
 	private String phone = " ";
 	private int customer_id;
 	Map session;
+	ArrayList<Address> addressList=new ArrayList<Address>();
+	ArrayList<Address> customerAddressList=new ArrayList<Address>();
+	
 	Customer customerAction = new Customer();
 	 public boolean containsOnlyNumbers(String str) {
 	        
@@ -35,6 +39,8 @@ public class addressAction extends ActionSupport {
 	    }
 
 	public String execute() {
+		
+		
 		String email=(String)ActionContext.getContext().getSession().get("email");
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
@@ -67,6 +73,13 @@ public class addressAction extends ActionSupport {
 			
 			address.insert(customerAction.getId());
 			addActionMessage("Address saved successfully");
+			/*addressList=Address.findAll();
+			for(int i=0;i<addressList.size();i++){
+				if(addressList.get(i).getCustomer_id() == customerAction.getId())
+					customerAddressList.add(addressList.get(i));
+				
+			}
+			*/			
 			return SUCCESS;
 		}
 	}
@@ -157,6 +170,22 @@ public class addressAction extends ActionSupport {
 
 	public void setCustomerAction(Customer customerAction) {
 		this.customerAction = customerAction;
+	}
+
+	public ArrayList<Address> getAddressList() {
+		return addressList;
+	}
+
+	public void setAddressList(ArrayList<Address> addressList) {
+		this.addressList = addressList;
+	}
+
+	public ArrayList<Address> getCustomerAddressList() {
+		return customerAddressList;
+	}
+
+	public void setCustomerAddressList(ArrayList<Address> customerAddressList) {
+		this.customerAddressList = customerAddressList;
 	}
 
 }
