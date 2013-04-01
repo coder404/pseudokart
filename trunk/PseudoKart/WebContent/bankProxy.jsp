@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<img src="./images/citi.jpg" width="100" />
+<img src="./images/citi.jpg" width="50"/>
 
 <h4>Welcome to Citibank Payment Gateway
 <br>
@@ -81,11 +81,17 @@
 													headerValue="Year" />
 <br>
 	<br> IPIN for your Account :
-	<input type="text" value="" name="ipin" class="keyboardInput">
+	<input type="password" value="" name="ipin" class="keyboardInput">
 	<br>
 	<br>
 	 <s:submit cssClass="btn"  align="center" cssStyle="background : #900 ;color : white" />
 	</s:form>
+
+<%-- <s:url action="displayProduct.action" var="urlTag" >
+    <s:param name="productName">Samsung Galaxy Grand Duos</s:param>
+</s:url>
+<!--<s:a href="%{urlTag}">Samsung Galaxy Grand Duos</s:a>--> --%>
+
 
 </body>
 
