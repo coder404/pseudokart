@@ -18,7 +18,8 @@ public class startPlaceOrderAction extends ActionSupport {
 	public String execute()
 	{
 		System.out.println("in initial");
-		session.put("email", "yams25@gmail.com"); //this shud be done at login time		
+		session.put("email", "yams25@gmail.com"); //this shud be done at login time	-- remove
+		session.put("totalCartAmt", 10000.56);  //this shud be done at cart time -- remove
 		session.put("tabno", 0);
 		return "trial";
 	}
