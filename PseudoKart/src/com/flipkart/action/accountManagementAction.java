@@ -76,7 +76,7 @@ public class accountManagementAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String changePasswordPage() {
+	public String changePasswordPage() { //for page navigation
 		return SUCCESS;
 	}
 
