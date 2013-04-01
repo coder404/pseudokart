@@ -27,7 +27,15 @@
      </tr>
      <tr>
      <td>Current Balance : </td>
-     <td></td>
+     <td><s:property value="%{voucherbal}"/></td>
+     </tr>
+     <tr>
+     <td>Purchase Amount : </td>
+     <td><s:property value="%{purchaseAmt}"/></td>
+     </tr>
+     <tr>
+     <td>Balance After Pay: </td>
+     <td><s:property value="%{RemVoucherBal}"/></td>
      </tr>
      </table>
     </div>
