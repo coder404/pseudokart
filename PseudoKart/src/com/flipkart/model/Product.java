@@ -11,14 +11,22 @@ import com.mast.util.MyLog;
 
 public class Product {
 
-	String prodid;
-	String name;
-	String categoryID;
-	Double price;
-	String description;
+	private String prodid;
+	private String name;
+	private String categoryID;
+	private Double price;
+	private String description;
+	private String prodImage;
 
-	
-	
+	public String getProdImage() {
+		return prodImage;
+	}
+	public void setProdImage(String prodImage) {
+		this.prodImage = prodImage;
+	}
+
+
+	private int rating;
 	public String getProdid() {
 		return prodid;
 	}
@@ -46,6 +54,12 @@ public class Product {
 	public String getDescription() {
 		return description;
 	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -65,10 +79,10 @@ public class Product {
 				product.prodid = rs.getString("productId");
 				product.name = rs.getString("name");
 				product.categoryID = rs.getString("categoryID");
-//				product.price = rs.getString("price");
+product.price = Double.parseDouble((rs.getString("price")));
 				product.description = rs.getString("description");
 				
-				
+				product.prodImage= rs.getString("imageUrl");
 				DB.close(rs);
 				DB.close(connection);
 				return product;
@@ -96,7 +110,7 @@ public class Product {
 				product.prodid = rs.getString("productId");
 				product.name = rs.getString("name");
 				product.categoryID = rs.getString("categoryID");
-//				product.price = rs.getString("price");
+				product.price = Double.parseDouble((rs.getString("price")));
 				product.description = rs.getString("description");
 				selection.add(product);
 			}
@@ -110,5 +124,33 @@ public class Product {
 	}
 
 	
+	public static float ratingsProduct(String selectionModifier)
+	{
+
+		ResultSet rs=null;
+		float avgprd_rating = 0;
+		String query = "select * from productRatings " + selectionModifier;
+		System.out.println(query);
+		Connection connection = DB.getConnection();
+		rs = DB.readFromDB(query, connection);
+		try {
+			if (rs.next()) {
+				
+				System.out.println(Integer.parseInt(rs.getString("rating"))+"/" + Integer.parseInt(rs.getString("numberOfCustomers")));
+					avgprd_rating = (Integer.parseInt(rs.getString("rating"))/(Integer.parseInt(rs.getString("numberOfCustomers"))));
+			
+				return avgprd_rating;
+			}
+			
+			
+		} catch (SQLException e) {
+			MyLog.myCatch("Product.java", 70, e);
+			e.printStackTrace();
+		}
+		DB.close(rs);
+		DB.close(connection);
+		return 0;
+	}
+		
 	
 }
