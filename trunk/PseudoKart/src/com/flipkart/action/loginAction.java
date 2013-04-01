@@ -65,7 +65,7 @@ public class loginAction extends ActionSupport{
 			if(this.email.equals(tmpusr) && this.password.equals(tmppass))
 			{
 				fl = 1;
-				session.put("sessnm",email);
+				session.put("email",email);
 				break;
 			}
 		}
