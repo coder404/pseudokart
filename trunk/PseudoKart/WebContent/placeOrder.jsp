@@ -46,6 +46,7 @@
 
 
 <sb:head />
+
 </head>
 
 <%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.placeorderAction,com.flipkart.model.Address"%>
@@ -355,6 +356,12 @@ $(window).load(function(){
 								</s:form>
 							</div>
 							<div id="wallet" class="tab-pane">
+							<script>
+									function myFunction()
+									{
+											alert("Payment With Wallet Success!!!!");
+									}
+							</script>
 							<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
 									label="Pay Using e-Wallet ">
 									<table class="table table-hover">
@@ -368,7 +375,7 @@ $(window).load(function(){
 									<td><strong>Remaining Wallet Balance :</strong> </td>
 									</tr>
 									</table>
-									<s:submit cssClass="btn btn-warning" value="Pay" />
+									<s:submit cssClass="btn btn-warning" value="Pay" onclick="myFunction()"  />
 								</s:form>
 							
 							</div>
@@ -384,3 +391,6 @@ $(window).load(function(){
 	<!-- /.tabbable -->
 </body>
 </html>
+
+
+<!-- To do :  failure case for wallet ; failure case for voucher ; order summry -->
