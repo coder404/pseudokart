@@ -1,5 +1,6 @@
 package com.flipkart.action;
 
+import com.flipkart.model.bankAccount;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class bankAction extends ActionSupport{
@@ -17,6 +18,15 @@ public class bankAction extends ActionSupport{
 	private String month;
 	private String year;
 	private String ipin;
+	private String cardNo;
+	private String totalAmount;
+	
+	public String getCardNo() {
+		return cardNo;
+	}
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
 	public String getCardChosen() {
 		return cardChosen;
 	}
@@ -40,6 +50,12 @@ public class bankAction extends ActionSupport{
 	}
 	public void setCardNo3(String cardNo3) {
 		this.cardNo3 = cardNo3;
+	}
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	public String getCardNo4() {
 		return cardNo4;
@@ -68,8 +84,20 @@ public class bankAction extends ActionSupport{
 	public String execute()
 	{
 		
+		String cardNumber = cardNo1 + cardNo2 + cardNo3 + cardNo4;
+		
+		
+		String sql = "where cardNo = " + cardNumber;
+		
+		bankAccount account = bankAccount.findAccount(sql);
+/*validate : 
+		- password
+		- expiry date
+		- 
+	*/	
 		System.out.println("bank");
 		System.out.println(cardChosen + " " + cardNo1 + " " + cardNo2 + " " + cardNo1 + " " + cardNo1 + " " + month + " " + year + " "+ ipin);
+		System.out.println(account.getCardType() + " " + account.getCardNo() + account.getExpiryDate());
 		return "success";
 	}
 
