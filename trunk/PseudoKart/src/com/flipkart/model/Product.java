@@ -83,7 +83,7 @@ public class Product {
 		return null;
 	}
 	
-	public static ArrayList<Product> find(String selectionModifier) {
+	public static ArrayList<Product> findAll(String selectionModifier) {
 		ArrayList<Product> selection = new ArrayList<Product>();
 		ResultSet rs = null;
 		String query = "select * " +
