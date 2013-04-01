@@ -20,7 +20,7 @@
        <put-attribute name="footer" value="/Footer.jsp"/>
     </definition>
 
-     <definition name="/accountManagement.tiles" extends="baseLayout">
+<definition name="/accountManagement.tiles" extends="baseLayout">
 		<put-attribute name="header" value=""/>
 		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/personalInformation.jsp" />
@@ -61,6 +61,7 @@
        <put-attribute name="body" value="/AccountManagement/profileSettings.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
+
 
 
  </tiles-definitions>
