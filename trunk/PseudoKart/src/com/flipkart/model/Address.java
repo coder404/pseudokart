@@ -19,6 +19,24 @@ public class Address {
 	private String country="India";
 	private String pin=" ";
 	private String phone=" ";
+	private int customer_id;
+
+	public int insert(int customer_id) {
+		// TODO Auto-generated method stub
+		System.out.println("in insert"+customer_id);
+		String insertSQL = "insert into address"
+				+ "(name,streetAddress,landmark,city,state,country,pin,phone,customer_id) "
+				+ "values(" + "'" + name + "','" + streetAddress + "', '"
+				+ landmark + "','" + city + "' , '" + state + "' , '" + country
+				+ "','" + pin + "','" + phone + "', '" +customer_id +"' );";
+		
+		System.out.println(insertSQL);
+
+		return DB.update(insertSQL);
+	}
+
+
+
 
 
 	public int insert() {
@@ -139,6 +157,14 @@ public static ArrayList<Address> findAll()
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
 
