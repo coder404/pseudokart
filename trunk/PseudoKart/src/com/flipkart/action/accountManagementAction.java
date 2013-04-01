@@ -22,6 +22,7 @@ public class accountManagementAction extends ActionSupport {
 
 	Login login;
 
+	
 	Map session;
 
 	// variables password
