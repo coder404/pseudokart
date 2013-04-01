@@ -18,7 +18,7 @@
 <title>Place Order</title>
 <style type="text/css">
 
-#addressBox{
+.addressBox{
 	border: 2px solid #a5a296; 
 	width: 150px; 
 	height: 120px; 
@@ -44,9 +44,7 @@
 
 </style>
 
-
 <sb:head />
-
 </head>
 
 <%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.placeorderAction,com.flipkart.model.Address"%>
@@ -79,7 +77,6 @@ $(window).load(function(){
    
 });
     </script>
-
 
 	<div class="tabbable">
 		<div class="container-fluid">
@@ -124,11 +121,9 @@ $(window).load(function(){
 						<center>
 							<h5>Select Previous Address</h5>
 						</center>
-						
-						<a id="refs" style="color: #004b91; text-decoration: none;">
 						<s:iterator value="addr_list">
-							<div id="addressBox" >
-							
+						<a style="color: #004b91; text-decoration: none;" href="multiAddr">
+							<div class="addressBox" >
 								<b><s:property value="name" /></b><br />
 								<s:property value="streetAddress" /><br/>
 								<s:property value="city" /> , &nbsp;<s:property value="state" /><br />
@@ -136,19 +131,18 @@ $(window).load(function(){
 								<s:property value="phone" /><br/>
 								<b style=" border: 1px solid #ccc;padding: 1px 18px 1px 30px; box-shadow: 1px 1px .3px #9d9d9d; background-color: #cecdcd;">Click to select</b>
 								<!-- <div class="tickSign" id=""></div>-->
-								
 								</div>
-								<br/>
+								
+					</a><br/>
 						</s:iterator>
-						</a>
 				      	
 					
 					<script type="text/javascript">
 					
-				$(function() {
+				/* $(function() {
 					    $('.tickSign').hide();
 			
-					    $(id).hover(
+					    $('#addressBox').hover(
 						    function() {
 						        $('.tickSign').show();
 						    }, function() {
@@ -157,7 +151,7 @@ $(window).load(function(){
 						);
 					});
 					
-					
+			 */		
 					</script>	
 		      </div>
 		      
@@ -204,49 +198,6 @@ $(window).load(function(){
 							<s:submit cssClass="btn btn-warning" value="Save and Continue"
 								align="right"></s:submit>
 								</s:form>	
-						<!--<script language="JavaScript">
-							function chkMobile() {
-								var mobile = document
-										.getElementById("contactnumber");
-								var pos = contactnumber.value
-										.search(/^(\+91-|\+91|0)?\d{10}$/);
-								if (mobile.value == "") {
-									alert("You did not enter a Contact Number. Enter one now");
-									init.focus();
-									return false;
-								}
-								if (mobile.value.length != 10) {
-									alert("Number should be of length 10 like[9740019599]");
-									return false;
-								}
-								if (pos != 0) {
-									alert("Contact number does not contain numbers");
-									return false;
-								} else
-									return true;
-							}
-							
-						function chckPin() {
-							var pin = document.getelementById("pin");
-							var pos = pin.value.search( /^([1-9])([0-9]){5}$/);
-							if(pin.value == "")
-								{
-								alert("You did not enter a PIN Number. Enter one now");
-								init.focus();
-								return false;
-								}
-							if (pin.value.length != 6) {
-								alert("Number should be of length 6 like[600107]");
-								return false;
-							}
-							if (pos != 0) {
-								alert("PIN number does not contain numbers");
-								return false;
-							} else
-								return true;
-							}	
-						</script>-->
-						
 					</div>
 				</div>
 

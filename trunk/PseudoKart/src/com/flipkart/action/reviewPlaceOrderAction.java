@@ -18,6 +18,18 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	String error="";
 	String vcardnum;
 	String vpinno;
+	double RemVoucherBal;
+	double voucherbal=0.0;
+	double purchaseAmt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
+	
+	public String MultiAddrSelect()
+	{
+		session=ActionContext.getContext().getSession();
+		System.out.println("forwarding to order summary");
+		session.put("tabno", 2);
+		return "move";
+		
+	}
 	
 	public String navigate()
 	{
@@ -90,7 +102,7 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	{
 		error="";
 		int flag=0;
-		double voucherbal=0.0;
+		
 		ArrayList<voucher> list;
 		if(vcardnum.isEmpty())
 		{
@@ -127,15 +139,20 @@ public class reviewPlaceOrderAction extends ActionSupport {
 		if(flag==1)
 		{
 			//check voucher balance with current purchase amount
-			double purchaseAmt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
+			
 			System.out.println("voucher bal="+voucherbal+" purchase amt="+purchaseAmt);
 			if(purchaseAmt > voucherbal)
 				error+="Insufficient Voucher Balance";
 		}
 		
 		 if(error.isEmpty())
+		 {    
+			 RemVoucherBal = voucherbal - purchaseAmt;
+			 //update voucher balance
+			 voucher.update(vcardnum,RemVoucherBal); 
 			  return SUCCESS;
-		  else
+		 }
+		 else
 		  {
 			  System.out.println("error="+error);
 			  session=ActionContext.getContext().getSession();
@@ -218,6 +235,30 @@ public class reviewPlaceOrderAction extends ActionSupport {
 
 	public void setVpinno(String vpinno) {
 		this.vpinno = vpinno;
+	}
+
+	public double getRemVoucherBal() {
+		return RemVoucherBal;
+	}
+
+	public void setRemVoucherBal(double remVoucherBal) {
+		RemVoucherBal = remVoucherBal;
+	}
+
+	public double getVoucherbal() {
+		return voucherbal;
+	}
+
+	public void setVoucherbal(double voucherbal) {
+		this.voucherbal = voucherbal;
+	}
+
+	public double getPurchaseAmt() {
+		return purchaseAmt;
+	}
+
+	public void setPurchaseAmt(double purchaseAmt) {
+		this.purchaseAmt = purchaseAmt;
 	}
 	
 }
