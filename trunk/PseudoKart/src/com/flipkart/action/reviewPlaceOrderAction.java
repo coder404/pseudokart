@@ -90,6 +90,7 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	{
 		error="";
 		int flag=0;
+		double voucherbal=0.0;
 		ArrayList<voucher> list;
 		if(vcardnum.isEmpty())
 		{
@@ -116,12 +117,22 @@ public class reviewPlaceOrderAction extends ActionSupport {
 			{
 				
 					if( list.get(i).getVoucher_number().equals(vcardnum) && list.get(i).getVoucher_pin().equals(vpinno) )
-				      {flag=1;break;}		
+				      {flag=1; voucherbal=list.get(i).getBalance();break;}		
 						
 			}
 		}
 		if(flag==0)
 			error+="Invalid Voucher Details";
+		
+		if(flag==1)
+		{
+			//check voucher balance with current purchase amount
+			double purchaseAmt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
+			System.out.println("voucher bal="+voucherbal+" purchase amt="+purchaseAmt);
+			if(purchaseAmt > voucherbal)
+				error+="Insufficient Voucher Balance";
+		}
+		
 		 if(error.isEmpty())
 			  return SUCCESS;
 		  else
