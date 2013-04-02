@@ -42,7 +42,7 @@ public class newUserAction extends ActionSupport{
 		this.repeatPassword = repeatPassword;
 	}
 
-	public void validate() {
+	/*public void validate() {
 
 		// validate email
 		if (email.isEmpty()) {
@@ -65,6 +65,12 @@ public class newUserAction extends ActionSupport{
 		}
 	}
 	
+*/	
+	public String newUser()
+	{
+		return "success";
+	}
+	
 	public String execute() {
 		int flag = 0;
 		Login login = new Login();
@@ -75,7 +81,7 @@ public class newUserAction extends ActionSupport{
 		int maximum=2000;
 		String random,subemail;
 		random=minimum + (int)(Math.random()*maximum)+"";
-		subemail=email.substring(1,5);
+		subemail=email.substring(0,5);
 		profileName=subemail+random;
 		Customer newCustomer=new Customer();
 		newCustomer.setFirstName("");
