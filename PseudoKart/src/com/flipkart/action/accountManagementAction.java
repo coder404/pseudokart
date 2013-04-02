@@ -24,7 +24,7 @@ public class accountManagementAction extends ActionSupport {
 
 	
 	Map session=ActionContext.getContext().getSession();;
-
+	
 	// variables password
 	private String oldPassword;
 	private String newPassword;
@@ -89,6 +89,7 @@ public class accountManagementAction extends ActionSupport {
 	}
 
 	public String changePassword() {
+		email=(String)session.get("email");
 		// Find one object of login for the corresponding email
 		String mod = "where email='" + email + "'";
 		Login login = new Login();
@@ -132,6 +133,7 @@ public class accountManagementAction extends ActionSupport {
 		 * emailSession=(String)ActionContext.getContext().getSession().get
 		 * ("email");
 		 */
+		email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
 		System.out.println(mod);
 		customerAction = Customer.findOne(mod);
