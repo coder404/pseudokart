@@ -1,6 +1,9 @@
 package com.flipkart.action;
 
+import com.flipkart.model.Customer;
+import com.flipkart.model.Order;
 import com.flipkart.model.bankAccount;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class bankAction extends ActionSupport{
@@ -19,7 +22,7 @@ public class bankAction extends ActionSupport{
 	private String year;
 	private String ipin;
 	private String cardNo;
-	private String totalAmount;
+	private double totalAmount;
 	
 	public String getCardNo() {
 		return cardNo;
@@ -51,10 +54,10 @@ public class bankAction extends ActionSupport{
 	public void setCardNo3(String cardNo3) {
 		this.cardNo3 = cardNo3;
 	}
-	public String getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
-	public void setTotalAmount(String totalAmount) {
+	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 	public String getCardNo4() {
@@ -81,6 +84,32 @@ public class bankAction extends ActionSupport{
 	public void setIpin(String ipin) {
 		this.ipin = ipin;
 	}
+	
+	
+public void validate(){
+		
+	String cardNumber = cardNo1 + cardNo2 + cardNo3 + cardNo4;
+	
+	if(cardNo1.length()!=4 || cardNo2.length()!=4 || cardNo3.length()!=4 || cardNo4.length()!=4)
+		addFieldError( "cardNo", "Enter valid card details" );
+	
+	String sql = "where cardNo = " + cardNumber;
+	bankAccount account = bankAccount.findAccount(sql);
+	
+	if(account==null)
+		addFieldError( "cardNo", "Enter valid card details" );
+	
+	else if (!(account.getPin().equals(ipin))){
+		addFieldError( "cardNo", "Check the password entered" );
+	}
+	
+	if(	month==null || year==null){
+		addFieldError( "cardNo", "Check the expiry Date" );
+	}
+	
+		
+	}
+
 	public String execute()
 	{
 		
@@ -95,10 +124,28 @@ public class bankAction extends ActionSupport{
 		- expiry date
 		- 
 	*/	
-		System.out.println("bank");
-		System.out.println(cardChosen + " " + cardNo1 + " " + cardNo2 + " " + cardNo1 + " " + cardNo1 + " " + month + " " + year + " "+ ipin);
-		System.out.println(account.getCardType() + " " + account.getCardNo() + account.getExpiryDate());
-		return "success";
+		//double amt = (Double)ActionContext.getContext().getSession().get("totalCartAmt");
+		
+		double amt = 5000 ;
+		
+		boolean isBal = bankAccount.checkBalance(amt,account.getBalance());
+		
+		if(isBal)
+		{
+			amt = account.getBalance() - amt;
+			sql = amt + "where accountNo =  " + account.getAccountNo();
+			bankAccount.updateBank(sql);
+			Order.updatePaidStatus();
+			Customer.cartAppendNoInc();
+			return "success";
+		}
+		
+		
+		 return "error";
+		
+			
+		
+		
 	}
 
 }
