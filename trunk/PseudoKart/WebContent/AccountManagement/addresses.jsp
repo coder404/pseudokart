@@ -23,14 +23,14 @@
 				</s:if>
 				<s:else>
 					<div class="alert alert-success">
+					
 						<s:actionmessage />
 					</div>
 				</s:else>
 				<table theme="simple" style="margin-left: 10px">
 					<tr>
 						<td>Name</td>
-						<td><s:textfield name="name" theme="simple"
-								value="%{customerAction.firstName}"></s:textfield></td>
+						<td><s:textfield name="name" theme="simple" value="%{name}"></s:textfield></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
