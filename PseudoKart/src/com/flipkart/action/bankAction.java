@@ -124,9 +124,9 @@ public void validate(){
 		- expiry date
 		- 
 	*/	
-		//double amt = (Double)ActionContext.getContext().getSession().get("totalCartAmt");
+		double amt = (Double)ActionContext.getContext().getSession().get("totalCartAmt");
 		
-		double amt = 5000 ;
+		//double amt = 5000 ;
 		
 		boolean isBal = bankAccount.checkBalance(amt,account.getBalance());
 		
