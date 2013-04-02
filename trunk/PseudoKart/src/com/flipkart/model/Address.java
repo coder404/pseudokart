@@ -109,6 +109,7 @@ public static ArrayList<Address> findAll()
 			addr.setCountry(resultSet.getString("country"));
 			addr.setPhone(resultSet.getString("phone"));
 			addr.setPin(resultSet.getString("pin"));
+			addr.setCustomer_id(resultSet.getInt("customer_id"));
 		  addr_list.add(addr);
 		}
 	} catch (SQLException e) {

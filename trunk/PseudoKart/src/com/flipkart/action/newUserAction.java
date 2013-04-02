@@ -77,12 +77,14 @@ public class newUserAction extends ActionSupport{
 		login.setEmail(email);
 		login.setPassword(password);
 		flag = login.insert();
+		
+		
 		int minimum=400;
 		int maximum=2000;
 		String random,subemail;
 		random=minimum + (int)(Math.random()*maximum)+"";
 		subemail=email.substring(0,5);
-		profileName=subemail+random;
+		profileName=subemail+"-"+random;
 		Customer newCustomer=new Customer();
 		newCustomer.setFirstName("");
 		newCustomer.setLastName("");
