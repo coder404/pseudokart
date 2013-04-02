@@ -116,7 +116,7 @@ $(window).load(function(){
 
 				<div id="shippingaddress" class="tab-pane">
 		
-		     
+		     <s:if test="addr_list != null">
 					<div style="width: 40%; float: left">
 						<center>
 							<h5>Select Previous Address</h5>
@@ -154,7 +154,7 @@ $(window).load(function(){
 			 */		
 					</script>	
 		      </div>
-		      
+		      </s:if>
 		      
       
 					<div style="width: 60%; float: right">
