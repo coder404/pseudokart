@@ -6,9 +6,9 @@ public class RuntimeSettings {
 			+ " dated October 28, 2012";
 	public static final String SERVER_IP = "localhost";
 	static String databaseName = "flipkart";
-	static String dbUserID = "root";
+	public static String dbUserID = "root";
 	// "" for apple Macbook Air
-	static String dbPassword = "yams";
+	public static String dbPassword = "yams";
 	public static String RUN_MODE = "Test"; // "Production"; //
 	public static boolean IS_IN_DEBUG_MODE = true; // false; //
 	static int portNo = 3306;// 5432; //
@@ -43,14 +43,16 @@ public class RuntimeSettings {
 					+ "CartAppendNo varchar(3)," + "primary key(id),"
 					+ "foreign key (email) references login(email)" + ");",
 
+					
+					
 			"CREATE TABLE address("
 					+ "address_id int(3) auto_increment not null,"
 					+ "name varchar(40) not null,"
 					+ "streetAdress varchar(216) not null,"
 					+ "landmark varchar(10) not null,"
 					+ "city varchar(10) not null,"
-					+ "state varchar(10) not null,"
-					+ "country varchar(30) default 'India',"
+					+ "state varchar(30) not null,"
+					+ "country varchar(10) default 'India',"
 					+ "pin varchar(6) not null,"
 					+ "phone varchar(10) not null,"
 					+ "customer_id int(3) not null," + "primary key(address_id),"
@@ -60,7 +62,7 @@ public class RuntimeSettings {
 					+ "accountId INT(10) auto_increment not null ,"
 					+ "accountNo int(10) not null,"
 					+ "accountName varchar(20) not null,"
-					+ "cardNo int(16) not null,"
+					+ "cardNo varchar(16) not null,"
 					+ "cardType varchar(10) not null,"
 					+ "pin varchar(32) not null ,"
 					+ "balance decimal(10,2) not null,"
@@ -78,6 +80,7 @@ public class RuntimeSettings {
 		+"categoryID varchar(20) NOT NULL,"
 + "price decimal(10,2)," 
 		+ "description varchar(100),"
+		+"imageUrl varchar(100),"
 + "primary key(productId) ,"
 		+"foreign key (categoryID) references category(categoryID));",
 		
@@ -116,6 +119,15 @@ public class RuntimeSettings {
 + "paidstatus varchar(10), "
 + "primary key(orderID), "
 + "foreign key (email) references login(email));" ,
+
+"create table cart(cartId int(10) auto_increment not null,"
++"email varchar(30),"
++"cartAppendNo varchar(3),"
++"productId varchar(20),"
++"quantity int(5),"
++"foreign key(email) references customer(email),"
++"foreign key(productId) references product(productId),"
++"primary key(cartId));",
 
 "create table stock ( stockId int(20) auto_increment not null,"
 + "stockProductId varchar(20) unique not null ,"
