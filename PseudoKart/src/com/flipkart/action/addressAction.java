@@ -21,7 +21,8 @@ public class addressAction extends ActionSupport {
 	private String pin = " ";
 	private String phone = " ";
 	private int customer_id;
-	Map session;
+	
+	Map session=ActionContext.getContext().getSession();
 	ArrayList<Address> addressList=new ArrayList<Address>();
 	ArrayList<Address> customerAddressList=new ArrayList<Address>();
 	
@@ -41,9 +42,10 @@ public class addressAction extends ActionSupport {
 	public String execute() {
 		
 		
-		String email=(String)ActionContext.getContext().getSession().get("email");
+		String email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
+		name=customerAction.getFirstName()+ " "+customerAction.getLastName(); 
 		if(name.isEmpty() || streetAddress.isEmpty() || landmark.isEmpty() || city.isEmpty() || state.isEmpty() || pin.isEmpty() || phone.isEmpty()){
 			addActionError("Please provide all details.");
 			return "error";
@@ -79,10 +81,28 @@ public class addressAction extends ActionSupport {
 					customerAddressList.add(addressList.get(i));
 				
 			}
-			*/			
+			
+			for(int i=0;i<customerAddressList.size();i++){
+				System.out.println(customerAddressList.get(i).getName());
+				
+				
+			}
+			*/
 			return SUCCESS;
 		}
 	}
+	
+	// method just for address page
+		public String addresses() {
+			String email="";
+			email=(String)session.get("email");
+			String mod = "where email='" + email + "'";
+			customerAction = Customer.findOne(mod);
+			name=customerAction.getFirstName()+ "  "+ customerAction.getLastName();
+			System.out.println(email);
+			System.out.println(name);
+			return SUCCESS;
+		}
 
 	public int getAddress_id() {
 		return address_id;
