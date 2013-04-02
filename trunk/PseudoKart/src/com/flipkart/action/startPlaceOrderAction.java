@@ -19,7 +19,7 @@ public class startPlaceOrderAction extends ActionSupport {
 	public String execute()
 	{
 		System.out.println("in initial");
-		session.put("email", "yams25@gmail.com"); //this shud be done at login time	-- remove and put get,name= sessnm
+		//session.put("email", "yams25@gmail.com"); //this shud be done at login time	-- remove and put get,name= sessnm
 		session.put("orderID", Order.rtrnorderNum());  
 		//System.out.println();
 		session.put("tabno", 0);

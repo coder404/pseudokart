@@ -24,7 +24,8 @@
 </head>
 <body onload="showRating()">
 	<s:form action="addToCart.action">
-	<s:hidden name="productId" value="product.prodid"/>
+	<s:hidden name="productId" value="%{product.prodid}"/>
+	
 		<table>
 			<tr>
 				<td><b><s:property value="product.name" /></b></td>

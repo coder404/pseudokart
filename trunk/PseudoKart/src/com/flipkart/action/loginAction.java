@@ -53,6 +53,7 @@ public class loginAction extends ActionSupport{
 	public String execute(){
 		return "success";
 	}
+	
 	public String login() {
 		
 		int fl = 0;

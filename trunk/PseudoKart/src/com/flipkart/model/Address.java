@@ -25,7 +25,7 @@ public class Address {
 		// TODO Auto-generated method stub
 		System.out.println("in insert"+customer_id);
 		String insertSQL = "insert into address"
-				+ "(name,streetAddress,landmark,city,state,country,pin,phone,customer_id) "
+				+ "(name,streetAdress,landmark,city,state,country,pin,phone,customer_id) "
 				+ "values(" + "'" + name + "','" + streetAddress + "', '"
 				+ landmark + "','" + city + "' , '" + state + "' , '" + country
 				+ "','" + pin + "','" + phone + "', '" +customer_id +"' );";

@@ -29,7 +29,7 @@ public class CartAction_ViewCart {
 	//Map session;
 	//String productId="HTC001";
 	int quantity;
-	String uemail="yams25@gmail.com";//Need to take it from login session
+	String uemail=(String)ActionContext.getContext().getSession().get("email");//Need to take it from login session
 	public static ArrayList<Cart> CartItems_View=new ArrayList<Cart>();
 	
 	public ArrayList<Cart> getCartItems_View() {

@@ -7,6 +7,10 @@
 
 </head>
 <body>
-<img src="./images/lock.png"/><strong>Safe and Secure Payment Gateway</strong>
+<table>
+<tr>
+<td><img src="./images/lock.png"/></td>
+<td><strong>Safe and Secure Payment Gateway</strong></td>
+</tr></table>
 </body>
 </html>

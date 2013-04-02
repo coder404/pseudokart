@@ -7,29 +7,16 @@ import com.flipkart.model.Cart;
 import com.opensymphony.xwork2.ActionContext;
 
 public class CartAction_AddItem {
+
 	public  double amount=0;
-	/*public static double amt=0;
-	public double getAmount()
-	{
-		this.amount=getPayableAmount();
-		return this.amount;
-	}
-	public  static double getPayableAmount() {
-		amt=0;
-		CartAction_AddItem.amt=Cart.getTotalAmount(CartItems);
-		for(int i=0;i<CartItems.size();i++){
-		
-			amount+=CartItems.get(i).subtotal;
-			System.out.println("^^^^^"+amount);
-			}
-		System.out.println("Amount==**"+amt);
-		return amt;
-	}
+	String appendNo;
+	Map session;
+	String productId;
+	int quantity;
+	boolean cart_status;
+	String uemail=(String)ActionContext.getContext().getSession().get("email");//Need to take it from login session
 	
-	public   void setAmount(double amount) {
-		this.amount = amount;
-	}*/
-	//Cart cart_obj=new Cart();
+
 	public String getAppendNo() {
 		appendNo=Cart.getCurrentAppendNo(uemail);
 		return appendNo;
@@ -37,11 +24,8 @@ public class CartAction_AddItem {
 	public void setAppendNo(String appendNo) {
 		this.appendNo = appendNo;
 	}
-	String appendNo;
-	Map session;
-	String productId="prod1";
-	int quantity;
-	String uemail="yams25@gmail.com";//Need to take it from login session
+	
+	
 	public static ArrayList<Cart> CartItems=new ArrayList<Cart>();
 	public ArrayList<Cart> getCartItems() {
 		ArrayList<Cart> CartItems=new ArrayList<Cart>();
@@ -49,17 +33,20 @@ public class CartAction_AddItem {
 		
 		return CartItems;
 	}
+	
 	public void setCartItems(ArrayList<Cart> cartItems) {
 		CartItems = cartItems;
 		//getAmount();
 	}
-	boolean cart_status;
+	
+		
 	public String execute()
 	{
 		return "success";
 	}
 	public String onClickBuy()
 	{
+		System.out.println("!@#$%^&*()="+productId);
 		appendNo=Cart.getCurrentAppendNo(uemail);
 		ActionContext.getContext().getSession().put("cartAppendNo", appendNo);
 		System.out.println("in cart add item --append num CHECK"+appendNo);
@@ -90,5 +77,34 @@ public class CartAction_AddItem {
 		return "success";
 	}
 	
-
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getProductId() {
+		return productId;
+	}
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public String getUemail() {
+		return uemail;
+	}
+	public void setUemail(String uemail) {
+		this.uemail = uemail;
+	}
+	public boolean isCart_status() {
+		return cart_status;
+	}
+	public void setCart_status(boolean cart_status) {
+		this.cart_status = cart_status;
+	}
 }

@@ -12,63 +12,121 @@
         <put-attribute name="body" value=""/>
         <put-attribute name="footer" value="/Footer.jsp" />
     </definition>
-    
-     <definition name="baseLayout1" template="/BaseLayout1.jsp">
+
+   <definition name="baseLayout1" template="/BaseLayout1.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/Header.jsp" />
         <put-attribute name="menu" value="/menu.jsp" />
         <put-attribute name="body" value=""/>
         <put-attribute name="footer" value="/Footer.jsp" />
     </definition>
-   
-    <definition name="/placeorder.tiles" extends="baseLayout">
-		<put-attribute name="header" value="/Header.jsp"/>  <!-- just for checking -->
-		<put-attribute name="menu" value="/placeOrder.jsp" />
-       <put-attribute name="body" value="/orderSummary.jsp" />
-       <put-attribute name="footer" value="/Footer.jsp"/>
+
+
+  <definition name="baseLayout2" template="/BaseLayout2.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/Header.jsp" />
+        <put-attribute name="menu" value="/menu.jsp" />
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/Footer.jsp" />
+    </definition>
+	
+	<definition name="/CartAction_AddItem.tiles" extends="baseLayout1">
+		<put-attribute name="header" value=""/>
+		<put-attribute name="menu" value="/CartAction_AddItem.jsp" />
+       <put-attribute name="body" value="" />
+       <put-attribute name="footer" value=""/>
+    </definition>
+    
+    <definition name="/CartAction_ViewCart.tiles" extends="baseLayout1">
+		<put-attribute name="header" value=""/>
+		<put-attribute name="menu" value="/CartAction_ViewCart.jsp" />
+       <put-attribute name="body" value="" />
+       <put-attribute name="footer" value=""/>
+    </definition>
+    
+     <definition name="/CartAction_EmptyCart.tiles" extends="baseLayout1">
+		<put-attribute name="header" value=""/>
+		<put-attribute name="menu" value="/CartAction_EmptyCart.jsp" />
+       <put-attribute name="body" value="" />
+       <put-attribute name="footer" value=""/>
     </definition>
 
+   
+    <definition name="/placeorder.tiles" extends="baseLayout">
+    	<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/payHeader.jsp"/>  <!-- just for checking -->
+		<put-attribute name="menu" value="/placeOrder.jsp" />
+       <put-attribute name="body" value="/addr_summary.jsp" />
+       <put-attribute name="footer" value="/payFooter.jsp"/>
+    </definition>
+
+
+
+
+
 <definition name="/accountManagement.tiles" extends="baseLayout1">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/personalInformation.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
     
     <definition name="/orderStatus.tiles" extends="baseLayout1">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/orderStatus.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
      <definition name="/changePassword.tiles" extends="baseLayout1">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/changePassword.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     <definition name="/addresses.tiles" extends="baseLayout1">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/addresses.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
     <definition name="/updateEmail.tiles" extends="baseLayout1">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/updateEmail.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
     
     <definition name="/profileSettings.tiles" extends="baseLayout1">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="/AccountManagement/accountManagement.jsp" />
        <put-attribute name="body" value="/AccountManagement/profileSettings.jsp" />
        <put-attribute name="footer" value=""/>
     </definition>
+    
+<definition name="/displayProduct.tiles" extends="baseLayout1">
+<put-attribute name="header" value=""/>
+<put-attribute name="menu" value="/productHome.jsp" />
+<put-attribute name="body" value="/displayProduct.jsp" />
+<put-attribute name="footer" value=""/>
+</definition>
+
+<definition name="homepage" extends="baseLayout2">
+<put-attribute name="header" value="/Header.jsp"/>
+<put-attribute name="menu" value="" />
+<put-attribute name="body" value="/categories_db.jsp" />
+<put-attribute name="footer" value="/Footer.jsp"/>
+</definition>
+
+
+<definition name="home_after_login" extends="baseLayout2">
+<put-attribute name="header" value="/Header_Email.jsp"/>
+<put-attribute name="menu" value="" />
+<put-attribute name="body" value="/categories_db.jsp" />
+<put-attribute name="footer" value="/Footer.jsp"/>
+</definition>
 
 
 
