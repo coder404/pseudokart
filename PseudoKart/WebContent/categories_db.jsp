@@ -131,24 +131,24 @@ animate()
 						<div class="row">
 							<div class="span2">
 
-								<img class="img-polaroid" src="./images/nokia-lumia.jpeg" alt="" />
-								nokia-lumia
+								<img class="img-rounded" src="./images/nokia-lumia.jpeg" alt="Samsung Galaxy Grand Duos I9082: Mobile"  />
+								
 							</div>
 							<div class="span2">
 
 
-								<img class="img-polaroid" src="./images/galaxy-tab.jpeg" alt="" />
+								<img class="img-rounded" src="./images/galaxy-tab.jpeg" alt="" />
 								galaxy-tab
 							</div>
 							<div class="span2">
 
 
-								<img class="img-polaroid" src="./images/micromax-book.jpeg"
+								<img class="img-rounded" src="./images/micromax-book.jpeg"
 									alt="" /> micromax-book
 							</div>
 							<div class="span2">
 
-								<img class="img-polaroid" src="./images/samsung-galaxy.jpeg"
+								<img class="img-rounded" src="./images/samsung-galaxy.jpeg"
 									alt="" /> samsung-galaxy
 							</div>
 						</div>
@@ -161,26 +161,26 @@ animate()
 							<div class="span2">
 
 
-								<img class="img-polaroid" src="./images/d-link-dwm.jpeg" alt="" />
+								<img class="img-rounded" src="./images/d-link-dwm.jpeg" alt="" />
 								d-link-dwm
 							</div>
 							<div class="span2">
 
 
-								<img class="img-polaroid"
+								<img class="img-rounded"
 									src="./images/iball-3-5g-wireless-modem.jpeg" alt="" />
 								iball-3-5g-wireless-modem
 							</div>
 							<div class="span2">
 
 
-								<img class="img-polaroid"
+								<img class="img-rounded"
 									src="./images/iball-3-5g-wireless-modem2.jpeg" alt="" />
 								iball-3-5g-wireless-modem2
 							</div>
 							<div class="span2">
 
-								<img class="img-polaroid" src="./images/d-link-dwm.jpeg" alt="" />
+								<img class="img-rounded" src="./images/d-link-dwm.jpeg" alt="" />
 								d-link-dwm
 							</div>
 						</div>
