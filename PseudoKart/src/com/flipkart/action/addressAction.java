@@ -75,20 +75,21 @@ public class addressAction extends ActionSupport {
 			
 			address.insert(customerAction.getId());
 			reset();
-			addActionMessage("Address saved successfully");
-			/*addressList=Address.findAll();
+			
+			addressList=Address.findAll();
+					
 			for(int i=0;i<addressList.size();i++){
 				if(addressList.get(i).getCustomer_id() == customerAction.getId())
 					customerAddressList.add(addressList.get(i));
 				
 			}
-			
+			/*
 			for(int i=0;i<customerAddressList.size();i++){
 				System.out.println(customerAddressList.get(i).getName());
 				
 				
 			}
-			*/
+			*/addActionMessage("Address saved successfully");
 			return SUCCESS;
 		}
 	}

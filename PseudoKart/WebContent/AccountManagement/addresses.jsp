@@ -10,7 +10,7 @@
 </style>
 </head>
 <body>
-	<!-- <div class="row-fluid"> -->
+	
 	<div class="span10">
 		<div>
 			<h3 style="margin-top: 50px; margin-left: 10px">Add a New
@@ -106,6 +106,31 @@
 				<br />
 				<s:submit name="commandButton" id="mysubmit" value="Save Changes"
 					cssClass="btn btn-primary" theme="simple" style="margin-left:120px" />
+
+				 <s:if test="customerAddressList != null">
+					<div style="width: 100%; float: left">
+						
+						<s:iterator value="customerAddressList">
+						<%-- <a style="color: #004b91; text-decoration: none;" href="multiAddr?address_id=<s:property value="address_id"/>"> --%>
+							<div class="addressBox" >
+								<b><s:property value="name" /></b><br />
+								<s:property value="streetAddress" /><br/>
+								<s:property value="city" /> , &nbsp;<s:property value="state" /><br />
+								<s:property value="pin" /><br />
+								<s:property value="phone" /><br/>
+								
+								
+								</div>
+								
+					</a><br/>
+						</s:iterator>
+				      	
+					
+					     </div>
+		      </s:if>
+		    
+
+
 <%-- 
 				<div class="address-box">
 				<s:if test="customerAddressList.size() != 0">
@@ -120,6 +145,6 @@
  --%>			</s:form>
 		</div>
 	</div>
-	<!-- </div> -->
+	
 </body>
 </html>
