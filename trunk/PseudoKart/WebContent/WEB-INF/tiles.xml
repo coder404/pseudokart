@@ -107,7 +107,7 @@
     </definition>
     
 <definition name="/displayProduct.tiles" extends="baseLayout1">
-<put-attribute name="header" value=""/>
+<put-attribute name="header" value="/Header.jsp"/>
 <put-attribute name="menu" value="/productHome.jsp" />
 <put-attribute name="body" value="/displayProduct.jsp" />
 <put-attribute name="footer" value=""/>
