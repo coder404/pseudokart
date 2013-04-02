@@ -39,7 +39,7 @@
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.loginAction"%>
 <td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;<%=ActionContext.getContext().getSession().get("email") %></font></a></td>
-
+<td><a href="logout"><font color="white" size="3px">&nbsp;&nbsp;Logout</font></a></td>
 
 </tr>
 </table>
