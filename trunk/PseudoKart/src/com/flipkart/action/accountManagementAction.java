@@ -84,14 +84,21 @@ public class accountManagementAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String changePasswordPage() { //for page navigation
+	public String changePasswordPage() {//for page navigation
+		email=(String)session.get("email");
+		String mod = "where email='" + email + "'";
+		customerAction = Customer.findOne(mod);
+		
 		return SUCCESS;
 	}
 
 	public String changePassword() {
 		email=(String)session.get("email");
-		// Find one object of login for the corresponding email
 		String mod = "where email='" + email + "'";
+		customerAction = Customer.findOne(mod);
+		
+		// Find one object of login for the corresponding email
+		
 		Login login = new Login();
 		login = Login.findOne(mod);
 		
@@ -117,13 +124,13 @@ public class accountManagementAction extends ActionSupport {
 		}
 	}
 
-	// method just for address page
-	public String addresses() {
-
-		return SUCCESS;
-	}
+	
 
 	public String updateEmail() {
+		email=(String)session.get("email");
+		String mod = "where email='" + email + "'";
+		customerAction = Customer.findOne(mod);
+		
 		return SUCCESS;
 	}
 
