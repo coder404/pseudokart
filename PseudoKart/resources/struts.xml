@@ -68,8 +68,9 @@
 		</action>
 
 		<action name="checkAccount" class="com.flipkart.action.bankAction">
-			<result name="success">/home_after_login.jsp</result>
+			<result name="success" type="redirect">home_after_login</result>
 			<result name="input">/bankProxy.jsp</result>
+			<result name="error">/bankError.jsp</result>
 		</action>
 
 		<action name="finishPurchase" class="com.flipkart.action.reviewPlaceOrderAction"
@@ -128,10 +129,17 @@
 			<result name="error">/Login.jsp</result>
 		</action>
 
+		<action name="newUser" class="com.flipkart.action.newUserAction" method="newUser">
+
+			<result name="success">/Signup.jsp</result>
+
+		</action>
+
+
 		<action name="newUserRegistration" class="com.flipkart.action.newUserAction"
 			method="execute">
 			<result name="input">/Signup.jsp</result>
-			<result name="success" type="redirect">home_after_login</result>
+			<result name="success" type="redirect">categories</result>
 			<result name="error">/Signup.jsp</result>
 		</action>
 
@@ -201,6 +209,10 @@
 			<result name="success" type="tiles">home_after_login</result>
 		</action>
 
+	<action name="logout" class="com.flipkart.action.logoutAction">
+			<result name="success" type="redirect">categories</result>
+		</action>
+	
 
 	</package>
 </struts>
