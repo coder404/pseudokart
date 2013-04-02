@@ -99,8 +99,7 @@ public class addressAction extends ActionSupport {
 			String mod = "where email='" + email + "'";
 			customerAction = Customer.findOne(mod);
 			name=customerAction.getFirstName()+ "  "+ customerAction.getLastName();
-			System.out.println(email);
-			System.out.println(name);
+			
 			return SUCCESS;
 		}
 
