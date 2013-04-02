@@ -53,7 +53,7 @@ public class loginAction extends ActionSupport{
 		this.emailForgotPwd = emailForgotPwd;
 	}
 	
-	/*public void validate() {
+	public void validate() {
 
 		// validate email
 		if (email.isEmpty()) {
@@ -64,22 +64,17 @@ public class loginAction extends ActionSupport{
 		if (password.isEmpty()) {
 			addFieldError("password", "Enter Password");
 		}
-	}*/
+	}
 	
 	public String execute(){
 		return "success";
 	}
-	
+	ArrayList<Login> list = new ArrayList<Login>();
 	public String login() {
 		
 		int fl = 0;
-		ArrayList<Login> list = new ArrayList<Login>();
-		list = Login.find("");
-		/*if(email.isEmpty() || password.isEmpty()){
-			return "input";
-			
-		}
-		*/
+		
+		list = Login.find("");		
 		
 		String tmpusr = "";
 		String tmppass = "";
@@ -87,6 +82,8 @@ public class loginAction extends ActionSupport{
 		{
 			tmpusr=list.get(i).getEmail();
 			tmppass=list.get(i).getPassword();
+			System.out.println(tmpusr+", "+tmppass);
+			System.out.println(i);
 			if(this.email.equals(tmpusr) && this.password.equals(tmppass))
 			{
 				System.out.println("Inside IF....");
