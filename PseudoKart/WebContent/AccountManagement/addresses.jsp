@@ -30,6 +30,7 @@
 				<table theme="simple" style="margin-left: 10px">
 					<tr>
 						<td>Name</td>
+
 						<td><s:textfield name="name" theme="simple" value="%{name}"></s:textfield></td>
 					</tr>
 					<tr>
