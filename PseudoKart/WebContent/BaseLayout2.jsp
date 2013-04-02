@@ -9,19 +9,17 @@
 </head>
 <body>
 <table cellpadding="2" cellspacing="2" align="center" >
+<tr>
+</tr>
+
  <tr>
-
-
-        <td height="30"  bgcolor="#005575"  colspan="2"><tiles:insertAttribute name="header" />
+        <td height="30" bgcolor="#005575" colspan="2"><tiles:insertAttribute name="header" />
         </td>
-
     </tr>  
     <tr>
-        <td></td><td></td>
     </tr>
-    <tr></tr>
     <tr>
-        <td  width="1500" valign="baseline"><tiles:insertAttribute name="menu" /></td>
+        <td valign="baseline"><tiles:insertAttribute name="menu" /></td>
         <td valign="top"><tiles:insertAttribute name="body"/></td>
     </tr>
   

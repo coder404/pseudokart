@@ -13,7 +13,7 @@ public class CartAction_PlaceOrder {
 		String append_num=(String) ActionContext.getContext().getSession().get("cartAppendNo");
 		System.out.println("&&&&&&&&&&&&"+amount);
 		System.out.println("*********"+append_num);
-		String email="yams25@gmail.com";/*need to take it from session*/
+		String email=(String)ActionContext.getContext().getSession().get("email");/*need to take it from session*/
 		Order.createOrder(email,append_num);
 		return "success";
 	}

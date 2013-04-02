@@ -15,6 +15,8 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
+
+		<!-- Place Order Status -->
 		<action name="dummy" class="com.flipkart.action.startPlaceOrderAction">
 			<result name="trial" type="tiles">/placeorder.tiles</result>
 		</action>
@@ -27,6 +29,11 @@
 		<action name="newShipAddr" class="com.flipkart.action.placeorderAction">
 			<result name="success" type="tiles">/placeorder.tiles</result>
 			<result name="input" type="chain">nextTab</result>
+		</action>
+
+		<action name="multiAddr" class="com.flipkart.action.reviewPlaceOrderAction"
+			method="MultiAddrSelect">
+			<result name="move" type="tiles">/placeorder.tiles</result>
 		</action>
 
 		<action name="orderReview" class="com.flipkart.action.reviewPlaceOrderAction"
@@ -61,27 +68,78 @@
 		</action>
 
 		<action name="checkAccount" class="com.flipkart.action.bankAction">
-			<result name="success">/bankProxy.jsp</result>
+			<result name="success">/home_after_login.jsp</result>
+			<result name="input">/bankProxy.jsp</result>
+		</action>
+
+		<action name="finishPurchase" class="com.flipkart.action.reviewPlaceOrderAction"
+			method="finish"> <!-- Redirect back to main page -->
+			<result name="ok" type="redirect">home_after_login</result>
+		</action>
+
+
+		<!-- Cart Struts -->
+		<action name="addToCart" class="com.flipkart.action.CartAction_AddItem"
+			method="onClickBuy">
+			<result name="success" type="tiles">/CartAction_AddItem.tiles</result>
+		</action>
+
+		<action name="ViewCart" class="com.flipkart.action.CartAction_ViewCart"
+			method="onClickCart">
+			<result name="success" type="tiles">/CartAction_ViewCart.tiles
+			</result>
+			<result name="empty_cart" type="tiles">/CartAction_EmptyCart.tiles
+			</result>
+		</action>
+
+		<action name="orderEntry_PlaceOrder" class="com.flipkart.action.CartAction_PlaceOrder"
+			method="onClickPlaceOrder">
+			<result name="success" type="redirect">dummy</result>
+
+		</action>
+
+		<!-- admin struts -->
+		<action name="check_stock" class="com.flipkart.action.stockAction">
+			<result name="success">/checkStock.jsp</result>
+		</action>
+
+
+		<action name="getstock" class="com.flipkart.action.stockAction"
+			method="getProdStock">
+			<result name="ok">/stockCheckSuccess.jsp</result>
+		</action>
+
+		<action name="returnAdmin" class="com.flipkart.action.stockAction"
+			method="back">
+			<result name="back">/AdminLinks.jsp</result>
 		</action>
 
 		<!-- login :- Tushar's part -->
+		<action name="loginPage" class="com.flipkart.action.loginAction">
+
+			<result name="success">/Login.jsp</result>
+
+		</action>
+
 		<action name="login" class="com.flipkart.action.loginAction"
 			method="login">
 			<result name="input">/Login.jsp</result>
-			<result name="success">/Categories.jsp</result>
+			<result name="success" type="redirect">home_after_login</result>
 			<result name="error">/Login.jsp</result>
 		</action>
 
 		<action name="newUserRegistration" class="com.flipkart.action.newUserAction"
 			method="execute">
 			<result name="input">/Signup.jsp</result>
-			<result name="success">/Categories.jsp</result>
+			<result name="success" type="redirect">home_after_login</result>
 			<result name="error">/Signup.jsp</result>
 		</action>
 
+		<!-- Account Actions -->
 
 		<!-- Account Actions -->
 		<action name="account" class="com.flipkart.action.accountManagementAction">
+			<result name="error">/Login.jsp</result>
 			<result name="success" type="tiles">/accountManagement.tiles</result>
 		</action>
 
@@ -107,7 +165,7 @@
 			<result name="error" type="tiles">/changePassword.tiles</result>
 		</action>
 
-		<action name="addresses" class="com.flipkart.action.accountManagementAction"
+		<action name="addresses" class="com.flipkart.action.addressAction"
 			method="addresses">
 			<result name="success" type="tiles">/addresses.tiles</result>
 		</action>
@@ -127,6 +185,22 @@
 			method="profileSettings">
 			<result name="success" type="tiles">/profileSettings.tiles</result>
 		</action>
+
+
+		<!-- -->
+		<action name="displayProduct" class="com.flipkart.action.displayProduct">
+			<result name="success" type="tiles">/displayProduct.tiles</result>
+		</action>
+
+
+		<action name="categories" class="com.flipkart.action.Categories_List">
+			<result name="success" type="tiles">homepage</result>
+		</action>
+
+		<action name="home_after_login" class="com.flipkart.action.Categories_List">
+			<result name="success" type="tiles">home_after_login</result>
+		</action>
+
 
 	</package>
 </struts>

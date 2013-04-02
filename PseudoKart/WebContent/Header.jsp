@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <%@page import="com.opensymphony.xwork2.ActionContext"%>
 <div align="justify">
 <table bgcolor="#005575">
@@ -39,6 +40,7 @@
 <td><a href="loginPage"><font color="white" size="3px">&nbsp;&nbsp;Login</font></a></td>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;Signup</font></a></td>
+
 
 
 </tr>

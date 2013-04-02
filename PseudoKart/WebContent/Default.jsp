@@ -10,6 +10,7 @@
 </head>
 <body>
 <%
+
 String redirectURL = "http://localhost:8080/PseudoKart/categories.action";
 response.sendRedirect(redirectURL); 
 %>
