@@ -74,6 +74,7 @@ public class addressAction extends ActionSupport {
 			System.out.println("Id"+ customerAction.getId());
 			
 			address.insert(customerAction.getId());
+			reset();
 			addActionMessage("Address saved successfully");
 			/*addressList=Address.findAll();
 			for(int i=0;i<addressList.size();i++){
@@ -92,7 +93,21 @@ public class addressAction extends ActionSupport {
 		}
 	}
 	
-	// method just for address page
+	
+
+	private void reset() {
+		// TODO Auto-generated method stub
+		streetAddress="";
+		landmark="";
+		city="";
+		state="";
+		country="";
+		pin="";
+		phone="";
+		
+	}
+
+		// method just for address page
 		public String addresses() {
 			String email="";
 			email=(String)session.get("email");
