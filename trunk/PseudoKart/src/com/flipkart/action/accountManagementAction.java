@@ -23,7 +23,7 @@ public class accountManagementAction extends ActionSupport {
 	Login login;
 
 	
-	Map session;
+	Map session=ActionContext.getContext().getSession();;
 
 	// variables password
 	private String oldPassword;
@@ -31,15 +31,15 @@ public class accountManagementAction extends ActionSupport {
 	private String reNewPassword;
 
 	public accountManagementAction() {
-		login = new Login();
+		/*login = new Login();
 		login.setEmail("laxmi21888@gmail.com");
 		login.setPassword("lax123456");
 		session = ActionContext.getContext().getSession();
-		email = "laxmi21888@gmail.com";/*
+		email = "laxmi21888@gmail.com";
 										 * (String)ActionContext.getContext().
 										 * getSession().get("email");
-										 */
-		session.put("email", email);
+										 
+		session.put("email", email);*/
 	}
 
 	public String execute() {
@@ -48,12 +48,20 @@ public class accountManagementAction extends ActionSupport {
 		 * emailSession=(String)ActionContext.getContext().getSession().get
 		 * ("email");
 		 */
+		email=(String)session.get("email");
+		if(email==null){
+			System.out.println("email in execute...ifff"+email);
+			return "error";
+		}else{
+			System.out.println("email in execute...else"+email);
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
 		return SUCCESS;
+		}
 	}
 
 	public String personalInformation() {
+		email=(String)session.get("email");
 		Customer cust = new Customer();
 		cust.setFirstName(firstName);
 		cust.setLastName(lastName);
