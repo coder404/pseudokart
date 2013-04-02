@@ -28,14 +28,16 @@
 	import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.placeorderAction,com.flipkart.model.Address"%>
 <!-- ADD AFTER GOIN FROM SHIPPING ADDRESS TAB TO ORDER SUMMARY TAB -->
 <body>
-	<s:form action="index" theme="bootstrap" cssClass="form-vertical"
-		label="Order Summary">
-
-		<s:textarea name="summary" cols="5" rows="5" />
-
-
+	<s:form >
+		<div class="addressBox">
+			<font><strong>Order Summary</strong></font><br/>
+			Order Id : &nbsp;&nbsp;<%=(String)ActionContext.getContext().getSession().get("orderID")%><br/>
+			Total Purchase : &nbsp;&nbsp; <%=(Double)ActionContext.getContext().getSession().get("totalCartAmt") %><br/>
+		    
+		
+		</div>
 	</s:form>
-
+<br/><br/><br/>
 		<s:if test="%{ #session['shipaddr'] != null }">
 			<div class="addressBox">
 						<font><strong>Shipping Address</strong></font>

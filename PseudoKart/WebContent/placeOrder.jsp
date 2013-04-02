@@ -208,18 +208,43 @@ $(window).load(function(){
 						label="Review Your Order">
 						<table class="table table-striped">
 							<tr>
-								<th>Type</th>
+								
 								<th>Item Description</th>
 								<th>Delivery Time</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Subtotal</th>
 							</tr>
+							<s:iterator value="cartItems">
+							<tr>
+							<td><s:property value="ItemDesc"/></td>
+							<td><s:property value="DeliveryTime"/></td>
+							<td><s:property value="subtotal"/></td>
+							<td><s:property value="quantity"/></td>
+							<td><s:property value="subtotal"/></td>
+							</tr>
+							</s:iterator>
+							
 						</table>
 						<table>
 							<tr>
 
 								<th>Amount Payable</th>
+								<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th><%=(Double)ActionContext.getContext().getSession().get("totalCartAmt") %></th>
 							</tr>
 						</table>
 						<br />

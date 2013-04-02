@@ -4,19 +4,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<style type="text/css">
+
+#customdiv{
+  
+  background-color:#005575 ;
+  height: 50;
+}
+
+
+</style>
 </head>
 <body>
 <%@page import="com.opensymphony.xwork2.ActionContext"%>
-<table bgcolor="#005575">
-<tr height="80">
-<td colspan="2"><img src="./images/logo.jpg" width="170"/></td>
-<td colspan="5"><font color="white" size="3px"><strong>&nbsp;&nbsp;&nbsp;Secure Payment</strong></font></td>
-<td><font color="white" size="3px"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hi&nbsp;&nbsp;&nbsp;yams25@gmail.com</strong></font></td>
-<td></td><td></td><td></td>
-<td><a href=" "><font color="white" size="3px">Logout</font></a></td>
-</tr>
-</table>
+
+<div id="customdiv" align="justify" >
+ <img src="./images/logo.jpg" height="30" width="100" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="white"><strong>Secure Payment</strong></font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="white"><strong>Hi,yams25@gmail.com</strong></font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=" "><font color="white"><strong>Logout</strong></font></a>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+
 </body>
 
 </html>
