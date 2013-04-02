@@ -31,7 +31,7 @@
 
 <h4>Welcome to Citibank Payment Gateway
 <br>
-<div align="right" style="font-weight:bold"> Transaction Amount: Rs. 5000<s:property value="5000<%-- #session.totalCartAmt --%>" /></div></h4>
+<div align="right" style="font-weight:bold"> Transaction Amount: Rs. <s:property value="#session.totalCartAmt" /></div></h4>
 	<s:actionerror theme="bootstrap" />
 	<s:actionmessage theme="bootstrap" />
 	<s:fielderror theme="bootstrap" />
