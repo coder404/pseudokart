@@ -107,7 +107,7 @@
 						<s:form theme="simple">
 						<table>
 						<tr>
-						<td><button class="btn  btn-primary" type="button" >Close and Continue Shopping</button>
+						<td><s:submit cssClass="btn  btn-primary" action="home_after_login" value="Continue Shopping"/>
 						</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 						<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 						<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
