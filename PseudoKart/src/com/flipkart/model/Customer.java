@@ -200,7 +200,7 @@ public class Customer {
 
 	public int insert() {
 		// TODO Auto-generated method stub
-		String insertSQL = "insert into address"
+		String insertSQL = "insert into customer"
 				+ "(firstName,lastName,mobileNumber,landlineNumber,gender,email,profileName,updatedProfileName,CartAppendNo) "
 				+ "values(" + "'" + firstName + "','" + lastName + "', '"
 				+ mobileNumber + "','" + landlineNumber + "' , '" + gender + "' , '" + email
