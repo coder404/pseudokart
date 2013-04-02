@@ -17,7 +17,7 @@ public class loginAction extends ActionSupport{
 	private String email;
 	private String password;
 	private String emailForgotPwd;
-	
+	Map session = ActionContext.getContext().getSession();
 	public String getEmail() {
 		return email;
 	}
@@ -37,7 +37,7 @@ public class loginAction extends ActionSupport{
 		this.emailForgotPwd = emailForgotPwd;
 	}
 	
-	public void validate() {
+	/*public void validate() {
 
 		// validate email
 		if (email.isEmpty()) {
@@ -48,14 +48,22 @@ public class loginAction extends ActionSupport{
 		if (password.isEmpty()) {
 			addFieldError("password", "Enter Password");
 		}
-	}
+	}*/
 	
+	public String execute(){
+		return "success";
+	}
 	public String login() {
-		Map session = ActionContext.getContext().getSession();
+		
 		int fl = 0;
 		ArrayList<Login> list = new ArrayList<Login>();
 		list = Login.find("");
-		System.out.println(list.size());
+		/*if(email.isEmpty() || password.isEmpty()){
+			return "input";
+			
+		}
+		*/
+		
 		String tmpusr = "";
 		String tmppass = "";
 		for(int i = 0;i < list.size();i++)
@@ -64,6 +72,7 @@ public class loginAction extends ActionSupport{
 			tmppass=list.get(i).getPassword();
 			if(this.email.equals(tmpusr) && this.password.equals(tmppass))
 			{
+				System.out.println("Inside IF....");
 				fl = 1;
 				session.put("email",email);
 				break;
@@ -77,6 +86,7 @@ public class loginAction extends ActionSupport{
 			addActionError(getText("Incorrect user id and / or password!"));
 			return "error";
 		}
+		
 }
 	
 	public String retrievePassword() {
