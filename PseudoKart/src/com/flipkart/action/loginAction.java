@@ -17,7 +17,23 @@ public class loginAction extends ActionSupport{
 	private String email;
 	private String password;
 	private String emailForgotPwd;
+	private String newPassword;
+	private String retypeNewPassword;
+	
 	Map session = ActionContext.getContext().getSession();
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	public String getRetypeNewPassword() {
+		return retypeNewPassword;
+	}
+	public void setRetypeNewPassword(String retypeNewPassword) {
+		this.retypeNewPassword = retypeNewPassword;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -90,8 +106,21 @@ public class loginAction extends ActionSupport{
 		
 }
 	
-	public String retrievePassword() {
+	public String changePassword() {
 		return "success";
+	}
+	
+	public String forgotPassword() {
+		String mod = "";
+		mod = "where email = '" + emailForgotPwd + "'";
+		if(Login.findOne(mod)!=null) {
+			//addActionMessage("An email has been successfully sent to your email address");
+			return "success";
+		}
+		else {
+			//addActionError("Invalid Email address");
+			return "error";
+		}
 	}
 	
 }
