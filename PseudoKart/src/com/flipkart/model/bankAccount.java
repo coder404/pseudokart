@@ -17,6 +17,14 @@ public class bankAccount {
 	String cardNo;
 	String cardType;
 	String pin;
+	double balance;
+
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
 
 	String expiryDate;
 	int cvvNo;
@@ -81,7 +89,7 @@ public class bankAccount {
 				account.expiryDate = rs.getString("expiryDate");
 				account.pin = rs.getString("pin");
 				account.cvvNo = Integer.parseInt(rs.getString("cvvNo"));
-				
+				account.balance = Double.parseDouble(rs.getString("balance"));
 				
 				DB.close(rs);
 				DB.close(connection);
@@ -96,14 +104,23 @@ public class bankAccount {
 		DB.close(connection);
 		return null;
 	}
-	public static int updatebank(String username,String timeStamp)
+	public static int updateBank(String sql)
 	{
-		Date ll=null;
-
-		String query="update student set lastlogged='"+timeStamp+"' where rollno='"+username+"';";
+		
+		String query="update bankProxy set balance="+ sql;
 		//System.out.println(query);
 		return DB.update(query);
 
 
+	}
+	
+	public static boolean checkBalance(double amt,double balance) {
+		// TODO Auto-generated method stub
+		
+		if(amt < balance)
+			return true;
+		
+		
+		return false;
 	}
 }
