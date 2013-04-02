@@ -17,6 +17,9 @@
 <script type="text/javascript" src="./js/keyboard.js" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="./css/keyboard.css">
 <link rel="stylesheet" type="text/css" href="./css/button.css">
+<%@page
+	import="java.sql.*,java.util.ArrayList,com.flipkart.model.*,com.flipkart.action.*,com.opensymphony.xwork2.*"%>
+
 
 <title>::Bank Payment Gateway::</title>
 
@@ -28,7 +31,7 @@
 
 <h4>Welcome to Citibank Payment Gateway
 <br>
-<div align="right" style="font-weight:bold"> Transaction Amount:<s:property value="name" /></div></h4>
+<div align="right" style="font-weight:bold"> Transaction Amount: Rs. 5000<s:property value="5000<%-- #session.totalCartAmt --%>" /></div></h4>
 	<s:actionerror theme="bootstrap" />
 	<s:actionmessage theme="bootstrap" />
 	<s:fielderror theme="bootstrap" />
@@ -55,13 +58,13 @@
 <br>
 	
   Card number :            <s:textfield cssClass="input-small"
-			name="cardNo1" />
+			name="cardNo1" maxlength="4" />
 -
-               <s:textfield cssClass="input-small" name="cardNo2" />
+               <s:textfield cssClass="input-small" name="cardNo2" maxlength="4" />
 -
-                   <s:textfield cssClass="input-small" name="cardNo3" />
+                   <s:textfield cssClass="input-small" name="cardNo3" maxlength="4" />
 -
-               <s:textfield cssClass="input-small" name="cardNo4" />
+               <s:textfield cssClass="input-small" name="cardNo4" maxlength="4" />
 	
 <br>
 <br>
