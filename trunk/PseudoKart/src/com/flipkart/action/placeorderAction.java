@@ -3,6 +3,7 @@ package com.flipkart.action;
 import java.util.*;
 
 import com.flipkart.model.Address;
+import com.flipkart.model.Cart;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -17,6 +18,7 @@ public class placeorderAction extends ActionSupport {
 	String phone="";
 	Map session;
 	ArrayList<Address> addr_list;
+	ArrayList<Cart> cartItems = new ArrayList<Cart>();
     String error="";
 	
 	
@@ -70,6 +72,8 @@ public class placeorderAction extends ActionSupport {
 		session=ActionContext.getContext().getSession();
 		System.out.println("forwarding to order summary");
 		session.put("tabno", 2);
+		cartItems=Cart.getCart((String)ActionContext.getContext().getSession().get("email"), (String)ActionContext.getContext().getSession().get("cartAppendNo"));
+		System.out.println("******size="+cartItems.size());
 		Address addr=new Address();
 		addr.setCity(this.city);
 		addr.setCountry("India");
@@ -79,7 +83,8 @@ public class placeorderAction extends ActionSupport {
 		addr.setPin(this.pincode);
 		addr.setState(this.state);
         addr.setName(this.name);
-		addr.insert();
+		addr.insert(); 	
+		session.put("shipaddr", addr);
 		return SUCCESS;
 	}
 	
@@ -126,6 +131,20 @@ public class placeorderAction extends ActionSupport {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+
+
+
+	public ArrayList<Cart> getCartItems() {
+		return cartItems;
+	}
+
+
+
+
+	public void setCartItems(ArrayList<Cart> cartItems) {
+		this.cartItems = cartItems;
 	}
 	
 

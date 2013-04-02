@@ -56,6 +56,38 @@ public class Address {
 			return -1;
 	}
 
+	public static Address findOne(String selectionModifier)
+	{
+		 ResultSet rs=null;
+         String query = "select * from address " + selectionModifier;
+         System.out.println(query);
+         Connection connection = DB.getConnection();
+         rs = DB.readFromDB(query, connection);
+         try {
+                 if (rs.next()) {
+                         Address a = new Address();
+                         a.address_id=rs.getInt("address_id");
+                         a.name=rs.getString("name");
+                         a.streetAddress=rs.getString("streetAdress");
+                         a.city=rs.getString("city");
+                         a.state=rs.getString("state");
+                         a.pin=rs.getString("pin");
+                         a.phone=rs.getString("phone");
+                         
+                         DB.close(rs);
+                         DB.close(connection);
+                         return a;
+                 }
+                 
+         } catch (SQLException e) {
+                 MyLog.myCatch("Product.java", 70, e);
+                 e.printStackTrace();
+         }
+         DB.close(rs);
+         DB.close(connection);
+         return null;
+	}
+	
 public static ArrayList<Address> findAll()
 {
 	ArrayList<Address> addr_list=new ArrayList<Address>();

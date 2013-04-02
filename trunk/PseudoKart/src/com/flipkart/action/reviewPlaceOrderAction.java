@@ -3,6 +3,10 @@ package com.flipkart.action;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.flipkart.model.Address;
+import com.flipkart.model.Cart;
+import com.flipkart.model.Customer;
+import com.flipkart.model.Order;
 import com.flipkart.model.voucher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,12 +25,24 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	double RemVoucherBal;
 	double voucherbal=0.0;
 	double purchaseAmt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
+	int address_id;
+	ArrayList<Cart> cartItems = new ArrayList<Cart>();
 	
+	public String finish()
+	{
+		System.out.println("Purchase over");
+		return "ok";
+	}
 	public String MultiAddrSelect()
 	{
 		session=ActionContext.getContext().getSession();
 		System.out.println("forwarding to order summary");
 		session.put("tabno", 2);
+	    System.out.println("address="+address_id);
+		Address a=Address.findOne("where address_id="+address_id);  	
+		session.put("shipaddr", a);
+		cartItems=Cart.getCart((String)ActionContext.getContext().getSession().get("email"), (String)ActionContext.getContext().getSession().get("cartAppendNo"));
+		System.out.println("in multi select **"+cartItems.size());
 		return "move";
 		
 	}
@@ -150,6 +166,11 @@ public class reviewPlaceOrderAction extends ActionSupport {
 			 RemVoucherBal = voucherbal - purchaseAmt;
 			 //update voucher balance
 			 voucher.update(vcardnum,RemVoucherBal); 
+			 //change status of orderdetails tables and change cartAppendNo;
+			 Order.updatePaidStatus();
+			 Customer.cartAppendNoInc();
+			 //reduce stock amount
+			 
 			  return SUCCESS;
 		 }
 		 else
@@ -259,6 +280,20 @@ public class reviewPlaceOrderAction extends ActionSupport {
 
 	public void setPurchaseAmt(double purchaseAmt) {
 		this.purchaseAmt = purchaseAmt;
+	}
+
+	public int getAddress_id() {
+		return address_id;
+	}
+
+	public void setAddress_id(int address_id) {
+		this.address_id = address_id;
+	}
+	public ArrayList<Cart> getCartItems() {
+		return cartItems;
+	}
+	public void setCartItems(ArrayList<Cart> cartItems) {
+		this.cartItems = cartItems;
 	}
 	
 }

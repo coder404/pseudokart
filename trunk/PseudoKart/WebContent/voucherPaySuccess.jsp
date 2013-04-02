@@ -38,6 +38,7 @@
      <td><s:property value="%{RemVoucherBal}"/></td>
      </tr>
      </table>
+     <s:form><s:submit cssClass="btn btn-primary" value="Back"	action="finishPurchase" align="center"></s:submit></s:form>
     </div>
 </body>
 </html>
