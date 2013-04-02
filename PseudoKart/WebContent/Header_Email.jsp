@@ -35,6 +35,7 @@
 <td><a href="account"><font color="white" size="3px">&nbsp;&nbsp;Account</font></a></td>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;Wishlist</font></a></td>
+<td><a href="ViewCart"><font color="white" size="3px">&nbsp;&nbsp;Cart</font></a></td>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.loginAction"%>
 <td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;<%=ActionContext.getContext().getSession().get("email") %></font></a></td>
