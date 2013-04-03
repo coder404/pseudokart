@@ -44,15 +44,14 @@ pic2.src="./images/image3.jpg"
 
 
 								<%@ page
-									import="java.util.*,com.flipkart.action.Categories_List,javax.servlet.*,javax.servlet.http.*"%>
+									import="java.util.ArrayList,com.flipkart.action.Categories_List,com.opensymphony.xwork2.ActionContext,com.opensymphony.xwork2.ActionSupport"%>
 								<%
-								System.out.println("Subcat populated.......");
 									String category = (String) request.getAttribute("cat");
 									Categories_List c = new Categories_List();
 									ArrayList<String> subcatg = c.getSubCategories(category);
-									HttpSession sess=request.getSession();
-									sess.setAttribute("subcatg", subcatg);
-									System.out.println("Subcat populated end.........");
+									ActionContext.getContext().getSession().put("subcatg", subcatg);
+								
+									
 								%>
 
 								<p:iterator value="#session.subcatg" status="text" id="p">
@@ -61,12 +60,13 @@ pic2.src="./images/image3.jpg"
 										<ul class="dropdown-menu">
 
 											<%
-											System.out.println("products populated.......");
 												String subcategory = (String) request.getAttribute("subcat");
 																																									
 												ArrayList<String> products = c.getProducts(subcategory);
-										
-												sess.setAttribute("products", products);
+												// Map sess = ActionContext.getContext().getSession();
+												ActionContext.getContext().getSession().put("products", products);
+
+												//session.setAttribute("products", products);
 											%>
 
 											<r:iterator value="#session.products" status="text" id="r">
