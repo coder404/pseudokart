@@ -21,6 +21,14 @@ public class Address {
 	private String phone=" ";
 	private int customer_id;
 
+	public int delete() {
+		String deleteSQL = 
+			    "delete from address "+"where address_id = '" + address_id+"'";
+		System.out.println(deleteSQL);
+		return DB.update(deleteSQL);
+	}
+
+	
 	public int insert(int customer_id) {
 		// TODO Auto-generated method stub
 		System.out.println("in insert"+customer_id);
