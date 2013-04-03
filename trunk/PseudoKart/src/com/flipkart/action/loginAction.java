@@ -54,6 +54,10 @@ public class loginAction extends ActionSupport{
 	}
 	
 	public void validate() {
+		
+		System.out.println(email);
+		System.out.println(password);
+	
 
 		// validate email
 		if (email.isEmpty()) {
@@ -76,8 +80,14 @@ public class loginAction extends ActionSupport{
 		
 		list = Login.find("");		
 		
+		for(int i=0;i<list.size();i++)
+		{
+			System.out.println("i is "+i+" value"+list.get(i).getEmail());
+		}
+		
 		String tmpusr = "";
 		String tmppass = "";
+		System.out.println(list.size());
 		for(int i = 0;i < list.size();i++)
 		{
 			tmpusr=list.get(i).getEmail();
