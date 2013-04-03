@@ -112,13 +112,13 @@
 				<s:submit name="commandButton" id="mysubmit" value="Save Changes"
 					cssClass="btn btn-primary" theme="simple" style="margin-left:120px" />
 				<br />
-				<div style="width: 400px; border: 2px solid #eee">
+				<div style="width: 600px; border: 2px solid #eee">
 				<font style="font-weight: bold">Your saved addresses</font>
 					<br /><br/>
 					<s:if test="customerAddressList != null">
-
+						<table><tr>
 						<s:iterator value="customerAddressList">
-							<div class="addressBox"
+							<td><div class="addressBox"
 								style="width: 200px; border: 1px solid #ddd;background-color:#DDD">
 								<b><s:property value="name" /></b><br />
 								<s:property value="streetAddress" />
@@ -131,10 +131,11 @@
 								<br />
 								<s:property value="phone" />
 								<br />
-								<a href="deleteAddress?address_id=<s:property value="address_id"/>" style="color:blue">Delete Address</a> 
+								<a href="deleteAddress?address_id=<s:property value="address_id"/>" style="align:right;color:blue">Delete Address</a> 
 							</div>
 							<br />
-						</s:iterator>
+						</td></s:iterator>
+						</tr></table>
 
 					</s:if>
 
