@@ -51,9 +51,10 @@ public class Login {
 				"from login " + selectionModifier;
 		Connection connection = DB.getConnection();
 		resultSet = DB.readFromDB(query, connection);
-		Login login = new Login();
+		
 		try {
 			while (resultSet.next()) {
+				Login login = new Login();
 				login.email=resultSet.getString("email");
 				login.password = resultSet.getString("password");
 				selection.add(login);
