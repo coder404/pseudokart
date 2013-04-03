@@ -6,11 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Addresses</title>
-<style>
+<style type="text/css">
+.example1 {
+	border: 1px solid #ddd;
+	text-align: justify;
+	text-justify: inter-word;
+}
 </style>
 </head>
 <body>
-	
+
 	<div class="span10">
 		<div>
 			<h3 style="margin-top: 50px; margin-left: 10px">Add a New
@@ -23,7 +28,7 @@
 				</s:if>
 				<s:else>
 					<div class="alert alert-success">
-					
+
 						<s:actionmessage />
 					</div>
 				</s:else>
@@ -106,45 +111,38 @@
 				<br />
 				<s:submit name="commandButton" id="mysubmit" value="Save Changes"
 					cssClass="btn btn-primary" theme="simple" style="margin-left:120px" />
+				<br />
+				<div style="width: 400px; border: 2px solid #eee">
+				<font style="font-weight: bold">Your saved addresses</font>
+					<br /><br/>
+					<s:if test="customerAddressList != null">
 
-				 <s:if test="customerAddressList != null">
-					<div style="width: 100%; float: left">
-						
 						<s:iterator value="customerAddressList">
-						<%-- <a style="color: #004b91; text-decoration: none;" href="multiAddr?address_id=<s:property value="address_id"/>"> --%>
-							<div class="addressBox" >
+							<div class="addressBox"
+								style="width: 200px; border: 1px solid #ddd;background-color:#DDD">
 								<b><s:property value="name" /></b><br />
-								<s:property value="streetAddress" /><br/>
-								<s:property value="city" /> , &nbsp;<s:property value="state" /><br />
-								<s:property value="pin" /><br />
-								<s:property value="phone" /><br/>
-								
-								
-								</div>
-								
-					</a><br/>
+								<s:property value="streetAddress" />
+								<br />
+								<s:property value="city" />
+								, &nbsp;
+								<s:property value="state" />
+								<br />
+								<s:property value="pin" />
+								<br />
+								<s:property value="phone" />
+								<br />
+								<a href="deleteAddress?address_id=<s:property value="address_id"/>" style="color:blue">Delete Address</a> 
+							</div>
+							<br />
 						</s:iterator>
-				      	
-					
-					     </div>
-		      </s:if>
-		    
 
+					</s:if>
 
-<%-- 
-				<div class="address-box">
-				<s:if test="customerAddressList.size() != 0">
-					<s:iterator value="customerAddressList">
-						<s:property value="name"/>
-						<s:property value="streetAddress"/>
-						<s:property value="landmark"/>
-						<s:property value="city"/>
-					</s:iterator>
-				</s:if>
 				</div>
- --%>			</s:form>
+
+			</s:form>
 		</div>
 	</div>
-	
+
 </body>
 </html>

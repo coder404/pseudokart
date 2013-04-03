@@ -8,6 +8,7 @@ import com.flipkart.model.Customer;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+
 public class addressAction extends ActionSupport {
 	// variables declaration
 
@@ -21,27 +22,27 @@ public class addressAction extends ActionSupport {
 	private String pin = " ";
 	private String phone = " ";
 	private int customer_id;
-	
+
 	Map session=ActionContext.getContext().getSession();
 	ArrayList<Address> addressList=new ArrayList<Address>();
 	ArrayList<Address> customerAddressList=new ArrayList<Address>();
-	
+	Address address= new Address();
 	Customer customerAction = new Customer();
-	 public boolean containsOnlyNumbers(String str) {
-	        
-	       for (int i = 0; i < str.length(); i++) {
+	public boolean containsOnlyNumbers(String str) {
 
-	            //If we find a non-digit character we return false.
-	            if (!Character.isDigit(str.charAt(i)))
-	                return false;
-	        }
-	        
-	        return true;
-	    }
+		for (int i = 0; i < str.length(); i++) {
+
+			//If we find a non-digit character we return false.
+			if (!Character.isDigit(str.charAt(i)))
+				return false;
+		}
+
+		return true;
+	}
 
 	public String execute() {
-		
-		
+
+
 		String email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
@@ -53,7 +54,7 @@ public class addressAction extends ActionSupport {
 		else if(containsOnlyNumbers(phone) == false || pin.length() !=6){
 			addActionError("Please provide valid Pincode.");
 			return "error";
-	
+
 		}
 		else if(containsOnlyNumbers(phone) == false){
 			addActionError("Please provide valid Phone number.");
@@ -72,29 +73,29 @@ public class addressAction extends ActionSupport {
 			address.setPhone(phone);
 			address.setCustomer_id(customerAction.getId());
 			System.out.println("Id"+ customerAction.getId());
-			
+
 			address.insert(customerAction.getId());
 			reset();
-			
+
 			addressList=Address.findAll();
-					
+
 			for(int i=0;i<addressList.size();i++){
 				if(addressList.get(i).getCustomer_id() == customerAction.getId())
 					customerAddressList.add(addressList.get(i));
-				
+
 			}
 			/*
 			for(int i=0;i<customerAddressList.size();i++){
 				System.out.println(customerAddressList.get(i).getName());
-				
-				
+
+
 			}
-			*/addActionMessage("Address saved successfully");
-			return SUCCESS;
+			 */addActionMessage("Address saved successfully");
+			 return SUCCESS;
 		}
 	}
-	
-	
+
+
 
 	private void reset() {
 		// TODO Auto-generated method stub
@@ -105,19 +106,44 @@ public class addressAction extends ActionSupport {
 		country="";
 		pin="";
 		phone="";
-		
+
 	}
 
-		// method just for address page
-		public String addresses() {
-			String email="";
-			email=(String)session.get("email");
-			String mod = "where email='" + email + "'";
-			customerAction = Customer.findOne(mod);
-			name=customerAction.getFirstName()+ "  "+ customerAction.getLastName();
-			
-			return SUCCESS;
+	// method just for address page
+	public String addresses() {
+		String email="";
+		email=(String)session.get("email");
+		String mod = "where email='" + email + "'";
+		customerAction = Customer.findOne(mod);
+		name=customerAction.getFirstName()+ "  "+ customerAction.getLastName();
+
+		addressList=Address.findAll();
+
+		for(int i=0;i<addressList.size();i++){
+			if(addressList.get(i).getCustomer_id() == customerAction.getId())
+				customerAddressList.add(addressList.get(i));
+
 		}
+		System.out.println(customerAddressList.size());
+		return SUCCESS;
+	}
+	
+	public String deleteAddress(){
+		//System.out.println("ID"+ address_id);
+		String mod = "where address_id='" + address_id + "'";
+		address=Address.findOne(mod);
+		address.delete();
+		
+		addressList=Address.findAll();
+
+		for(int i=0;i<addressList.size();i++){
+			if(addressList.get(i).getCustomer_id() == customerAction.getId())
+				customerAddressList.add(addressList.get(i));
+
+		}
+		
+		return SUCCESS;
+	}
 
 	public int getAddress_id() {
 		return address_id;
