@@ -129,9 +129,16 @@ public class addressAction extends ActionSupport {
 	}
 	
 	public String deleteAddress(){
+		String email="";
+		email=(String)session.get("email");
+		String mod = "where email='" + email + "'";
+		customerAction = Customer.findOne(mod);
+		name=customerAction.getFirstName()+ "  "+ customerAction.getLastName();
+
+		
 		//System.out.println("ID"+ address_id);
-		String mod = "where address_id='" + address_id + "'";
-		address=Address.findOne(mod);
+		String mod1 = "where address_id='" + address_id + "'";
+		address=Address.findOne(mod1);
 		address.delete();
 		
 		addressList=Address.findAll();
