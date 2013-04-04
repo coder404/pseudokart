@@ -7,6 +7,7 @@ import com.flipkart.model.Address;
 import com.flipkart.model.Cart;
 import com.flipkart.model.Customer;
 import com.flipkart.model.Order;
+import com.flipkart.model.Stock;
 import com.flipkart.model.voucher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -169,8 +170,12 @@ public class reviewPlaceOrderAction extends ActionSupport {
 			 //change status of orderdetails tables and change cartAppendNo;
 			 Order.updatePaidStatus();
 			 Customer.cartAppendNoInc();
-			 //reduce stock amount
+			 cartItems=Cart.getCart((String)ActionContext.getContext().getSession().get("email"), (String)ActionContext.getContext().getSession().get("cartAppendNo"));
 			 
+			 if(cartItems!=null)
+			 System.out.println("cart size in voucher success="+cartItems.size());
+			 //reduce stock amount
+			 Stock.reduceQunatity(cartItems);
 			  return SUCCESS;
 		 }
 		 else
