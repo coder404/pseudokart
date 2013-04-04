@@ -46,6 +46,11 @@ public class CartAction_AddItem {
 	}
 	public String onClickBuy()
 	{
+		
+		if(this.uemail==null)
+			return "error";
+		else
+		{
 		System.out.println("!@#$%^&*()="+productId);
 		appendNo=Cart.getCurrentAppendNo(uemail);
 		ActionContext.getContext().getSession().put("cartAppendNo", appendNo);
@@ -75,7 +80,8 @@ public class CartAction_AddItem {
 		ActionContext.getContext().getSession().put("totalCartAmt", amount);
 		System.out.println(amount);
 		return "success";
-	}
+		}
+		}
 	
 	public double getAmount() {
 		return amount;
