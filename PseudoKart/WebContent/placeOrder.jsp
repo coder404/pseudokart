@@ -48,7 +48,7 @@
 <sb:head />
 </head>
 
-<%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.placeorderAction,com.flipkart.model.Address"%>
+<%@ page import="com.opensymphony.xwork2.ActionContext,java.util.*,com.flipkart.action.placeorderAction,com.flipkart.model.*"%>
 
 <body>
 
@@ -115,13 +115,14 @@ $(window).load(function(){
 						
 				</div>
 
-				<div id="shippingaddress" class="tab-pane">
+				<div id="shippingaddress" class="tab-pane" >
 		
-		     <s:if test="addr_list != null">
-					<div style="width: 40%; float: left">
+		    
+					<div style="width: 40%; float: left" >
 						<center>
 							<h5>Select Previous Address</h5><br/>
 						</center>
+						 <s:if test="addr_list != null">
 						<s:iterator value="addr_list">
 						<a style="color: #004b91; text-decoration: none;" href="multiAddr?address_id=<s:property value="address_id"/>" >
 							<div class="addressBox" onmouseover="this.style.border = '2px solid green'" onmouseout="this.style.border = '2px solid #a5a296'">
@@ -137,27 +138,10 @@ $(window).load(function(){
 					</a><br/>
 						</s:iterator>
 				      	
-					
-					<script type="text/javascript">
-					
-				/* $(function() {
-					    $('.tickSign').hide();
-			
-					    $(this.id).hover(
-						    function() {
-						        $('.tickSign').show();
-						    }, function() {
-						        $('.tickSign').hide().empty();
-						    }
-						);
-					}); */
-					
-			 		
-					</script>	
+				</s:if>	
 		      </div>
-		      <div
-							style="width: 1px; height: 450px; background-color: black; float: left;"></div>	
-		      </s:if>
+		      <div style="width: 1px; height: 450px; background-color: black; float: left;"></div>	
+		      
 		      
       
 					<div style="width: 58%; float: right">
@@ -333,30 +317,43 @@ $(window).load(function(){
 									<s:submit cssClass="btn btn-warning" value="Pay" />
 								</s:form>
 							</div>
+							<%
+							   double bal=Wallet.findBalance();
+							   double cart_amt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
+							   if(bal > cart_amt)
+							   {
+							   
+							%>
 							<div id="wallet" class="tab-pane">
-							<script>
-									function myFunction()
-									{
-											alert("Payment With Wallet Success!!!!");
-									}
-							</script>
-							<s:form action=" " theme="bootstrap" cssClass="form-horizontal"
+							
+							<s:form action="walletpay" theme="bootstrap" cssClass="form-horizontal"
 									label="Pay Using e-Wallet ">
 									<table class="table table-hover">
+									<tr class="success">
+									<td><strong>Current Wallet Balance :</strong> </td>
+									<td><%=bal%></td>
+									</tr>
 									<tr class="info">
 									<td><strong>Amount payable :</strong> </td>
-									</tr>
-									<tr class="success">
-									<td><strong>Wallet Balance Used :</strong> </td>
+									<td><%=cart_amt %></td>
 									</tr>
 									<tr class="warning">
-									<td><strong>Remaining Wallet Balance :</strong> </td>
+									<td><strong>Remaining Wallet Will Be Balance :</strong> </td>
+									<td><%=(bal-cart_amt) %></td>
 									</tr>
 									</table>
-									<s:submit cssClass="btn btn-warning" value="Pay" onclick="myFunction()"  />
+									<s:submit cssClass="btn btn-warning" value="Pay" onclick="func()" />
 								</s:form>
+								<script type="text/javascript">
+								 function func()
+								 {
+									 alert("Payment Succesful");
+								 }
+								
+								</script>
 							
 							</div>
+							<%} %>
 						</div>
 					</div>
 					<!-- End here -->
