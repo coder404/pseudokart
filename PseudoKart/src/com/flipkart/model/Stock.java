@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.mast.util.DB;
 import com.mast.util.MyLog;
+import com.opensymphony.xwork2.ActionContext;
 
 public class Stock {
 
@@ -57,6 +58,24 @@ public class Stock {
          return s;
  }
 
-
+	 public static int updatequantity(String query)
+		{
+			return DB.update(query);
+		}
+		
+	 
+public static void reduceQunatity(ArrayList<Cart> items)
+{
+	
+	for(int i=0;i<items.size();i++)
+	{
+		Stock s = Stock.findOne("where stockProductId='"+items.get(i).productId+"';");
+		s.quantity=s.quantity-1;
+		String query="update stock set quantity="+s.quantity+" where stockProductId='"+s.stockProductID+"';";
+		System.out.println(query);
+		Stock.updatequantity(query);
+	}
+	
+}
 	
 }

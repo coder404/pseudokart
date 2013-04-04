@@ -93,7 +93,7 @@ public class Cart {
 			{
 				Cart obj=new Cart();
 				obj.DeliveryTime="2-3 days";
-				//obj.productId=Cart.getProductId(resultSet.getString("productId"));
+				obj.productId=resultSet.getString("productId");
 				obj.ItemDesc=Cart.getItemDescription(resultSet.getString("productId"));
 				System.out.println(obj.ItemDesc);
 				obj.subtotal=Cart.getsubTotal(resultSet.getString("productId"));
