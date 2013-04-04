@@ -36,6 +36,7 @@
     float: left;
     position: relative; right: 1px;
     background-image: url('./images/tickk.png');
+    display : url('./images/tickk.png');
     background-repeat: no-repeat;
 }
 .tickSign:hover{
@@ -102,7 +103,7 @@ $(window).load(function(){
 				<td></td><td></td>
 				<td>Not You?</td>
 				<td></td>
-				<td><a>Logout</a></td>
+				<td><a href="logout">Logout</a></td>
 				<td></td>
 				</tr></table>
 				<br/><br/>
@@ -119,11 +120,11 @@ $(window).load(function(){
 		     <s:if test="addr_list != null">
 					<div style="width: 40%; float: left">
 						<center>
-							<h5>Select Previous Address</h5>
+							<h5>Select Previous Address</h5><br/>
 						</center>
 						<s:iterator value="addr_list">
-						<a style="color: #004b91; text-decoration: none;" href="multiAddr?address_id=<s:property value="address_id"/>">
-							<div class="addressBox" >
+						<a style="color: #004b91; text-decoration: none;" href="multiAddr?address_id=<s:property value="address_id"/>" >
+							<div class="addressBox" onmouseover="this.style.border = '2px solid green'" onmouseout="this.style.border = '2px solid #a5a296'">
 								<b><s:property value="name" /></b><br />
 								<s:property value="streetAddress" /><br/>
 								<s:property value="city" /> , &nbsp;<s:property value="state" /><br />
@@ -142,24 +143,25 @@ $(window).load(function(){
 				/* $(function() {
 					    $('.tickSign').hide();
 			
-					    $('#addressBox').hover(
+					    $(this.id).hover(
 						    function() {
 						        $('.tickSign').show();
 						    }, function() {
 						        $('.tickSign').hide().empty();
 						    }
 						);
-					});
+					}); */
 					
-			 */		
+			 		
 					</script>	
 		      </div>
+		      <div
+							style="width: 1px; height: 450px; background-color: black; float: left;"></div>	
 		      </s:if>
 		      
       
-					<div style="width: 60%; float: right">
-						<div
-							style="width: 1px; height: 450px; background-color: black; float: left;"></div>						<center>
+					<div style="width: 58%; float: right">
+											<center>
 							<h5>Enter New Shipping Address</h5>
 						</center>
 						<br /> <br />
