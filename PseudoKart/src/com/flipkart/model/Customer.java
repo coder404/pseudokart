@@ -12,16 +12,15 @@ import com.opensymphony.xwork2.ActionContext;
 public class Customer {
 	private int id;
 
-	private String firstName="";
-	private String lastName="";
-	private String mobileNumber="";
-	private String landlineNumber="";
-	private String gender="";
-	private String email="";
-	private String profileName="";
-	private String updatedProfileName="";
-	String cartAppendNo="1";
-	
+	private String firstName = "";
+	private String lastName = "";
+	private String mobileNumber = "";
+	private String landlineNumber = "";
+	private String gender = "";
+	private String email = "";
+	private String profileName = "";
+	private String updatedProfileName = "";
+	String cartAppendNo = "1";
 
 	public int getId() {
 		return id;
@@ -90,6 +89,7 @@ public class Customer {
 	public String getCartAppendNo() {
 		return cartAppendNo;
 	}
+
 	public void setCartAppendNo(String cartAppendNo) {
 		this.cartAppendNo = cartAppendNo;
 	}
@@ -131,61 +131,60 @@ public class Customer {
 		return selection;
 	}
 
+	public static int cartAppendNoInc() {
+		String em = (String) ActionContext.getContext().getSession()
+				.get("email");
+		Customer c = Customer.findOne("where email='" + em + "'");
+		if (c != null) {
+			int tmp_no = Integer.parseInt((String) ActionContext.getContext()
+					.getSession().get("cartAppendNo"));
+			tmp_no = tmp_no + 1;
+			String appnd_no = tmp_no + "";
 
+			String query = "update customer set CartAppendNo='" + appnd_no
+					+ "' where email='" + em + "';";
+			System.out.println("update query for appendno=" + query);
+			return DB.update(query);
+		}
 
-  public static int cartAppendNoInc()
-  {
-	  String em=(String)ActionContext.getContext().getSession().get("email");
-	  Customer c=Customer.findOne("where email='"+em+"'");
-	  if(c!=null)
-	  {
-		  int tmp_no=Integer.parseInt((String)ActionContext.getContext().getSession().get("cartAppendNo"));
-		  tmp_no=tmp_no+1;
-		  String appnd_no=tmp_no+"";
-		 
-		  String query = "update customer set CartAppendNo='"+appnd_no+"' where email='"+em+"';";
-		  System.out.println("update query for appendno="+query);
-		  return DB.update(query);
-	  }
-	  
-	  return 0;
-  }
-	
-		
+		return 0;
+	}
+
 	public static Customer findOne(String selectionModifier) {
 
-			ResultSet rs=null;
-			String query = "select * from customer " + selectionModifier;
-			//System.out.println(query);
-			Connection connection = DB.getConnection();
-			rs = DB.readFromDB(query, connection);
-			try {
-				if (rs.next()) {
-					Customer customer=new Customer();
-					customer.id=Integer.parseInt(rs.getString("id"));
-					customer.firstName=rs.getString("firstName");
-					customer.lastName=rs.getString("lastName");
-					customer.mobileNumber=rs.getString("mobileNumber");
-					customer.landlineNumber=rs.getString("landlineNumber");
-					customer.gender=rs.getString("gender");
-					customer.profileName=rs.getString("profileName");
-					customer.updatedProfileName=rs.getString("updatedProfileName");
-					customer.cartAppendNo=rs.getString("CartAppendNo");
-					DB.close(rs);
-					DB.close(connection);
-					return customer;
-				}
-				
-			} catch (SQLException e) {
-				MyLog.myCatch("Customer.java", 70, e);
-				e.printStackTrace();
-					
+		ResultSet rs = null;
+		String query = "select * from customer " + selectionModifier;
+		// System.out.println(query);
+		Connection connection = DB.getConnection();
+		rs = DB.readFromDB(query, connection);
+		try {
+			if (rs.next()) {
+				Customer customer = new Customer();
+				customer.id = Integer.parseInt(rs.getString("id"));
+				customer.firstName = rs.getString("firstName");
+				customer.lastName = rs.getString("lastName");
+				customer.mobileNumber = rs.getString("mobileNumber");
+				customer.landlineNumber = rs.getString("landlineNumber");
+				customer.gender = rs.getString("gender");
+				customer.profileName = rs.getString("profileName");
+				customer.updatedProfileName = rs
+						.getString("updatedProfileName");
+				customer.cartAppendNo = rs.getString("CartAppendNo");
+				DB.close(rs);
+				DB.close(connection);
+				return customer;
 			}
-			DB.close(rs);
-			DB.close(connection);
-			 return null;
+
+		} catch (SQLException e) {
+			MyLog.myCatch("Customer.java", 70, e);
+			e.printStackTrace();
+
+		}
+		DB.close(rs);
+		DB.close(connection);
+		return null;
 	}
-	
+
 	public int updatePersonalInformation() {
 		// TODO Auto-generated method stub
 		String updateSQL = "update customer " + "set firstName= '" + firstName
@@ -203,13 +202,22 @@ public class Customer {
 		String insertSQL = "insert into customer"
 				+ "(firstName,lastName,mobileNumber,landlineNumber,gender,email,profileName,updatedProfileName,CartAppendNo) "
 				+ "values(" + "'" + firstName + "','" + lastName + "', '"
-				+ mobileNumber + "','" + landlineNumber + "' , '" + gender + "' , '" + email
-				+ "','" + profileName + "','" + updatedProfileName + "', '" + 1 + "' );";
+				+ mobileNumber + "','" + landlineNumber + "' , '" + gender
+				+ "' , '" + email + "','" + profileName + "','"
+				+ updatedProfileName + "', '" + 1 + "' );";
 
 		System.out.println(insertSQL);
 
 		return DB.update(insertSQL);
 
+	}
+
+	public int update_profile(String profileName2, String email2) {
+		// TODO Auto-generated method stub
+		String updateSQL = "update customer " + "set updatedProfileName= '"
+				+ profileName2 + " '"+ " where email='" + email2 + "'";
+		System.out.println("query = " + updateSQL);
+		return DB.update(updateSQL);
 	}
 
 }

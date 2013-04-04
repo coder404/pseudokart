@@ -22,41 +22,25 @@ public class accountManagementAction extends ActionSupport {
 
 	Login login;
 
-	
+
 	Map session=ActionContext.getContext().getSession();;
-	
+
 	// variables password
 	private String oldPassword;
 	private String newPassword;
 	private String reNewPassword;
 
-	public accountManagementAction() {
-		/*login = new Login();
-		login.setEmail("laxmi21888@gmail.com");
-		login.setPassword("lax123456");
-		session = ActionContext.getContext().getSession();
-		email = "laxmi21888@gmail.com";
-										 * (String)ActionContext.getContext().
-										 * getSession().get("email");
-										 
-		session.put("email", email);*/
-	}
-
 	public String execute() {
-		/*
-		 * String
-		 * emailSession=(String)ActionContext.getContext().getSession().get
-		 * ("email");
-		 */
+		
 		email=(String)session.get("email");
 		if(email==null){
 			System.out.println("email in execute...ifff"+email);
 			return "error";
 		}else{
 			System.out.println("email in execute...else"+email);
-		String mod = "where email='" + email + "'";
-		customerAction = Customer.findOne(mod);
-		return SUCCESS;
+			String mod = "where email='" + email + "'";
+			customerAction = Customer.findOne(mod);
+			return SUCCESS;
 		}
 	}
 
@@ -88,7 +72,7 @@ public class accountManagementAction extends ActionSupport {
 		email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
-		
+
 		return SUCCESS;
 	}
 
@@ -96,12 +80,12 @@ public class accountManagementAction extends ActionSupport {
 		email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
-		
+
 		// Find one object of login for the corresponding email
-		
+
 		Login login = new Login();
 		login = Login.findOne(mod);
-		
+
 		if (oldPassword.isEmpty() || newPassword.isEmpty()
 				|| reNewPassword.isEmpty()) {
 			addActionError("Password Cannot be left empty.");
@@ -124,13 +108,13 @@ public class accountManagementAction extends ActionSupport {
 		}
 	}
 
-	
+
 
 	public String updateEmail() {
 		email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
 		customerAction = Customer.findOne(mod);
-		
+
 		return SUCCESS;
 	}
 
@@ -142,11 +126,31 @@ public class accountManagementAction extends ActionSupport {
 		 */
 		email=(String)session.get("email");
 		String mod = "where email='" + email + "'";
-		System.out.println(mod);
+		//System.out.println(mod);
 		customerAction = Customer.findOne(mod);
+		if(! customerAction.getUpdatedProfileName().equals("")){
+			return "error";
+		}
 		return SUCCESS;
 	}
 
+	public String updateProfileName(){
+		email=(String)session.get("email");
+		String mod = "where email='" + email + "'";
+		System.out.println(mod);
+		customerAction = Customer.findOne(mod);
+		//System.out.println(profileName);
+		//System.out.println(customerAction.getProfileName());
+		if(! profileName.equals(customerAction.getProfileName()) && customerAction.getUpdatedProfileName().equals("")){
+			customerAction.update_profile(profileName,email);
+			customerAction = Customer.findOne(mod);
+			return SUCCESS;
+
+		}
+
+
+		return "error";
+	}
 	public int getId() {
 		return id;
 	}

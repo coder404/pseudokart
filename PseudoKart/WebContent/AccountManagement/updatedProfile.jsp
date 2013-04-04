@@ -17,22 +17,24 @@
 
 			<h3 style="margin-top: 50px">Profile Settings</h3>
 			<div class="alert">
-				<font style="font-weight: bold">Please Note:</font> Your Profile
-				name can be changed <font style="font-weight: bold">only once</font>
-				after registration
+				<font style="font-weight: bold">Please Note:</font> You have already
+				changed your <font style="font-weight: bold">Profile name </font>
+				after registration.
 			</div>
-		
-			<s:form action="updateProfileName" method="post">
+
+			<s:form action="#" method="post">
 				<table theme="simple">
 					<tr>
-						<td align="left">Profile Name</td>
-						<td><s:textfield name="profileName"
-								value="%{customerAction.profileName}" theme="simple" /></td>
+						<td align="left">Profile Name:</td>
+						<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><s:label name="profileName" value="%{customerAction.updatedProfileName}" theme="simple"/>
+						<%-- <s:textfield name="profileName" readonly="true"
+								value="%{customerAction.updatedProfileName}" theme="simple" /> --%></td>
 					</tr>
 				</table>
 				<br />
-				<s:submit name="commandButton" id="mysubmit" value="Save Changes"
+				<%-- <s:submit name="commandButton" id="mysubmit" value="Save Changes"
 					cssClass="btn btn-primary" theme="simple" style="margin-left:120px" />
+		 --%>
 			</s:form>
 
 		</div>
