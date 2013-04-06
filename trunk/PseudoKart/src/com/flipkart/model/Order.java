@@ -3,6 +3,7 @@ package com.flipkart.model;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.mast.util.DB;
@@ -17,6 +18,56 @@ public class Order {
 	String email;
 	String orderstatus;
 	String paidstatus;
+	public static ArrayList<Order> findAll(String selectionModifier) {
+		ArrayList<Order> selection = new ArrayList<Order>();
+		ResultSet rs = null;
+		String query = "select * " +
+				"from orderDetails " + selectionModifier;
+		Connection connection = DB.getConnection();
+		rs = DB.readFromDB(query, connection);
+		try {
+			while (rs.next()) {
+				Order order=new Order();
+				order.orderId=rs.getInt("orderId");
+				order.orderNo=rs.getString("orderNo");
+				order.cartNo=rs.getString("cartNo");
+				order.email=rs.getString("email");
+				order.orderstatus=rs.getString("orderStatus");
+				order.paidstatus=rs.getString("paidStatus");
+				
+				selection.add(order);
+			}
+		} catch (SQLException e) {
+	        MyLog.myCatch("Product.java",50, e);
+			e.printStackTrace();
+		}
+		DB.close(rs);
+		DB.close(connection);
+		return selection;
+	}
+
+	public int delete(String email2) {
+		// TODO Auto-generated method stub
+		String deleteSQL = 
+			    "delete from orderDetails "+"where email= '" + email2+"'";
+		System.out.println(deleteSQL);
+		return DB.update(deleteSQL);
+	}
+	
+	public int insert() {
+		// TODO Auto-generated method stub
+		String insertSQL = "insert into orderDetails"
+				+ "(orderNo,cartNo,email,orderstatus,paidstatus) "
+				+ "values(" + "'" + orderNo + "','" + cartNo + "', '"
+				+ email + "','" + orderstatus + "' , '" + paidstatus
+				+ "');";
+
+		System.out.println(insertSQL);
+
+		return DB.update(insertSQL);
+
+	}
+	
 	public int getOrderId() {
 		return orderId;
 	}

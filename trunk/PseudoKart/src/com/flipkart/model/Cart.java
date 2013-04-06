@@ -9,6 +9,7 @@ import com.mast.util.DB;
 import com.mast.util.MyLog;
 
 public class Cart {
+	private int cartId;
 	public String productId;
 	public String ItemDesc;
 	public String DeliveryTime;
@@ -177,7 +178,55 @@ public class Cart {
 		System.out.println(amt);
 		return amt;
 	}
+	
+	public static ArrayList<Cart> findAll(String selectionModifier) {
+		ArrayList<Cart> selection = new ArrayList<Cart>();
+		ResultSet rs = null;
+		String query = "select * " +
+				"from cart " + selectionModifier;
+		Connection connection = DB.getConnection();
+		rs = DB.readFromDB(query, connection);
+		try {
+			while (rs.next()) {
+				Cart cart=new Cart();
+				cart.cartId=rs.getInt("cartId");
+				cart.email=rs.getString("email");
+				cart.cartAppendNo=rs.getString("cartAppendNo");
+				cart.productId=rs.getString("productId");
+				cart.quantity=rs.getInt("quantity");
+				selection.add(cart);
+			}
+		} catch (SQLException e) {
+	        MyLog.myCatch("Product.java",50, e);
+			e.printStackTrace();
+		}
+		DB.close(rs);
+		DB.close(connection);
+		return selection;
+	}
 
+	public int delete(String email2) {
+		// TODO Auto-generated method stub
+		String deleteSQL = 
+			    "delete from cart "+"where email= '" + email2+"'";
+		System.out.println(deleteSQL);
+		return DB.update(deleteSQL);
+	}
+	
+	
+	public int insert() {
+		// TODO Auto-generated method stub
+		String insertSQL = "insert into cart"
+				+ "(email,cartAppendNo,productId,quantity) "
+				+ "values(" + "'" + email + "','" + cartAppendNo + "', '"
+				+ productId + "','" + quantity + "');";
+
+		System.out.println(insertSQL);
+
+		return DB.update(insertSQL);
+
+	}
+	
 	public String getProductId() {
 		return productId;
 	}
@@ -208,6 +257,14 @@ public class Cart {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
 }

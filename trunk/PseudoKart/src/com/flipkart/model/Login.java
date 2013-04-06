@@ -120,6 +120,14 @@ public class Login {
 	
 		
 	}
+
+	public int delete(String email2) {
+		// TODO Auto-generated method stub
+		String deleteSQL = 
+			    "delete from login "+"where email= '" + email2+"'";
+		System.out.println(deleteSQL);
+		return DB.update(deleteSQL);
+	}
 	
 }
 
