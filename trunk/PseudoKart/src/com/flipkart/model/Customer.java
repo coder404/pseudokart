@@ -20,6 +20,7 @@ public class Customer {
 	private String email = "";
 	private String profileName = "";
 	private String updatedProfileName = "";
+	private String updated_email="";
 	String cartAppendNo = "1";
 
 	public int getId() {
@@ -100,6 +101,14 @@ public class Customer {
 
 	public void setUpdatedProfileName(String updatedProfileName) {
 		this.updatedProfileName = updatedProfileName;
+	}
+
+	public String getUpdated_email() {
+		return updated_email;
+	}
+
+	public void setUpdated_email(String updated_email) {
+		this.updated_email = updated_email;
 	}
 
 	public static ArrayList<Customer> find(String selectionModifier) {
@@ -200,11 +209,11 @@ public class Customer {
 	public int insert() {
 		// TODO Auto-generated method stub
 		String insertSQL = "insert into customer"
-				+ "(firstName,lastName,mobileNumber,landlineNumber,gender,email,profileName,updatedProfileName,CartAppendNo) "
+				+ "(firstName,lastName,mobileNumber,landlineNumber,gender,email,profileName,updatedProfileName,CartAppendNo,updated_email) "
 				+ "values(" + "'" + firstName + "','" + lastName + "', '"
 				+ mobileNumber + "','" + landlineNumber + "' , '" + gender
 				+ "' , '" + email + "','" + profileName + "','"
-				+ updatedProfileName + "', '" + 1 + "' );";
+				+ updatedProfileName + "', '" + 1 + "' , '" + updated_email + "');";
 
 		System.out.println(insertSQL);
 
@@ -219,5 +228,15 @@ public class Customer {
 		System.out.println("query = " + updateSQL);
 		return DB.update(updateSQL);
 	}
+
+	public int update_email(String updated_email2, String email2) {
+		// TODO Auto-generated method stub
+		String updateSQL = "update customer " + "set updated_email= '"
+				+ updated_email2 + " '"+ " where email='" + email2 + "'";
+		System.out.println("query = " + updateSQL);
+		return DB.update(updateSQL);
+	}
+
+	
 
 }

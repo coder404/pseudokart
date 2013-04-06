@@ -51,9 +51,11 @@
 				<br/>
 				<s:submit name="commandButton" id="mysubmit" 
 								value="Save Changes" cssClass="btn btn-primary" theme="simple" style="margin-left:120px"/>
+				<s:if test="hasActionErrors()">
 				<div class="alert alert-success">
 				<s:actionerror/>
 				</div>
+				</s:if>
 			</s:form>
 			</div>
 		</div>

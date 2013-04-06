@@ -26,12 +26,11 @@
 						<s:actionerror />
 					</div>
 				</s:if>
-				<s:else>
+				<s:elseif test!="hasActionErrors()">
 					<div class="alert alert-success">
-
 						<s:actionmessage />
 					</div>
-				</s:else>
+				</s:elseif>
 				<table theme="simple" style="margin-left: 10px">
 					<tr>
 						<td>Name</td>

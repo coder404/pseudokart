@@ -20,12 +20,14 @@
 			<s:form action="changePassword" method="post">
 				<s:if test="hasActionErrors()">
 					<div class="alert alert-error">
-					<s:actionerror/>
+						<s:actionerror />
 					</div>
 				</s:if>
-				<s:else><div class="alert alert-success">
-					<s:actionmessage/>
-					</div></s:else>
+				<s:elseif test!="hasActionErrors()">
+					<div class="alert alert-success">
+						<s:actionmessage />
+					</div>
+				</s:elseif>
 				<table theme="simple">
 					<tr>
 						<td align="left">Email Address</td>
