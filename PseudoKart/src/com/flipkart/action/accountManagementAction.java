@@ -271,6 +271,11 @@ public class accountManagementAction extends ActionSupport {
 			
 		newCustomer.setEmail(customerAction.getUpdated_email());
 		newCustomer.setUpdated_email("");
+		for(int i=0;i<newAddress.size();i++){
+			newAddress.get(i).setCustomer_id(newCustomer.getId());
+		}
+
+		
 		for(int i=0;i<newCarts.size();i++){
 			newCarts.get(i).setEmail(customerAction.getUpdated_email());
 		}
