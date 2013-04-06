@@ -54,7 +54,7 @@
 				<li><a href="change_password">Change Password </a></li>
 				<li><a href="addresses">Addresses </a></li>
 				<li><a href="profile_settings">Profile Settings </a></li>
-				<li><a href="update_email">Update Email </a></li>
+				<li><a href="update_email_page">Update Email </a></li>
 			</ul>
 		</div>
 

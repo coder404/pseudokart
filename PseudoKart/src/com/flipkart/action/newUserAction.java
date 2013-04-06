@@ -17,7 +17,7 @@ public class newUserAction extends ActionSupport{
 	private String gender="";
 	private String profileName="";
 	private String updatedProfileName="";
-	
+	private String updated_email;
 	public String getEmail() {
 		return email;
 	}
@@ -94,7 +94,7 @@ public class newUserAction extends ActionSupport{
 		newCustomer.setUpdatedProfileName("");
 		newCustomer.setEmail(email);
 		newCustomer.setProfileName(profileName);
-		
+		newCustomer.setUpdated_email("");
 		newCustomer.insert();
 		if(flag == 1)
 			return "success";
@@ -158,5 +158,13 @@ public class newUserAction extends ActionSupport{
 
 	public void setUpdatedProfileName(String updatedProfileName) {
 		this.updatedProfileName = updatedProfileName;
+	}
+
+	public String getUpdated_email() {
+		return updated_email;
+	}
+
+	public void setUpdated_email(String updated_email) {
+		this.updated_email = updated_email;
 	}
 }
