@@ -12,8 +12,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.flipkart.model.Address;
+import com.flipkart.model.Cart;
 import com.flipkart.model.Customer;
 import com.flipkart.model.Login;
+import com.flipkart.model.Order;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart;
@@ -190,12 +193,12 @@ public class accountManagementAction extends ActionSupport {
 			String to = this.updated_email; // added this line
 			System.out.println("to :" + to);
 			Session session = Session.getDefaultInstance(props, null);
-			
+
 			//String param1 = email;
 			String baseURL= "http://localhost:8080/PseudoKart/";
 			String actionName= "updateNewEmail?";
-			String URL = baseURL+actionName+"&email="+email;
-			
+			String URL = baseURL+actionName+"&email="+updated_email;
+
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
 
@@ -207,12 +210,12 @@ public class accountManagementAction extends ActionSupport {
 			System.out.println(toAddress);
 
 			message.setSubject("Update Email");
-			
+
 			message.setText("click here : " + URL);
 
-			
-			
-			
+
+
+
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, from, pass);
 			transport.sendMessage(message, message.getAllRecipients());
@@ -222,135 +225,211 @@ public class accountManagementAction extends ActionSupport {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	
+
 
 		if(flag==1){
 			return SUCCESS;
 		}
 		else
 			return "error";
-}
-public String updateNewEmail(){
-	String mod = "where email='" + email + "'";
-	Login login=new Login();
-	login.findOne(mod);
-	customerAction=Customer.findOne(mod);
-	//System.out.println("UPDATED EMAIL.."+customerAction.getUpdated_email());
-	login.update_email(customerAction.getUpdated_email(),email);
-	customerAction.update_newemail(customerAction.getUpdated_email(), email);
-	String mod1 = "where email='" + updated_email + "'";
-	customerAction=Customer.findOne(mod1);
-	return SUCCESS;
-}
-public int getId() {
-	return id;
-}
+	}
+	public String updateNewEmail(){
+		System.out.println("email beginnnig"+email);
+		String mod = "where email='" + email + "'";
+		int customerId=customerAction.getId();
+		String mod1 = "where customer_id='" + customerId + "'";
+		
+		Login login=new Login();
 
-public void setId(int id) {
-	this.id = id;
-}
+		ArrayList<Cart> carts=new ArrayList<Cart>();
+		ArrayList<Order> orders=new ArrayList<Order>();
+		ArrayList<Address> address=new ArrayList<Address>();
+		
+		address=Address.findAll(mod1);
+		
+		login=Login.findOne(mod);
+		customerAction=Customer.findOne(mod);
+		carts=Cart.findAll(mod);
+		orders=Order.findAll(mod);
 
-public String getFirstName() {
-	return firstName;
-}
+		String mod2 = "where email='" + customerAction.getUpdated_email() + "'";
+		
+		Login newLogin=new Login();
+		ArrayList<Cart> newCarts=new ArrayList<Cart>();
+		ArrayList<Order> newOrders=new ArrayList<Order>();
+		ArrayList<Address> newAddress=new ArrayList<Address>();
+		Customer newCustomer=new Customer();
 
-public void setFirstName(String firstName) {
-	this.firstName = firstName;
-}
+		
+		newAddress=Address.findAll(mod1);
+		newLogin=Login.findOne(mod);
+		newCustomer=Customer.findOne(mod);
+		newCarts=Cart.findAll(mod);
+		newOrders=Order.findAll(mod);
 
-public String getLastName() {
-	return lastName;
-}
+		newLogin.setEmail(customerAction.getUpdated_email());
+			
+		newCustomer.setEmail(customerAction.getUpdated_email());
+		newCustomer.setUpdated_email("");
+		for(int i=0;i<newCarts.size();i++){
+			newCarts.get(i).setEmail(customerAction.getUpdated_email());
+		}
 
-public void setLastName(String lastName) {
-	this.lastName = lastName;
-}
+		for(int i=0;i<newOrders.size();i++){
+			newOrders.get(i).setEmail(customerAction.getUpdated_email());
+		}
 
-public String getMobileNumber() {
-	return mobileNumber;
-}
+		//delete from child tables first then delete from parent table
+		for(int i=0;i<address.size();i++){
+			address.get(i).delete();
+			
+		}
+		customerAction.delete(email);
+		for(int i=0;i<carts.size();i++){
+			carts.get(i).delete(email);
 
-public void setMobileNumber(String mobileNumber) {
-	this.mobileNumber = mobileNumber;
-}
+		}
+		for(int i=0;i<orders.size();i++){
+			orders.get(i).delete(email);
 
-public String getLandlineNumber() {
-	return landlineNumber;
-}
+		}
+		login.delete(email);
 
-public void setLandlineNumber(String landlineNumber) {
-	this.landlineNumber = landlineNumber;
-}
 
-public String getGender() {
-	return gender;
-}
+		//insert into parent table first then to child tables
+		newLogin.insert();
+		newCustomer.insert();
+		
+		for(int i=0;i<newAddress.size();i++){
+			newAddress.get(i).insert(newCustomer.getId());		
+		}
+		for(int i=0;i<newCarts.size();i++){
+			newCarts.get(i).insert();
 
-public void setGender(String gender) {
-	this.gender = gender;
-}
+		}
+		for(int i=0;i<newOrders.size();i++){
+			newOrders.get(i).insert();
 
-public String getEmail() {
-	return email;
-}
+		}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+		//System.out.println("UPDATED EMAIL.."+customerAction.getUpdated_email());
+		//login.update_email(customerAction.getUpdated_email(),email);
+		//customerAction.update_newemail(customerAction.getUpdated_email(), email);
 
-public String getUpdated_email() {
-	return updated_email;
-}
+		
+		System.out.println("email endddddd"+mod2);
+		customerAction=Customer.findOne(mod2);
+		return SUCCESS;
+	}
+	public int getId() {
+		return id;
+	}
 
-public void setUpdated_email(String updated_email) {
-	this.updated_email = updated_email;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-public String getProfileName() {
-	return profileName;
-}
+	public String getFirstName() {
+		return firstName;
+	}
 
-public void setProfileName(String profileName) {
-	this.profileName = profileName;
-}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-public String getUpdatedProfileName() {
-	return updatedProfileName;
-}
+	public String getLastName() {
+		return lastName;
+	}
 
-public void setUpdatedProfileName(String updatedProfileName) {
-	this.updatedProfileName = updatedProfileName;
-}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-public Customer getCustomerAction() {
-	return customerAction;
-}
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
 
-public void setCustomerAction(Customer customerAction) {
-	this.customerAction = customerAction;
-}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
 
-public String getOldPassword() {
-	return oldPassword;
-}
+	public String getLandlineNumber() {
+		return landlineNumber;
+	}
 
-public void setOldPassword(String oldPassword) {
-	this.oldPassword = oldPassword;
-}
+	public void setLandlineNumber(String landlineNumber) {
+		this.landlineNumber = landlineNumber;
+	}
 
-public String getNewPassword() {
-	return newPassword;
-}
+	public String getGender() {
+		return gender;
+	}
 
-public void setNewPassword(String newPassword) {
-	this.newPassword = newPassword;
-}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-public String getReNewPassword() {
-	return reNewPassword;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public void setReNewPassword(String reNewPassword) {
-	this.reNewPassword = reNewPassword;
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUpdated_email() {
+		return updated_email;
+	}
+
+	public void setUpdated_email(String updated_email) {
+		this.updated_email = updated_email;
+	}
+
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
+	}
+
+	public String getUpdatedProfileName() {
+		return updatedProfileName;
+	}
+
+	public void setUpdatedProfileName(String updatedProfileName) {
+		this.updatedProfileName = updatedProfileName;
+	}
+
+	public Customer getCustomerAction() {
+		return customerAction;
+	}
+
+	public void setCustomerAction(Customer customerAction) {
+		this.customerAction = customerAction;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getReNewPassword() {
+		return reNewPassword;
+	}
+
+	public void setReNewPassword(String reNewPassword) {
+		this.reNewPassword = reNewPassword;
+	}
 }
