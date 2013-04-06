@@ -90,7 +90,9 @@ public class addressAction extends ActionSupport {
 
 
 			}
-			 */addActionMessage("Address saved successfully");
+			 */
+			System.out.println("size of customer address list"+customerAddressList.size());
+			addActionMessage("Address saved successfully");
 			 return SUCCESS;
 		}
 	}
