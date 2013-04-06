@@ -26,7 +26,7 @@
 						<s:actionerror />
 					</div>
 				</s:if>
-				<s:elseif test!="hasActionErrors()">
+				<s:elseif test="hasActionMessages()">
 					<div class="alert alert-success">
 						<s:actionmessage />
 					</div>
