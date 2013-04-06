@@ -108,5 +108,18 @@ public class Login {
 		
 	}
 	
+	public int update_email(String updated_email, String email2) {
+		System.out.println("In login update..");
+		// TODO Auto-generated method stub
+		String updateSQL = 
+				"update login "
+						+ "set email= '" + updated_email +"'" 
+						+" where email='"+email2 +"'";
+		System.out.println("query = " + updateSQL);
+		return DB.update(updateSQL);
+	
+		
+	}
+	
 }
 

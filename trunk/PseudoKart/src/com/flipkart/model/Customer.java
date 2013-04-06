@@ -176,8 +176,8 @@ public class Customer {
 				customer.landlineNumber = rs.getString("landlineNumber");
 				customer.gender = rs.getString("gender");
 				customer.profileName = rs.getString("profileName");
-				customer.updatedProfileName = rs
-						.getString("updatedProfileName");
+				customer.updatedProfileName = rs.getString("updatedProfileName");
+				customer.updated_email=rs.getString("updated_email");
 				customer.cartAppendNo = rs.getString("CartAppendNo");
 				DB.close(rs);
 				DB.close(connection);
@@ -237,6 +237,14 @@ public class Customer {
 		return DB.update(updateSQL);
 	}
 
-	
+	public int update_newemail(String updated_email2, String email2) {
+		System.out.println("in customer update....");
+		// TODO Auto-generated method stub
+		String updateSQL = "update customer " + "set email= '"
+				+ updated_email2 + " '"+ " where email='" + email2 + "'";
+		System.out.println("query = " + updateSQL);
+		return DB.update(updateSQL);
+	}
+
 
 }
