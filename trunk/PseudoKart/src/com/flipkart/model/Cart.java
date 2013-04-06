@@ -13,6 +13,8 @@ public class Cart {
 	public String ItemDesc;
 	public String DeliveryTime;
 	public int quantity;
+	private String cartAppendNo;
+	private String email;
 	public double subtotal;
 	//public static double amount=0;
 	//public  ArrayList<Cart> CartList=new ArrayList<Cart>();
@@ -174,6 +176,38 @@ public class Cart {
 			System.out.println("******"+amt);}
 		System.out.println(amt);
 		return amt;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getCartAppendNo() {
+		return cartAppendNo;
+	}
+
+	public void setCartAppendNo(String cartAppendNo) {
+		this.cartAppendNo = cartAppendNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
