@@ -190,7 +190,12 @@ public class accountManagementAction extends ActionSupport {
 			String to = this.updated_email; // added this line
 			System.out.println("to :" + to);
 			Session session = Session.getDefaultInstance(props, null);
-
+			
+			//String param1 = email;
+			String baseURL= "http://localhost:8080/PseudoKart/";
+			String actionName= "updateNewEmail?";
+			String URL = baseURL+actionName+"&email="+email;
+			
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
 
@@ -202,29 +207,9 @@ public class accountManagementAction extends ActionSupport {
 			System.out.println(toAddress);
 
 			message.setSubject("Update Email");
-			//message.setText("To update your flipkart email is click on this link " + "<a> </a>" );
-			//message.setSentDate(new Date());
+			
+			message.setText("click here : " + URL);
 
-			// creates message part
-			
-			
-			/*MimeBodyPart messageBodyPart = new MimeBodyPart();
-			messageBodyPart.setContent(message, "text/html");
-
-			String message1 = "<html>" +
-					"<head><title>"+"Email Updation"+"</title></head>" +
-					"<body>" +
-					"Click <a href=\"" + "email" + "\">here</a> to activate your free subscription." +
-					"</body>" +
-					"</html>";
-			
-			// creates multi-part
-			messageBodyPart.setContentMD5(message1);
-			MimeMultipart multipart = new MimeMultipart();
-			multipart.addBodyPart(messageBodyPart);
-*/			
-
-			
 			
 			
 			
@@ -245,7 +230,18 @@ public class accountManagementAction extends ActionSupport {
 		else
 			return "error";
 }
-
+public String updateNewEmail(){
+	String mod = "where email='" + email + "'";
+	Login login=new Login();
+	login.findOne(mod);
+	customerAction=Customer.findOne(mod);
+	//System.out.println("UPDATED EMAIL.."+customerAction.getUpdated_email());
+	login.update_email(customerAction.getUpdated_email(),email);
+	customerAction.update_newemail(customerAction.getUpdated_email(), email);
+	String mod1 = "where email='" + updated_email + "'";
+	customerAction=Customer.findOne(mod1);
+	return SUCCESS;
+}
 public int getId() {
 	return id;
 }
