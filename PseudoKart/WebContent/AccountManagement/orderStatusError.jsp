@@ -21,9 +21,9 @@
 <body>
 	<div class="span10" align="left">
 		<div>
-			<h3 style="margin-top: 50px">Order Status</h3>
+			<h3 style="margin-top: 50px">The Order Id does not exist... :(</h3>
 		</div>
-			
+		<div align="left"><a href="">View All Details</a></div>	
 		</div>
 </body>
 </html>
