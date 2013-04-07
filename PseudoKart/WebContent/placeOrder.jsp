@@ -14,7 +14,7 @@
 <script type="text/javascript"
 	src="./ViewResources/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="./ViewResources/js/bootstrap-tab.js"></script>
-
+<script>window.history.forward(1);</script>
 <title>Place Order</title>
 <style type="text/css">
 
@@ -50,7 +50,7 @@
 
 <%@ page import="com.opensymphony.xwork2.ActionContext,java.util.*,com.flipkart.action.placeorderAction,com.flipkart.model.*"%>
 
-<body>
+<body onload="javascript:history.go(1)">
 
 <script>
 $(window).load(function(){
@@ -338,7 +338,7 @@ $(window).load(function(){
 									<td><%=cart_amt %></td>
 									</tr>
 									<tr class="warning">
-									<td><strong>Remaining Wallet Will Be Balance :</strong> </td>
+									<td><strong>Remaining Wallet Balance Will Be  :</strong> </td>
 									<td><%=(bal-cart_amt) %></td>
 									</tr>
 									</table>
