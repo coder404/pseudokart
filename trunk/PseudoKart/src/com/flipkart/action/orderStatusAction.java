@@ -31,6 +31,7 @@ public class orderStatusAction extends ActionSupport{
 	Order order=new Order();
 	ArrayList<Cart> cart=new ArrayList<Cart>();
 	Product product =new Product();
+	ArrayList<Product> products=new ArrayList<Product>();
 	
 	Map session=ActionContext.getContext().getSession();
 	
@@ -44,7 +45,21 @@ public class orderStatusAction extends ActionSupport{
 		}
 		//System.out.println(order.getCartNo());
 		//System.out.println(order.getEmail());
+		String mod1="where cartId='" + order.getCartNo() + "'" + "and email='" + email + "'";
+		cart=Cart.findAll(mod1);
 		
+		for(int i=0;i<cart.size();i++){
+			String mod2="where productId='" + cart.get(i).getProductId() + "'";
+			Product product1=new Product();
+			product1=Product.findProduct(mod2);
+			products.add(product1);
+		}
+		
+		for(int i=0;i<products.size();i++){
+			System.out.println(products.get(i).getName());
+			System.out.println(products.get(i).getPrice());
+			System.out.println(products.get(i).getDescription());
+		}
 		return SUCCESS;
 	}
 
@@ -154,6 +169,14 @@ public class orderStatusAction extends ActionSupport{
 
 	public ArrayList<Cart> getCart() {
 		return cart;
+	}
+
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
 	}
 
 	public void setCart(ArrayList<Cart> cart) {
