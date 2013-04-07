@@ -17,12 +17,57 @@
 
 <title>Order Status</title>
 <sb:head />
+<style type="text/css">
+table
+{
+border-collapse:collapse;
+}
+
+
+.example1 {
+	border: 1px solid #ddd;
+	text-align: justify;
+	text-justify: inter-word;
+	backgroung:#C0C0C0;
+	
+}
+
+</style>
+
 </head>
 <body>
 	<div class="span10" align="left">
-		<div>
-			<h3 style="margin-top: 50px">Order Status Successs....</h3>
-		</div>
+			<br/>
+			<br/>
+			
+			<table class="example1">
+			<tr>
+			<td>Order ID:</td><td><s:label value="%{order.orderNo}" /></td>
+			</tr>
+			</table>
+			<br/>
+			<br/>
+			<table class="example1">
+			<tr style="border: 1px solid black">
+			<th style="border: 1px solid black">Item Name</th>
+			<th style="border: 1px solid black">Item Description</th>
+			<th style="border: 1px solid black">Order Status</th>
+			<th style="border: 1px solid black">Price</th>
+			<th style="border: 1px solid black">Quantity</th>
+			</tr>
+			<tr style="border: 1px solid black">
+			<s:iterator value="cart">
+				<s:iterator value="products">
+					<td style="border: 1px solid black"><s:property value="name"/></td>
+					<td style="border: 1px solid black"><s:property value="description"/></td>
+					<td style="border: 1px solid black"><s:property value="%{order.orderstatus}"/></td>
+					<td style="border: 1px solid black"><s:property value="price"/></td>
+					<td style="border: 1px solid black"><s:property value="quantity"/></td>
+				</s:iterator>
+			</s:iterator>
+			</tr>
+			
+			</table>
 			
 		</div>
 </body>
