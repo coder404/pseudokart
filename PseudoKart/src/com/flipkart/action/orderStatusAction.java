@@ -27,6 +27,7 @@ public class orderStatusAction extends ActionSupport{
 	//product table
 	private String name;
 	private Double price;
+	private String description;
 	
 	Order order=new Order();
 	ArrayList<Cart> cart=new ArrayList<Cart>();
@@ -52,12 +53,12 @@ public class orderStatusAction extends ActionSupport{
 			products.add(product1);
 		}
 		
-		for(int i=0;i<products.size();i++){
+	/*	for(int i=0;i<products.size();i++){
 			System.out.println(products.get(i).getName());
 			System.out.println(products.get(i).getPrice());
 			System.out.println(products.get(i).getDescription());
 		}
-		return SUCCESS;
+	*/	return SUCCESS;
 	}
 
 	public int getOrderId() {
@@ -146,6 +147,14 @@ public class orderStatusAction extends ActionSupport{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Double getPrice() {
