@@ -36,15 +36,12 @@ public class orderStatusAction extends ActionSupport{
 	Map session=ActionContext.getContext().getSession();
 	
 	public String execute(){
-		System.out.println("in order status execute.....");
 		email=(String)session.get("email");
 		String mod = "where orderNo='" + orderNo + "'" + "and email='" + email + "'" + "and paidstatus='Y'";
 		order=Order.findOne(mod);
 		if(order==null){
 			return "error";
 		}
-		//System.out.println(order.getCartNo());
-		//System.out.println(order.getEmail());
 		String mod1="where cartId='" + order.getCartNo() + "'" + "and email='" + email + "'";
 		cart=Cart.findAll(mod1);
 		
