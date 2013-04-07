@@ -24,8 +24,8 @@ public class Order {
 
 		ResultSet rs = null;
 		String query = "select * from orderDetails " + selectionModifier;
-		System.out.print("IN findone order....");
-		System.out.println(query);
+		//System.out.print("IN findone order....");
+		//System.out.println(query);
 		Connection connection = DB.getConnection();
 		rs = DB.readFromDB(query, connection);
 		try {
