@@ -11,9 +11,9 @@
 <link type="text/css" rel="stylesheet" href="./ViewResources/css/bootstrap.css">
 <script type="text/javascript" src="./ViewResources/js/bootstrap-tab.js"></script>
 <script type="text/javascript" src="./ViewResources/js/jquery-1.7.1.js"></script>
-<script>window.history.forward(1);</script>
+
 </head>
-<body onload="javascript:history.go(1)">
+<body >
 
 	<s:actionerror theme="bootstrap"/>
 						<s:fielderror/>
