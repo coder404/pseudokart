@@ -39,7 +39,7 @@ public class accountManagementAction extends ActionSupport {
 	Login login;
 
 
-	Map session=ActionContext.getContext().getSession();;
+	Map session=ActionContext.getContext().getSession();
 
 	// variables password
 	private String oldPassword;
@@ -196,8 +196,8 @@ public class accountManagementAction extends ActionSupport {
 
 			//String param1 = email;
 			String baseURL= "http://localhost:8080/PseudoKart/";
-			String actionName= "updateNewEmail?";
-			String URL = baseURL+actionName+"&email="+updated_email;
+			String actionName= "updateNewEmail;//?";
+			String URL = baseURL+actionName;//+"&email="+updated_email;
 
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));

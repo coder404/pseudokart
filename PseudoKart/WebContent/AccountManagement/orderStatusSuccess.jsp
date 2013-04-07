@@ -21,30 +21,9 @@
 <body>
 	<div class="span10" align="left">
 		<div>
-			<h3 style="margin-top: 50px">Order Status</h3>
+			<h3 style="margin-top: 50px">Order Status Successs....</h3>
 		</div>
-		<div>
-			<h4>Check Order Status</h4>
+			
 		</div>
-		<br/>
-		<div>Now you can track the progress of your order right here!</div>
-	
-		<div>Enter your Order ID below and click "GO" to view details of
-			your order.</div>
-		<br/>
-		<s:form action="checkOrderStatus" method="post">
-			<table theme="simple">
-				
-				<tr>
-					<td><s:textfield name="orderNo" size="15"
-							placeholder="Enter Your Order Id" theme="simple"
-							cssClass="input-large" /></td>
-					<td><s:submit name="commandButton" id="mysubmit" value="Go"
-							cssClass="btn btn-small btn-primary" theme="simple" /></td>
-				</tr>
-			</table>
-
-		</s:form>
-	</div>
 </body>
 </html>
