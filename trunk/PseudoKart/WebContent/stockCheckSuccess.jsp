@@ -12,6 +12,7 @@
 <script type="text/javascript" src="./ViewResources/js/bootstrap-tab.js"></script>
 </head>
 <body>
+<br/><br/>
 	<div class="alert alert-info">
      <s:form action="returnAdmin">
 		<table class="table table-striped">
@@ -19,13 +20,17 @@
 				
 				<th>Product ID</th>
 				<th>Product Name</th>
-				<th>Stock Quantity</th>
+				<th colspan="2">Stock Quantity</th>
 			</tr>
 			<s:iterator value="fin">
 				<tr>
 					<td><s:property value="prodID" /></td>
 					<td><s:property value="prodName" /></td>
-					<td><s:property value="quantity" /></td>
+					<td colspan="2"><s:property value="quantity" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<s:if test='quantity <= 5'><a href="stock_report">Report Out of Stock to Seller</a></s:if></td>
 				</tr>
 			</s:iterator>
 		</table>

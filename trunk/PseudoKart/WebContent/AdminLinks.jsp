@@ -11,16 +11,12 @@
 <script type="text/javascript" src="./ViewResources/js/bootstrap-tab.js"></script>
 </head>
 <body>
-
+<br/><br/><br/>
 <div class="alert alert-success" align="center">
 <table class="table table-striped">
 <tr>
 <td><img src="./images/glyph1.png"/></td>
 <td><a href="check_stock">Check Stock</a></td>
-</tr>
-<tr>
-<td><img src="./images/glyph1.png"/></td>
-<td><a href="">Report Out Of Stock</a></td>
 </tr>
 <tr>
 <td><img src="./images/glyph1.png"/></td>

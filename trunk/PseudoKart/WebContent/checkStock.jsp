@@ -12,6 +12,7 @@
 <script type="text/javascript" src="./ViewResources/js/bootstrap-tab.js"></script>
 </head>
 <body>
+<br/><br/>
 	<div class="alert alert-info">
      <s:form action="getstock">
 		<table class="table table-striped">
