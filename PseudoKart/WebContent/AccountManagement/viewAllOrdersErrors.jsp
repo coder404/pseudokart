@@ -17,13 +17,31 @@
 
 <title>Order Status</title>
 <sb:head />
+<style type="text/css">
+table
+{
+border-collapse:collapse;
+}
+
+
+.example1 {
+	border: 1px solid #ddd;
+	text-align: justify;
+	text-justify: inter-word;
+	backgroung:#C0C0C0;
+	
+}
+
+</style>
+
 </head>
 <body>
 	<div class="span10" align="left">
-		<div>
-			<h3 style="margin-top: 50px">The Order Id does not exist... :(</h3>
-		</div>
-		<div align="left"><a href="viewAllOrders">View All Details</a></div>	
+			<a href="home_after_login">Home</a>
+			<br/>
+			<br/>
+			You have not places any order till date...	
+			
 		</div>
 </body>
 </html>
