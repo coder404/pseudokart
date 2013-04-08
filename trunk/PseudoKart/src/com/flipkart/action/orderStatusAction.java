@@ -33,6 +33,8 @@ public class orderStatusAction extends ActionSupport{
 	ArrayList<Cart> cart=new ArrayList<Cart>();
 	Product product =new Product();
 	ArrayList<Product> products=new ArrayList<Product>();
+	ArrayList<Order> orders=new ArrayList<Order>();
+	ArrayList<Cart> carts=new ArrayList<Cart>();
 	
 	Map session=ActionContext.getContext().getSession();
 	
@@ -43,6 +45,7 @@ public class orderStatusAction extends ActionSupport{
 		if(order==null){
 			return "error";
 		}
+		
 		String mod1="where cartId='" + order.getCartNo() + "'" + "and email='" + email + "'";
 		cart=Cart.findAll(mod1);
 		
@@ -59,6 +62,34 @@ public class orderStatusAction extends ActionSupport{
 			System.out.println(products.get(i).getDescription());
 		}
 	*/	return SUCCESS;
+	}
+	
+	public String viewAllOrders(){
+		email=(String)session.get("email");
+		String mod = "where email='" + email +"'" ;
+		orders=Order.findAll(mod);
+		if(orders==null){
+			return "error";
+		}
+		
+		for(int i=0;i<orders.size();i++){
+			String mod1="where cartId='" + orders.get(i).getCartNo() + "'" + "and email='" + email + "'";
+			cart=Cart.findAll(mod1);
+			for(int j=0;j<cart.size();j++){
+				carts.add(cart.get(j));
+			}
+		}
+		
+		for(int i=0;i<carts.size();i++){
+			String mod2="where productId='" + carts.get(i).getProductId() + "'";
+			Product product1=new Product();
+			product1=Product.findProduct(mod2);
+			products.add(product1);
+		}
+	
+		
+		return SUCCESS;
+		
 	}
 
 	public int getOrderId() {
@@ -163,6 +194,22 @@ public class orderStatusAction extends ActionSupport{
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public ArrayList<Cart> getCarts() {
+		return carts;
+	}
+
+	public void setCarts(ArrayList<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public ArrayList<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(ArrayList<Order> orders) {
+		this.orders = orders;
 	}
 
 	public Order getOrder() {
