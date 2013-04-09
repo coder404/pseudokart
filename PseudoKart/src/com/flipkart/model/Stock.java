@@ -77,5 +77,13 @@ public static void reduceQunatity(ArrayList<Cart> items)
 	}
 	
 }
+
+public static void insertNotifyMe(String sql)
+{
+	String query = "insert into notifyme(email,productId) values(" + sql + ")";
+	DB.update(query);
+	
+	
+}
 	
 }
