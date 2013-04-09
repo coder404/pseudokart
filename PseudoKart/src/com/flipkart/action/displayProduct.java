@@ -11,6 +11,20 @@ public class displayProduct extends ActionSupport {
 
 	
 	String productName;
+	String prodId;
+	
+	public String getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(String prodId) {
+		this.prodId = prodId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	float product_rating;
 	public float getProduct_rating() {
 		return product_rating;

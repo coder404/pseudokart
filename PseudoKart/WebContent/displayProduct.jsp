@@ -19,7 +19,35 @@
 		radioButtons[Prodrating].checked = true;
 
 	};
+	
+	$.fn.stars = function() {
+	    return $(this).each(function() {
+	        // Get the value
+	        var val = parseFloat($(this).html());
+	        // Make sure that the value is in 0 - 5 range, multiply to get width
+	        var size = Math.max(0, (Math.min(5, val))) * 16;
+	        // Create stars holder
+	        var $span = $('<span />').width(size);
+	        // Replace the numerical value with stars
+	        $(this).html($span);
+	    });
+	}
+	
+	
 </script>
+<style type="text/css">
+
+span.stars, span.stars span {
+    display: block;
+    background: url(/image/stars.jpg) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
+</style>
 
 </head>
 <body onload="showRating()">
@@ -31,7 +59,7 @@
 				<td><b><s:property value="product.name" /></b></td>
 			</tr>
 			<tr>
-				<td>Ratings : <s:property value="%{product_rating}" /></td>
+				<td>Ratings : <span class="stars"><s:property value="%{product_rating}" /></span></td>
 			</tr>
 			<tr></tr>
 			<tr></tr>
@@ -55,11 +83,12 @@
 	</div></td>
 
 </tr> -->
-			<br>
+			
 			<tr>
 				<td><s:property value="product.description" /></td>
 			</tr>
 		</table>
+		<br/>
 		<hr>
 		<br>
 		<table>

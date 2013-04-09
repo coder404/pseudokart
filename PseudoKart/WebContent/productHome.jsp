@@ -15,12 +15,23 @@ var radioButtons = document.getElementsByName("rating");
 for (var i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
        alert("You gave a rating of " + radioButtons[i].value + " out of 5. Thank you!");
-    var rate = radioButtons[i];
+     
+       
+    break;
     }
     
     }
+    
+    document.getElementById("rating").submit();
      
-}
+};
+
+
+/* function redirect(id){
+	alert(id);
+	document.getElementById("rating").value=id;
+	document.forms["rating"].submit();
+	} */
 </script>
 
 
@@ -36,8 +47,10 @@ for (var i = 0; i < radioButtons.length; i++) {
 	<br>
 	<strong>Please rate it.</strong>
 	<br>
+	<s:form action="rating" method="get">
 	<div class="rating" id="rate" onclick="addRating()" >
-
+		<s:hidden  name="prodId" id="prodId" value="%{prodId}"/>
+	
 		<input type="radio" id="star5" name="rating" value="5" /><label
 			for="star5" title="Rate this 5 star out of 5">5 stars</label><input
 			type="radio" id="star4" name="rating" value="4" /><label for="star4"
@@ -49,7 +62,7 @@ for (var i = 0; i < radioButtons.length; i++) {
 			id="star1" name="rating" value="1" /><label for="star1"
 			title="Rate this 1 star out of 5">1 star</label>
 	</div>
-
+</s:form>
 
 
 	<!--  <div class="star-rating"><s><s><s><s><s></s></s></s></s></s></div>-->
