@@ -42,9 +42,9 @@ public class productRatingsAction extends ActionSupport{
 			prRatings.setNumberOfCustomers(1);
 			prRatings.insert(prodId,rating);
 			
-		}
+		}else{
 		pr.update(prodId,rating,pr.getNumberOfCustomers());
-		
+		}
 		String sql1 = "where productId = '" + prodId + "'";
 		System.out.println("sql=" + sql1);
 
