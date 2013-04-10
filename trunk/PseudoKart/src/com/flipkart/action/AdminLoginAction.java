@@ -8,8 +8,25 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminLoginAction extends ActionSupport{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String email;
 	String passwd;
+	private boolean MainAdmin = true;
+	
+	
+
+
+
+	public boolean isMainAdmin() {
+		return MainAdmin;
+	}
+	public void setMainAdmin(boolean mainAdmin) {
+		MainAdmin = mainAdmin;
+	}
+
 	ArrayList<adminLogin> list=new ArrayList<adminLogin>();
 	
 	public ArrayList<adminLogin> getList() {
@@ -34,6 +51,7 @@ public class AdminLoginAction extends ActionSupport{
 	public String execute()
 	{
 		int flg=0;
+		int level=0;
 		if(this.email==null && this.passwd==null)
 		{
 			
@@ -45,10 +63,22 @@ public class AdminLoginAction extends ActionSupport{
 				for(int i=0;i<list.size();i++)
 				{
 					if((list.get(i).getEmail().equals(this.email)) && (list.get(i).getPasswd().equals(this.passwd)))
-						flg=1;					
-							
+					{
+						flg=1;
+						level = list.get(i).getLevel();
+						System.out.println("LEVEL " + level);
+					}
 				}
+				if(level == 1){
+					MainAdmin = true;
+
+					System.out.println("LEVEL IS OF MAIN ADMIN");
+				}
+				else
+					MainAdmin = false;
 				
+				if(MainAdmin == true)
+					System.out.println("PRINT OUT");
 				if(flg == 1)
 					return "success";
 				else
