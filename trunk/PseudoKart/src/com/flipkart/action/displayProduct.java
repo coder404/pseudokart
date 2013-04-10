@@ -56,28 +56,31 @@ public class displayProduct extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	Map session = ActionContext.getContext().getSession();
 	public String execute() {
 
-		Map session = ActionContext.getContext().getSession();
+		
 		String sql = "where name = '" + productName + "'";
 		System.out.println("sql=" + sql);
 
 		product = Product.findProduct(sql);
-
+		
+		session.put("productId", product.getProdid());
+		
 		sql = "where productId = '" + product.getProdid() + "'";
 		System.out.println("SQL :" + sql);
 		product_rating = Product.ratingsProduct(sql);
 		System.out.println(product_rating);
 
 		Stock s=Stock.findOne("where stockProductID='"+product.getProdid()+"'");
-		if(s.getQuantity()==0)
+		//System.out.println("Syock"+s.getQuantity());
+		if(s==null || s.getQuantity()==0 )
 			inStock = false;
 		else
 			inStock = true;
 		
 		
-		session.put("productID", product_rating);
+		session.put("productRatings", product_rating);
 
 		return "success";
 	}

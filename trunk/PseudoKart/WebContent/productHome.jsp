@@ -43,11 +43,12 @@ for (var i = 0; i < radioButtons.length; i++) {
 		<img class="img-polaroid" src=<s:text name="product.prodImage"/>
 			width="150" height="300" />
 	</div>
+	<s:hidden name="productName" value="%{product.name}"></s:hidden>
 	<strong>Have you used this product? </strong>
 	<br>
 	<strong>Please rate it.</strong>
 	<br>
-	<s:form action="rating" method="get">
+	<s:form action="rating?productName=productName" method="get">
 	<div class="rating" id="rate" onclick="addRating()" >
 		<s:hidden  name="prodId" id="prodId" value="%{prodId}"/>
 	

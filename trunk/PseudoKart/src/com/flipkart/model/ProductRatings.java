@@ -11,7 +11,7 @@ public class ProductRatings {
 	private String prodId;
 	private int rating;
 	private int numberOfCustomers;
-	
+	String productName;
 	
 	public int update(String prodId, int i, int j) {
 		// TODO Auto-generated method stub
@@ -34,6 +34,8 @@ public class ProductRatings {
 			if (rs.next()) {
 				ProductRatings pr=new ProductRatings();
 				pr.prodId=rs.getString("productId");
+				//pr.prodId="prod1";//change it
+				
 				pr.rating=Integer.parseInt(rs.getString("rating"));
 			    pr.numberOfCustomers=Integer.parseInt(rs.getString("numberOfCustomers"));
 				DB.close(rs);
@@ -61,6 +63,14 @@ public class ProductRatings {
 	public int getRating() {
 		return rating;
 	}
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
@@ -69,6 +79,20 @@ public class ProductRatings {
 	}
 	public void setNumberOfCustomers(int numberOfCustomers) {
 		this.numberOfCustomers = numberOfCustomers;
+	}
+
+	public int insert(String prodId2, int rating2) {
+		// TODO Auto-generated method stub
+		String insertSQL = "insert into productRatings"
+				+ "(productId,rating,numberOfCustomers) "
+				+ "values(" + "'" + prodId2 + "'," + rating2 + ", "
+				+ 1 + ");";
+
+		System.out.println(insertSQL);
+
+		return DB.update(insertSQL);
+		
+		
 	}
 	
 }
