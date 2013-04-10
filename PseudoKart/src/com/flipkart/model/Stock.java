@@ -35,7 +35,7 @@ public class Stock {
 	
 	
 	 public static Stock findOne(String selectionModifier) {
-		 Stock s= s=new Stock();
+		 Stock s= new Stock();
          ResultSet rs = null;
          String query = "select * " +
                          "from stock " + selectionModifier;
@@ -48,14 +48,16 @@ public class Stock {
                          s.stockID=rs.getInt("stockID");
                          s.stockProductID=rs.getString("stockProductID");
                          s.quantity=rs.getInt("quantity");
+                         return s;
                          }
+                
          } catch (SQLException e) {
          MyLog.myCatch("Product.java",50, e);
                  e.printStackTrace();
          }
          DB.close(rs);
          DB.close(connection);
-         return s;
+         return null;
  }
 
 	 public static int updatequantity(String query)
@@ -78,6 +80,40 @@ public static void reduceQunatity(ArrayList<Cart> items)
 	
 }
 
+@SuppressWarnings("null")
+public static ArrayList<String> findAllNotifyMe(String sql)
+{
+
+	ArrayList<String> email_list = new ArrayList<String>();
+
+    ResultSet rs = null;
+    String query = "select * " +
+                    "from notifyme " + sql;
+    System.out.println(query);
+    Connection connection = DB.getConnection();
+    rs = DB.readFromDB(query, connection);
+    try {
+    	
+    	
+            while(rs.next()) {
+                   
+            	email_list.add(rs.getString("email"));
+            	System.out.println(rs.getString("email"));
+                    
+                    }
+           
+    
+           
+    } catch (SQLException e) {
+    MyLog.myCatch("Product.java",50, e);
+            e.printStackTrace();
+    }
+    DB.close(rs);
+    DB.close(connection);
+    return email_list;
+	
+}
+
 public static void insertNotifyMe(String sql)
 {
 	String query = "insert into notifyme(email,productId) values(" + sql + ")";
@@ -85,5 +121,33 @@ public static void insertNotifyMe(String sql)
 	
 	
 }
+
+public static void updateStock(String sql){
 	
+	String query = "update stock set quantity=quantity+" + sql ;
+	System.out.println(query);
+	Stock.updatequantity(query);
+	
+	
+}
+	
+
+public static void insertStock(String sql){
+	
+	String query = "insert into stock(stockProductId,quantity) values (" +  sql + ")" ;
+	System.out.println(query);
+	Stock.updatequantity(query);
+	
+	
+}
+public static void deleteNotifyme(String sql) {
+	
+	String query = "delete from notifyme " +  sql ;
+	
+System.out.println(query);
+	DB.update(query);
+	
+}
+
+
 }
