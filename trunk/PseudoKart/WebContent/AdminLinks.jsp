@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +27,19 @@
 <td><img src="./images/glyph1.png"/></td>
 <td><a href="">Add New Product</a></td>
 </tr>
+<s:property value="email"/>
+<s:if test="MainAdmin">
+<tr>
+<td><img src="./images/glyph1.png"/></td>
+<td><a href="update_link">Update Stock</a></td>
+</tr>
+</s:if>
+<s:else>
+<tr>
+<td><img src="./images/glyph1.png"/></td>
+<td><a href="#">Update Stock</a></td>
+
+</s:else>
 </table>
 </div>
 </body>
