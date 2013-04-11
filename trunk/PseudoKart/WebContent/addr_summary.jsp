@@ -31,7 +31,9 @@
 	<s:form >
 		<div class="addressBox">
 			<font><strong>Order Summary</strong></font><br/>
+			<s:if test="%{ #session['orderID'] != null }">
 			Order Id : &nbsp;&nbsp;<%=(String)ActionContext.getContext().getSession().get("orderID")%><br/>
+			</s:if>
 			Total Purchase : &nbsp;&nbsp; <%=(Double)ActionContext.getContext().getSession().get("totalCartAmt") %><br/>
 		    
 		
