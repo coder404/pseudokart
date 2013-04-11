@@ -139,6 +139,26 @@ public class Customer {
 		DB.close(connection);
 		return selection;
 	}
+	
+	public static int getCustId(String email)
+	{
+			int custid=0;
+			ResultSet resultSet = null;
+			String query = "select  id from customer where email='"+email+"'" ;
+			Connection connection = DB.getConnection();
+			resultSet = DB.readFromDB(query, connection);
+			try {
+				while (resultSet.next()) {
+					custid=resultSet.getInt("id");
+				}
+			} catch (SQLException e) {
+				MyLog.myCatch("Customer.java", 50, e);
+				e.printStackTrace();
+			}
+			DB.close(resultSet);
+			DB.close(connection);
+			return custid;
+		}
 
 	public static int cartAppendNoInc() {
 		String em = (String) ActionContext.getContext().getSession()
@@ -222,7 +242,6 @@ public class Customer {
 	}
 
 	public int update_profile(String profileName2, String email2) {
-		// TODO Auto-generated method stub
 		String updateSQL = "update customer " + "set updatedProfileName= '"
 				+ profileName2 + " '"+ " where email='" + email2 + "'";
 		System.out.println("query = " + updateSQL);
