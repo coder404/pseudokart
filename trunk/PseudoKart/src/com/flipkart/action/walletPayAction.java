@@ -19,6 +19,7 @@ public class walletPayAction {
 
 	public String execute() throws Exception {
 		double bal = Wallet.findBalance();
+		
 		double cart_amt = (Double) ActionContext.getContext().getSession()
 				.get("totalCartAmt");
 		Wallet.updateBalance(bal - cart_amt);
@@ -29,6 +30,7 @@ public class walletPayAction {
 				.getSession().get("cartAppendNo"));
 		Stock.reduceQunatity(cartItems);
 		return "success";
-	}
+		
+				}
 
 }
