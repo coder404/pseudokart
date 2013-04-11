@@ -227,21 +227,8 @@ public class Cart {
 
 	}
 	
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	
+	
 
 	public String getCartAppendNo() {
 		return cartAppendNo;
@@ -265,6 +252,46 @@ public class Cart {
 
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getItemDesc() {
+		return ItemDesc;
+	}
+
+	public void setItemDesc(String itemDesc) {
+		ItemDesc = itemDesc;
+	}
+
+	public String getDeliveryTime() {
+		return DeliveryTime;
+	}
+
+	public void setDeliveryTime(String deliveryTime) {
+		DeliveryTime = deliveryTime;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
 	}
 
 }
