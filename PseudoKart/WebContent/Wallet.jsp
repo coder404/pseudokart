@@ -23,19 +23,20 @@ The Wallet is a pre-paid credit instrument which is associated with your Flipkar
 You can now maintain a balance of money with Flipkart.com and redeem it as you choose.</p><br />
 <h4>Flipkart Wallet</h4>
   <div class="alert alert-info"  >
-  
+  <%@page import="java.util.*" %>
+  <%@page import="com.opensymphony.xwork2.ActionContext"%>
  <h4 align="justify">Top-Up</h4><br />
- <p>Balance : Rs.0 </p>
+ <p>Balance : Rs. <%=ActionContext.getContext().getSession().get("wallet_bal")%></p>
  <p>Want to Top-Up?<br />
  Enter an Amount to Top-up</p>
-  <form class="form-search">
-  <p>Rs.<input type="text" class="input-medium search-query">
-  <button class="btn  btn-warning" type="button" >Top-Up</button></p>
+  <s:form class="form-search">
+  <p>Rs.<input type="text" class="input-medium search-query" name="topupamt">
+  <s:submit cssClass="btn  btn-warning"  value="Top-up" action="orderEntry_PlaceOrder"/></p>
 
-</form>
+</s:form>
 
   <p>
-        </a>
+       
   </p>
 </div>
 <h5 >How do I get Started?</h5>
