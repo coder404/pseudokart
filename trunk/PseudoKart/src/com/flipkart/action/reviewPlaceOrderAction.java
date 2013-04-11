@@ -8,6 +8,7 @@ import com.flipkart.model.Cart;
 import com.flipkart.model.Customer;
 import com.flipkart.model.Order;
 import com.flipkart.model.Stock;
+import com.flipkart.model.Wallet;
 import com.flipkart.model.voucher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -26,6 +27,7 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	double RemVoucherBal;
 	double voucherbal=0.0;
 	double purchaseAmt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
+	String topupamt=(String)ActionContext.getContext().getSession().get("topupamt");
 	int address_id;
 	ArrayList<Cart> cartItems = new ArrayList<Cart>();
 	
@@ -43,7 +45,10 @@ public class reviewPlaceOrderAction extends ActionSupport {
 		Address a=Address.findOne("where address_id="+address_id);  	
 		session.put("shipaddr", a);
 		cartItems=Cart.getCart((String)ActionContext.getContext().getSession().get("email"), (String)ActionContext.getContext().getSession().get("cartAppendNo"));
-		System.out.println("in multi select **"+cartItems.size());
+		if(cartItems!=null && cartItems.size()!=0)
+				System.out.println("in multi select **"+cartItems.size());
+		else
+			cartItems.add((Cart)ActionContext.getContext().getSession().get("walletcart"));
 		return "move";
 		
 	}
@@ -115,7 +120,7 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	}
 	
 	
-	public String payVoucher()
+	public String payVoucher() throws Exception 
 	{
 		error="";
 		int flag=0;
@@ -162,12 +167,12 @@ public class reviewPlaceOrderAction extends ActionSupport {
 				error+="Insufficient Voucher Balance";
 		}
 		
-		 if(error.isEmpty())
+		 if( (error.isEmpty()) && (this.topupamt==null) )
 		 {    
 			 RemVoucherBal = voucherbal - purchaseAmt;
 			 //update voucher balance
 			 voucher.update(vcardnum,RemVoucherBal); 
-			 //change status of orderdetails tables and change cartAppendNo;
+			 //change status of order details tables and change cartAppendNo;
 			 Order.updatePaidStatus();
 			 Customer.cartAppendNoInc();
 			 cartItems=Cart.getCart((String)ActionContext.getContext().getSession().get("email"), (String)ActionContext.getContext().getSession().get("cartAppendNo"));
@@ -177,6 +182,21 @@ public class reviewPlaceOrderAction extends ActionSupport {
 			 //reduce stock amount
 			 Stock.reduceQunatity(cartItems);
 			  return SUCCESS;
+		 }
+		 
+		 else if( error.isEmpty() && (this.topupamt!=null))
+		 {
+			 System.out.println("Wallet top up..not purchase");
+			 //check customer
+			 RemVoucherBal = voucherbal - Double.parseDouble(topupamt);
+			 double bals=Wallet.findCustExists();
+			 if(bals<0)
+				 Wallet.insert((String)ActionContext.getContext().getSession().get("email"), Double.parseDouble(topupamt));
+			 else
+				 Wallet.update((String)ActionContext.getContext().getSession().get("email"), Double.parseDouble(topupamt));
+			//update voucher	 
+			 voucher.update(vcardnum,RemVoucherBal); 
+			 return "WalletSuccess";
 		 }
 		 else
 		  {
@@ -299,6 +319,12 @@ public class reviewPlaceOrderAction extends ActionSupport {
 	}
 	public void setCartItems(ArrayList<Cart> cartItems) {
 		this.cartItems = cartItems;
+	}
+	public String getTopupamt() {
+		return topupamt;
+	}
+	public void setTopupamt(String topupamt) {
+		this.topupamt = topupamt;
 	}
 	
 }
