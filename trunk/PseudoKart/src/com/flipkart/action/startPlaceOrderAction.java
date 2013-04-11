@@ -23,6 +23,7 @@ public class startPlaceOrderAction extends ActionSupport {
 		session.put("orderID", Order.rtrnorderNum());  
 		//System.out.println();
 		session.put("tabno", 0);
+		
 		return "trial";
 	}
 	public String emailLogin()
@@ -51,6 +52,7 @@ public class startPlaceOrderAction extends ActionSupport {
 	public void setAddr_list(ArrayList<Address> addr_list) {
 		this.addr_list = addr_list;
 	}
+	
 
 	
 	
