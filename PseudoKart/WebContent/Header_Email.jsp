@@ -34,7 +34,7 @@
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <td><a href="account"><font color="white" size="3px">&nbsp;&nbsp;Account</font></a></td>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
-<td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;Wishlist</font></a></td>
+<td><a href="Wallet"><font color="white" size="3px">&nbsp;&nbsp;Wallet</font></a></td>
 <td><a href="ViewCart"><font color="white" size="3px">&nbsp;&nbsp;Cart</font></a></td>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <%@ page import="com.opensymphony.xwork2.ActionContext,com.flipkart.action.loginAction"%>
