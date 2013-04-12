@@ -14,6 +14,7 @@ public class CartAction_AddItem {
 	String productId;
 	int quantity;
 	boolean cart_status;
+	String product_status;
 	String uemail=(String)ActionContext.getContext().getSession().get("email");//Need to take it from login session
 	
 
@@ -44,31 +45,28 @@ public class CartAction_AddItem {
 	{
 		return "success";
 	}
-	public String onClickBuy()
-	{
-		
-		if(this.uemail==null)
-			return "error";
-		else
-		{
-		System.out.println("!@#$%^&*()="+productId);
+	public ArrayList<Cart> onClickBuy(String uemail)
+	{   
+		productId=(String)ActionContext.getContext().getSession().get("pro_id");
+		//System.out.println("!@#$%^&*()="+productId);
 		appendNo=Cart.getCurrentAppendNo(uemail);
 		ActionContext.getContext().getSession().put("cartAppendNo", appendNo);
 		System.out.println("in cart add item --append num CHECK"+appendNo);
 		cart_status=Cart.checkCurrentCart(uemail,appendNo);
-		System.out.println("In cart add item -- cart_status check"+cart_status);
-		if(cart_status==true)  /*previous cart exists with unpaid status.Need to add this item to that cart itself*/
-		{
+		product_status=Cart.checkProduct(productId,uemail,appendNo);
+		System.out.println("^^^^^^^^"+product_status);
+		if(product_status=="notfound"){
 			quantity=1;
-			Cart.insertIntoCart(uemail,productId,appendNo,quantity);
-			
-			//Cart.insertToCart()
-		}
-		if(cart_status==false) /*previous cart is paid.So,need to create a new cart */{
-			quantity=1;
-			Cart.insertIntoCart(uemail,productId,appendNo,quantity);
+		Cart.insertIntoCart(uemail,productId,appendNo,quantity);
 			
 		}
+		else{}
+		ActionContext.getContext().getSession().put("prod_status",product_status);
+		
+	
+		
+			
+		
 		CartItems=getCartItems();
 		//getAmount();
 		System.out.println("^^^^^^^"+CartItems.size());
@@ -79,9 +77,8 @@ public class CartAction_AddItem {
 		//double Payable_Amt;
 		ActionContext.getContext().getSession().put("totalCartAmt", amount);
 		System.out.println(amount);
-		return "success";
-		}
-		}
+		return CartItems;
+	}
 	
 	public double getAmount() {
 		return amount;

@@ -8,7 +8,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class CartAction_PlaceOrder {
 	
-	String topupamt;
+	String topupamt="";
 	
 	public String onClickPlaceOrder()
 	{
