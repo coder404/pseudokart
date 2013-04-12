@@ -15,10 +15,10 @@
 <script type="text/javascript"
 	src="./ViewResources/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="./ViewResources/js/bootstrap-tab.js"></script>
-
+<script>window.history.forward(1);</script>
 </head>
-<body>
-   <div class="alert alert-info">
+<body onload="javascript:history.go(1)">
+   <div class="alert alert-info" align="center">
   <center> <strong>Payment Successful!!!!</strong></center><br/>
      <table class="table table-striped" align="center">
      <tr>
