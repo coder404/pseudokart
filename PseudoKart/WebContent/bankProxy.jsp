@@ -19,14 +19,14 @@
 <link rel="stylesheet" type="text/css" href="./css/button.css">
 <%@page
 	import="java.sql.*,java.util.ArrayList,com.flipkart.model.*,com.flipkart.action.*,com.opensymphony.xwork2.*"%>
-
+<script>window.history.forward(1);</script>
 
 <title>::Bank Payment Gateway::</title>
 
 
 </head>
 
-<body>
+<body onload="javascript:history.go(1)">
 <img src="./images/citi.jpg" width="50"/>
 
 <h4>Welcome to Citibank Payment Gateway
