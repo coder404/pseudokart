@@ -18,179 +18,63 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="p" uri="/struts-tags"%>
 <%@ taglib prefix="r" uri="/struts-tags"%>
-<SCRIPT LANGUAGE="JavaScript">
-<!--
 
-var pic1=new Image()
-pic1.src="./images/image1.jpg"
-var pic2=new Image()
-pic2.src="./images/image2.jpg"
-	var pic2=new Image()
-pic2.src="./images/image3.jpg"
-
-//-->
-</script>
 </head>
 <body>
 
-	<div class="container">
-		<div class="row">
-			<div class="span3">
-				<ul class="nav nav-tabs nav-stacked">
-					<s:iterator value="categories_list" status="text" id="c">
-						<li class="dropdown-submenu"><a href="#"> <s:property /></a>
-							<s:set scope="request" var="cat" value="#c" />
-							<ul class="dropdown-menu">
+
+	<div class="row">
+		<div class="span3">
+			<ul class="nav nav-tabs nav-stacked">
+				<s:iterator value="categories_list.{name}" status="text" id="c">
+					<li class="dropdown-submenu"><a href="#"> <s:property /></a>
+						<s:set scope="request" var="cat" value="#c" />
+						<ul class="dropdown-menu">
 
 
-								<%@ page
-									import="java.util.ArrayList,com.flipkart.action.Categories_List,com.opensymphony.xwork2.ActionContext,com.opensymphony.xwork2.ActionSupport"%>
-								<%
-									String category = (String) request.getAttribute("cat");
+							<%@ page
+								import="java.util.ArrayList,com.flipkart.model.*,com.flipkart.action.Categories_List,com.opensymphony.xwork2.ActionContext,com.opensymphony.xwork2.ActionSupport"%>
+							<%
+								String category = (String) request.getAttribute("cat");
 									Categories_List c = new Categories_List();
-									ArrayList<String> subcatg = c.getSubCategories(category);
+									ArrayList<Category> subcatg = c.getSubCategories(category);
 									ActionContext.getContext().getSession().put("subcatg", subcatg);
-								
-									
-								%>
+							%>
 
-								<p:iterator value="#session.subcatg" status="text" id="p">
-									<li class="dropdown-submenu"><a href="#"> <p:property /></a>
-										<p:set scope="request" var="subcat" value="#p" />
-										<ul class="dropdown-menu">
+							<p:iterator value="#session.subcatg.{name}" status="text" id="p">
+								<li class="dropdown-submenu"><a href="#"> <p:property /></a>
+									<p:set scope="request" var="subcat" value="#p" />
+									<ul class="dropdown-menu">
 
-											<%
-												String subcategory = (String) request.getAttribute("subcat");
-																																									
-												ArrayList<String> products = c.getProducts(subcategory);
-												// Map sess = ActionContext.getContext().getSession();
-												ActionContext.getContext().getSession().put("products", products);
+										<%
+											String subcategory = (String) request
+															.getAttribute("subcat");
 
-												//session.setAttribute("products", products);
-											%>
+													ArrayList<Product> products = c.getProducts(subcategory);
+													// Map sess = ActionContext.getContext().getSession();
+													ActionContext.getContext().getSession()
+															.put("products", products);
 
-											<r:iterator value="#session.products" status="text" id="r">
-												<s:set scope="request" var="prod" value="#r" />
-												<%
-													String product = (String) request.getAttribute("prod");
-												%>
-												<li><a href="displayProduct?productName=<%=product%>">
-														<r:property />
-												</a></li>
-											</r:iterator>
-										</ul></li>
-								</p:iterator>
-							</ul></li>
-					</s:iterator>
-				</ul>
+													//session.setAttribute("products", products);
+										%>
+
+										<r:iterator value="#session.products" status="text"
+											id="r">
+
+											<li><a href="displayProduct?productId=<r:property value="prodid" />">
+													<r:property value="name" />
+											</a></li>
+										</r:iterator>
+									</ul></li>
+							</p:iterator>
+						</ul></li>
+				</s:iterator>
+			</ul>
 
 
-			</div>
-			<div class="row">
-				<div class="span8">
-
-					<div style="border: 1px solid skyblue">
-
-
-						<img src="./images/image1.jpg" name="animation" />
-
-
-					</div>
-					<script type="text/javascript">
-
-<!--
-var counter=1
-function animate(){
-//does not animate if the browser does not support images
-if (!document.images)
-return
-document.images.animation.src=eval("pic"+counter+".src")
-if (counter<2)
-counter++
-else
-counter=1
-//controls the speed of the transition, in this case 100 means 100 milliseconds or 1/10 seconds
-setTimeout("animate()",1000)
-}
-animate()
-//-->
-</script>
-				</div>
-				<div class="span8">
-					<div class="row">
-						<table border="1" align="right" BORDERCOLOR=skyblue>
-							<tr>
-								<td><img src="./images/camera1.png" name="animation"
-									width="210" /></td>
-								<td><img src="./images/bag1.png" name="animation"
-									width="200" /></td>
-								<td><img src="./images/watch1.png" name="animation"
-									width="200" /></td>
-							</tr>
-						</table>
-					</div>
-
-
-					<div class="span8">
-						<div class="row">
-							<div class="span2">
-
-								<img class="img-rounded" src="./images/nokia-lumia.jpeg" alt="Samsung Galaxy Grand Duos I9082: Mobile"  />
-								
-							</div>
-							<div class="span2">
-
-
-								<img class="img-rounded" src="./images/galaxy-tab.jpeg" alt="" />
-								galaxy-tab
-							</div>
-							<div class="span2">
-
-
-								<img class="img-rounded" src="./images/micromax-book.jpeg"
-									alt="" /> micromax-book
-							</div>
-							<div class="span2">
-
-								<img class="img-rounded" src="./images/samsung-galaxy.jpeg"
-									alt="" /> samsung-galaxy
-							</div>
-						</div>
-						<ul>
-
-
-							<li class="divider"></li>
-						</ul>
-						<div class="row">
-							<div class="span2">
-
-
-								<img class="img-rounded" src="./images/d-link-dwm.jpeg" alt="" />
-								d-link-dwm
-							</div>
-							<div class="span2">
-
-
-								<img class="img-rounded"
-									src="./images/iball-3-5g-wireless-modem.jpeg" alt="" />
-								iball-3-5g-wireless-modem
-							</div>
-							<div class="span2">
-
-
-								<img class="img-rounded"
-									src="./images/iball-3-5g-wireless-modem2.jpeg" alt="" />
-								iball-3-5g-wireless-modem2
-							</div>
-							<div class="span2">
-
-								<img class="img-rounded" src="./images/d-link-dwm.jpeg" alt="" />
-								d-link-dwm
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
+
+	</div>
+
 </body>
 </html>
