@@ -29,7 +29,8 @@ public class CartAction_ViewCart {
 	//Map session;
 	//String productId="HTC001";
 	int quantity;
-	String uemail=(String)ActionContext.getContext().getSession().get("email");//Need to take it from login session
+	String uemail=(String)ActionContext.getContext().getSession().get("email");
+	//Need to take it from login session
 	public static ArrayList<Cart> CartItems_View=new ArrayList<Cart>();
 	
 	public ArrayList<Cart> getCartItems_View() {
@@ -43,10 +44,13 @@ public class CartAction_ViewCart {
 	boolean cart_status;
 	public String execute()
 	{
+		
+		System.out.println("in cart action");
 		return "success";
 	}
-	public String onClickCart()
+	public ArrayList<Cart> onClickCart(String uemail)
 	{
+		
 		appendNo=Cart.getCurrentAppendNo(uemail);
 		ActionContext.getContext().getSession().put("cartAppendNo", appendNo);
 		System.out.println("in cart add item --append num CHECK"+appendNo);
@@ -54,7 +58,7 @@ public class CartAction_ViewCart {
 		System.out.println("In cart add item -- cart_status check"+cart_status);
 		if(cart_status==true)  /*previous cart exists with unpaid status.Need to add this item to that cart itself*/
 		{
-			quantity=1;
+			//quantity=1;
 			//Cart.insertIntoCart(uemail,productId,appendNo,quantity);
 			
 			//Cart.insertToCart()
@@ -68,16 +72,17 @@ public class CartAction_ViewCart {
 			//double Payable_Amt;
 			ActionContext.getContext().getSession().put("totalCartAmt", amount);
 			System.out.println(amount);
-			return "success";
+			return CartItems_View;
 			
 		}
 		else if(cart_status==false) /*previous cart is paid.So,need to create a new cart */{
 			//quantity=1;
 			//Cart.insertIntoCart(uemail,productId,appendNo,quantity);
-			return "empty_cart";
+			CartItems_View=getCartItems_View();
+			return CartItems_View;
 		}
 		else
-			return "error";
+			return CartItems_View;
 		//getCartItems();
 		//getAmount();
 		//return "success";
