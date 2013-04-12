@@ -30,7 +30,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<s:if test='quantity <= 5'><a href="stock_report">Report Out of Stock to Seller</a></s:if></td>
+					
 				</tr>
 			</s:iterator>
 		</table>
