@@ -301,7 +301,12 @@ $(window).load(function(){
 
 
 							</div>
-
+							<%
+							Cart ob=(Cart)ActionContext.getContext().getSession().get("vouchercart");
+							if(ob==null)
+							{
+							%>
+						
 							<div id="gift" class="tab-pane">
 								<s:actionerror theme="bootstrap" />
 								<s:actionmessage theme="bootstrap" />
@@ -317,10 +322,13 @@ $(window).load(function(){
 									<s:submit cssClass="btn btn-warning" value="Pay" />
 								</s:form>
 							</div>
+							<%} %>
 							<%
 							   double bal=Wallet.findBalance();
 							   double cart_amt=(Double)ActionContext.getContext().getSession().get("totalCartAmt");
-							   if(bal > cart_amt)
+							   String topupamt=(String)ActionContext.getContext().getSession().get("topupamt");
+							   Cart obj=(Cart)ActionContext.getContext().getSession().get("vouchercart");
+							   if((bal > cart_amt) && (topupamt==null) && (obj==null))
 							   {
 							   
 							%>
