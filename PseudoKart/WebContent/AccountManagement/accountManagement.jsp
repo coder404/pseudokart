@@ -47,14 +47,14 @@
 				<li class="example2"
 					style="font-size: 16px; font-weight: bold; background-color:">Payments</li>
 				<li><a href="">E-Gift Voucher </a></li>
-				<li><a href="">Wallet </a></li>
+				<li><a href="Wallet">Wallet </a></li>
 				<li class="example2"
 					style="font-size: 16px; font-weight: bold; background-color:">Settings</li>
 				<li><a href="account">Personal Information</a></li>
 				<li><a href="change_password">Change Password </a></li>
 				<li><a href="addresses">Addresses </a></li>
 				<li><a href="profile_settings">Profile Settings </a></li>
-				<li><a href="update_email_page">Update Email </a></li>
+				<!-- <li><a href="update_email_page">Update Email </a></li> -->
 			</ul>
 		</div>
 
