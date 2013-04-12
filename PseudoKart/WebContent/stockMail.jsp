@@ -21,8 +21,8 @@
 						label="Report Out of Stock" >
 
 		<s:textfield name="to" label="To"></s:textfield>
-		<s:textfield name="subject" label="Subject"></s:textfield>
-		<s:textarea cols="15" rows="7" label="Message" name="msg"></s:textarea>
+		<s:textfield name="subject" label="Subject" value="%{subject}" size="50"></s:textfield>
+		<s:textarea cols="27" rows="10" label="Message" name="msg" value="%{msg}"></s:textarea>
 		<s:submit cssClass="btn btn-primary" value="send"  align="center"></s:submit>
 	</s:form>
 	
