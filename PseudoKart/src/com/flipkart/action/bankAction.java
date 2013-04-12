@@ -1,8 +1,14 @@
 package com.flipkart.action;
 
+import java.util.ArrayList;
+
+import com.flipkart.model.Cart;
 import com.flipkart.model.Customer;
 import com.flipkart.model.Order;
+import com.flipkart.model.Stock;
+import com.flipkart.model.Wallet;
 import com.flipkart.model.bankAccount;
+import com.flipkart.model.voucher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -11,7 +17,7 @@ public class bankAction extends ActionSupport{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	
 	private String cardChosen;
 	private String cardNo1;
@@ -23,6 +29,23 @@ public class bankAction extends ActionSupport{
 	private String ipin;
 	private String cardNo;
 	private double totalAmount;
+	private bankAccount account;
+	
+	public bankAccount getAccount() {
+		return account;
+	}
+	public void setAccount(bankAccount account) {
+		this.account = account;
+	}
+
+	String topupamt=(String)ActionContext.getContext().getSession().get("topupamt");
+	
+	Cart voucher_obj=(Cart)ActionContext.getContext().getSession().get("vouchercart");
+	
+	double amt = (Double)ActionContext.getContext().getSession().get("totalCartAmt");
+	
+ArrayList<Cart> cartitems = (ArrayList<Cart>)ActionContext.getContext().getSession().get("finalcartitems");
+	
 	
 	public String getCardNo() {
 		return cardNo;
@@ -118,13 +141,14 @@ public void validate(){
 		
 		String sql = "where cardNo = " + cardNumber;
 		
-		bankAccount account = bankAccount.findAccount(sql);
+		account = bankAccount.findAccount(sql);
 /*validate : 
 		- password
 		- expiry date
 		- 
 	*/	
-		double amt = (Double)ActionContext.getContext().getSession().get("totalCartAmt");
+		
+		
 		
 		//double amt = 5000 ;
 		
@@ -135,15 +159,52 @@ public void validate(){
 			amt = account.getBalance() - amt;
 			sql = amt + "where accountNo =  " + account.getAccountNo();
 			bankAccount.updateBank(sql);
+			
+			if(topupamt==null && voucher_obj == null ){
 			Order.updatePaidStatus();
 			Customer.cartAppendNoInc();
+			
+			Stock.reduceQunatity(cartitems);
+
+			}
+			
+			else if(topupamt != null)
+			{
+				 double bals;
+				try {
+					bals = Wallet.findCustExists();
+					 if(bals<0)
+						 Wallet.insert((String)ActionContext.getContext().getSession().get("email"), Double.parseDouble(topupamt));
+					 else
+						 Wallet.update((String)ActionContext.getContext().getSession().get("email"), Double.parseDouble(topupamt));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			else if(voucher_obj != null){
+				
+				 
+				try {
+					for(int i= 0 ; i< ((Integer)ActionContext.getContext().getSession().get("voucherqty")); i++)
+					{
+					     double bal=voucher_obj.getSubtotal();
+						 voucher.insert(bal, (String)ActionContext.getContext().getSession().get("email") );
+						 
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			account = bankAccount.findAccount(sql);
 			return "success";
 		}
-		
+
 		
 		 return "error";
-		
-			
 		
 		
 	}
