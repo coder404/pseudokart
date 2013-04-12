@@ -14,7 +14,11 @@
 <body>
 <br/><br/>
 	<div class="alert alert-info">
-     <s:form action="getstock">
+						<s:actionerror/>
+						<s:fielderror/>
+						<s:actionmessage/>
+     <s:form action="getstock" theme="bootstrap" cssClass="form-horizontal"
+						label="Products List" >
 		<table class="table table-striped">
 			<tr>
 				<th></th>
