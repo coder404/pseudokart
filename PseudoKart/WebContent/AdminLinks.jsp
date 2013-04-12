@@ -21,6 +21,10 @@
 </tr>
 <tr>
 <td><img src="./images/glyph1.png"/></td>
+<td><a href="report_out_stock">Report Out of Stock</a></td>
+</tr>
+<tr>
+<td><img src="./images/glyph1.png"/></td>
 <td><a href="">Add New category</a></td>
 </tr>
 <tr>
