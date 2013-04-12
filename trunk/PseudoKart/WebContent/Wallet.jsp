@@ -31,7 +31,7 @@ You can now maintain a balance of money with Flipkart.com and redeem it as you c
  Enter an Amount to Top-up</p>
   <s:form class="form-search">
   <p>Rs.<input type="text" class="input-medium search-query" name="topupamt">
-  <s:submit cssClass="btn  btn-warning"  value="Top-up" action="orderEntry_PlaceOrder"/></p>
+  <s:submit cssClass="btn  btn-warning"  value="Top-up" action="orderEntry_PlaceOrder_wallet"/></p>
 
 </s:form>
 
