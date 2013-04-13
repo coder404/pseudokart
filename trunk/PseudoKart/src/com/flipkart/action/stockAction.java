@@ -23,7 +23,9 @@ public class stockAction extends ActionSupport{
 	ArrayList<Product> list;
 	ArrayList<Product> selectedProds=new ArrayList<Product>();
 	ArrayList<Stock> stock_list=new ArrayList<Stock>();
-	ArrayList<stock_prod> fin=new ArrayList<stock_prod>(); 
+	ArrayList<stock_prod> fin=new ArrayList<stock_prod>();
+	ArrayList<stock_prod> out=new ArrayList<stock_prod>();
+	
 	String[] productID;
 	String to;
 	String subject;
@@ -69,7 +71,41 @@ public class stockAction extends ActionSupport{
 	public String report()
 	{
 		System.out.println("Reporting....");
+		
+         
+		 this.subject="Reporting Out of Stock for Products";
+		 ArrayList<stock_prod> tmp=(ArrayList<stock_prod>)ActionContext.getContext().getSession().get("nostock");
+		 this.msg="The following products are out of stock \n";
+		 if(tmp!=null)
+		 {
+			 for(int i=0;i<tmp.size();i++)
+			 {
+			    this.msg=this.msg+(i+1)+") Product Name : "+tmp.get(i).getProdName()+"\n"+" \n";
+			 }
+		 }
+         
+         this.msg=this.msg+"\n"+"\n"+"Please send 100 quantities of each of the above mentioned product.";
 		return "done";
+	}
+	
+	public String outStock()
+	{
+		
+		list=Product.findAll("");
+		for(int i=0;i<list.size();i++)
+		{
+			 Stock s=Stock.findOne("where stockProductId='"+list.get(i).getProdid()+"'");
+			 if(s.getQuantity()<=5)
+			 {
+				 stock_prod obj=new stock_prod();
+				 obj.setProdID(s.getStockProductID());
+				 obj.setProdName(list.get(i).getName());
+				 obj.setQuantity(s.getQuantity());
+				 out.add(obj);
+			 }
+		}
+		ActionContext.getContext().getSession().put("nostock", out);
+		return "good";
 	}
 	
 	public String send_mail()
@@ -90,11 +126,14 @@ public class stockAction extends ActionSupport{
 
 			 String to = this.to; // added this line
 			 System.out.println("to :"+to);
-			 Session session = Session.getDefaultInstance(props, null);
-	    
+			
+	         
+			 Session session = Session.getDefaultInstance(props, null); 
 			 MimeMessage message = new MimeMessage(session);
 			 message.setFrom(new InternetAddress(from));
 
+			 
+			 
 			 InternetAddress toAddress = new InternetAddress(to);
 	   // InternetAddress[] toAddress = new InternetAddress[to.length];
 	    // To get the array of addresses
@@ -109,7 +148,7 @@ public class stockAction extends ActionSupport{
 	    //}
 			 message.setSubject(this.subject);
 			 message.setText(this.msg);
-	    
+			
 			 Transport transport = session.getTransport("smtp");
 			 transport.connect(host, from, pass);
 			 transport.sendMessage(message, message.getAllRecipients());
@@ -308,6 +347,14 @@ public class stockAction extends ActionSupport{
 
 	public void setFin(ArrayList<stock_prod> fin) {
 		this.fin = fin;
+	}
+
+	public ArrayList<stock_prod> getOut() {
+		return out;
+	}
+
+	public void setOut(ArrayList<stock_prod> out) {
+		this.out = out;
 	}
 
 	public String getTo() {
