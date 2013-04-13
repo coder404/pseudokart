@@ -6,53 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.flipkart.model.Category;
 import com.flipkart.model.Product;
 import com.mast.util.DB;
 import com.mast.util.RuntimeSettings;
 
 public class ProductSelection {
-	public static ArrayList<String> getProductnames(String categoryname) {
-		ResultSet res;
+	public static ArrayList<Product> getProductnames(String categoryname) {
+		
 		String categoryID=null;
-		ArrayList<String> products_selecion= new ArrayList<String>();
-		Connection con = null;
-
-		try {
-
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/flipkart";
-			con = DriverManager.getConnection(url, RuntimeSettings.dbUserID,
-					RuntimeSettings.dbPassword);
-			PreparedStatement stmt = con
-					.prepareStatement("select categoryID from category where name='"+categoryname+"';");
-			System.out.println(stmt);
-			res = stmt.executeQuery();
-			while(res.next())
-			{
-				categoryID = res.getString("categoryID");
-				
-			}
-
-			System.out.println("In retrieve categories ");
-			PreparedStatement stmt1 = con
-					.prepareStatement("select * from product where categoryID IN (select categoryID from category where parentCatID='"+categoryID+"');");
-			System.out.println(stmt1);
-			res = stmt1.executeQuery();
+		ArrayList<Product> products_selecion= new ArrayList<Product>();
+	
+		String selectionModifier="where name='"+categoryname+"';";
+		Category c=Category.findCategory(selectionModifier);
+		categoryID=c.getCategoryID();
+		String selectionModifier1="where categoryID IN (select categoryID from category where parentCatID='"+categoryID+"');";
 			
-			while(res.next())
-			{
-				products_selecion.add(res.getString("name"));
-
-							
-			}
+		products_selecion=Product.findAll(selectionModifier1);
+		
 			
-
-		} catch (Exception e) {
-			res = null;
-
-			e.printStackTrace();
-			
-		}
 	
 		return products_selecion;
 	}
