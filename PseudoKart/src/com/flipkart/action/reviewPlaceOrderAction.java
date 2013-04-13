@@ -47,8 +47,13 @@ public class reviewPlaceOrderAction extends ActionSupport {
 		cartItems=Cart.getCart((String)ActionContext.getContext().getSession().get("email"), (String)ActionContext.getContext().getSession().get("cartAppendNo"));
 		if(cartItems!=null && cartItems.size()!=0)
 				System.out.println("in multi select **"+cartItems.size());
-		else
+		else if(this.topupamt!=null)
 			cartItems.add((Cart)ActionContext.getContext().getSession().get("walletcart"));
+		else
+			cartItems.add((Cart)ActionContext.getContext().getSession().get("vouchercart"));
+		
+		ActionContext.getContext().getSession().put("finalcartitems",cartItems);
+		
 		return "move";
 		
 	}
@@ -134,9 +139,9 @@ public class reviewPlaceOrderAction extends ActionSupport {
 		{
 			error+="Voucher PIN number is necessary.";
 		}
-		if( !(vcardnum.isEmpty()) && (vcardnum.length()!=10))
+		if( !(vcardnum.isEmpty()) && (vcardnum.length()!=9))
 		{
-			error+="Voucher Card Number has to be 10 digits.";
+			error+="Voucher Card Number has to be 9 digits.";
 		}
 		
 		if( !(vpinno.isEmpty()) && (vpinno.length()!=4))
