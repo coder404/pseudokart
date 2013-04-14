@@ -17,7 +17,7 @@
 <table class="table table-striped">
 <tr>
 <td><img src="./images/glyph1.png"/></td>
-<td><a href="check_stock">Check Stock</a></td>
+<td><a href="select_categ">Check Stock</a></td>
 </tr>
 <tr>
 <td><img src="./images/glyph1.png"/></td>
