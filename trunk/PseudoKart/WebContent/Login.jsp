@@ -36,11 +36,27 @@ display:none;
 	<s:form action="login" validate="true">
 		<table>
 			<s:actionerror/>
+	        <tr>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	        <td><a href="adminLogin">Admin Login</a>
+	        </tr>
 	        <tr><td><s:textfield name="email" size="20" label="Email Address"/></td></tr>
 	        <tr><td><s:password name="password" size="20" label="Password"/></td></tr>
 	        <tr><td><button class="btn-primary btn-large">LOGIN</button></td>
 	        	<td><div id="forgotPwd" style="color: #6C9DCE" align="center">Forgot your password?</div></td>
 	        </tr>
+	        
 		</table>
 	</s:form>
 	<div class="container" id="forgotPwdForm">
