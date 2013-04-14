@@ -13,10 +13,7 @@
 </head>
 <body>
 <br/><br/>
-	<div class="alert alert-info">
-						<s:actionerror/>
-						<s:fielderror/>
-						<s:actionmessage/>
+	<div class="alert alert-error">
      <s:form action="getstock" theme="bootstrap" cssClass="form-horizontal"
 						label="Products List" >
 		<table class="table table-striped">
@@ -35,6 +32,7 @@
 			</s:iterator>
 		</table>
 		<s:submit cssClass="btn btn-primary" value="Check Stock"	align="center"></s:submit>
+		
 		</s:form>
 	</div>
 
