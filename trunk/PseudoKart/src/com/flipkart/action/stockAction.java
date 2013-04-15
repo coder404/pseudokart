@@ -65,7 +65,11 @@ public class stockAction extends ActionSupport{
 		return SUCCESS;
 	}
 
-
+public String updatetheStock(){
+	list=Product.findAll("");
+	session.put("stk_list", list);
+	return SUCCESS;
+}
 
 
 	public String back()
@@ -164,8 +168,7 @@ public class stockAction extends ActionSupport{
 		{
 			System.out.println(e);
 		}
-
-
+				
 		return "sent";
 
 	}
@@ -205,7 +208,12 @@ public class stockAction extends ActionSupport{
 
 	@SuppressWarnings("unchecked")
 	public String update_stock(){
-		stklist = (ArrayList<Product>)session.get("stock_list");
+	
+	//System.out.println("Category..."+this.language1+"..subcat.."+this.language2);
+	//	String query="where categoryID=(select categoryID from category where name='"+ this.language2 +"' and parentCatID=(select categoryID from category where name='"+ this.language1+"'));";
+		//stklist=Product.findAll("");
+		System.out.println("in update stock");
+		stklist = (ArrayList<Product>)session.get("stk_list");
 		for(int i=0 ; i<stklist.size() ; i++)
 			System.out.println(stklist.get(i).getProdid());
 
