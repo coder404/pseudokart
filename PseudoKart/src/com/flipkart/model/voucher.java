@@ -1,12 +1,16 @@
 package com.flipkart.model;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import com.mast.util.DB;
 import com.mast.util.MyLog;
+import com.opensymphony.xwork2.ActionContext;
 
 public class voucher {
 
@@ -15,22 +19,66 @@ public class voucher {
 	String voucher_number;
 	String voucher_pin;
 	double balance;
+	Date purchase_Date;
+	String purchaser_Email;
 	
+	//String uemail=(String)ActionContext.getContext().getSession().get("email");
 	
+	public String getPurchaser_Email() {
+		return purchaser_Email;
+	}
+
+	public void setPurchaser_Email(String purchaser_Email) {
+		this.purchaser_Email = purchaser_Email;
+	}
+
+	public Date getPurchase_Date() {
+		return purchase_Date;
+	}
+
+	public void setPurchase_Date(Date purchase_Date) {
+		this.purchase_Date = purchase_Date;
+	}
+
 	public static int update(String voucherno,double bal) {
 
-		int no = Integer.parseInt(voucherno);
+		int num = Integer.parseInt(voucherno);
 		String updateSQL = 
 				"update voucher "
 						+ "set balance=" + bal +   
-						" where voucher_number = " +no+";" ;
+						" where voucher_number = " +num+";" ;
 		System.out.println("query = " + updateSQL);
 		return DB.update(updateSQL);
 	}
-
-
 	
-	
+	public static int insert(Double bal,String uemail) {
+		
+		System.out.println("Inside insert method of Voucher");
+		System.out.println(bal);
+		BigDecimal balance = new BigDecimal(bal);
+		
+		System.out.println("balance="+balance);
+		
+		int num=0;
+		int pin=0;
+		
+		int Min=100000000;
+		int Max=999999999;
+		
+		num = Min + (int)(Math.random() * (Max - Min));
+		pin = (int)(Math.random() * 9999);
+		
+		System.out.println("num="+num);
+		System.out.println("pin="+pin);
+		
+		String insertSQL = 
+				"insert into voucher values"
+						+ "(NULL,"+num+","+pin+","+balance+","+"curdate()"+",'"+uemail+"')";
+		
+		System.out.println("query = " + insertSQL);
+		
+		return DB.update(insertSQL);
+	}
 	
 	public static ArrayList<voucher> findAll()
 	{
@@ -45,6 +93,8 @@ public class voucher {
 				v.voucher_number=resultSet.getInt("voucher_number")+"";
 				v.voucher_pin=resultSet.getInt("voucher_pin")+"";
 				v.balance=resultSet.getDouble("balance");
+				v.purchase_Date=resultSet.getDate("purchase_Date");
+				v.purchaser_Email=resultSet.getString("purchaser_Email");
 			   list.add(v);
 			}
 		} catch (SQLException e) {
