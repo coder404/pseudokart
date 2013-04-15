@@ -64,7 +64,7 @@
 											<tr>
 												<td class="smal-txt">&nbsp;</td>
 											</tr>
-						<tr><td><a href ="addToCart.action?bookId=<s:property value = 'prodid'/>" style="color: #F66D05">Buy Now</a></td></tr> 					
+						<tr><td><a href="displayProduct?productId=<s:property value = "prodid" />" style="color: #F66D05">Buy Now</a></td></tr> 					
 										</table>
 									</td>
 									</tr>
