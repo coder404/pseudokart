@@ -21,8 +21,7 @@
 	function showRating() {
 		System.out.println("In show rating");
 		var radioButtons = document.getElementsByName("rating");
-		float
-		Prodrating = (Float)ActionContext.getContext().getSession().get("productID");
+		float Prodrating = (Float)ActionContext.getContext().getSession().get("productID");
 
 		System.out.println("rating :" + Prodrating);
 		radioButtons[Prodrating].checked = true;
@@ -74,6 +73,7 @@
 		</table>
 		<hr>
 		<br>
+		<s:if test="inStock">
 		<table>
 			<tr>
 				<td><b style="color: red">Rs.<s:property
@@ -108,6 +108,37 @@
 				<td>30 DAY REPLACEMENT GUARANTEE</td>
 			</tr>
 		</table>
+		</s:if>
+		<s:else>
+		<table>
+		<tr>
+		<td><b style="color: red">Rs.<s:property
+							value="product.price" /></b></td>
+		<td style="color: black">Out of Stock</td>
+			</tr>
+
+			<tr>
+				<td>Inclusive of taxes</td>
+			</tr>
+			<tr>
+				<td>(Free Home Delivery)</td>
+			</tr>
+			
+			<tr>
+						<td>Notify me when this product is in stock:</td>
+					</tr>
+					<tr></tr>
+
+					<tr>
+						<td><s:textfield key="emailid" name="emailid" size="20"
+								label="Email Id">
+							</s:textfield></td>
+						<td><s:submit type="button" value="notifyMe"
+								action="notifyMe" name="buttonName" label="Notify Me" cssStyle="border-radius:0; border:1px solid #1A356E ;background : #5B74A8 ;color : white"/></td>
+					</tr>
+		
+		</table>
+		</s:else>
 	</s:form>
 	<%@ page import="com.flipkart.action.CartAction_AddItem"%>
 <%@ page import="java.util.*" %>
