@@ -15,9 +15,7 @@ var radioButtons = document.getElementsByName("rating");
 for (var i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
        alert("You gave a rating of " + radioButtons[i].value + " out of 5. Thank you!");
-     
-       
-    break;
+         break;
     }
     
     }
