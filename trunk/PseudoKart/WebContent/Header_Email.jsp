@@ -128,7 +128,7 @@ return null;
 <table bgcolor="#005575">
 <tr height="30">
 
-<td colspan="2"><img src="./images/logo.jpg" width="170"/></td>
+<td colspan="2"><a href="home_after_login"><img src="./images/logo.jpg" width="170"/></a></td>
 <td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/>
 <td/><td/><td/><td/><td/><td/><td/><td/>
 <td/><td/><td/><td/><td/><td/><td/><td/>
@@ -143,14 +143,17 @@ return null;
 <td/><td/><td/><td/><td/><td/><td/><td/>
 <td/><td/><td/><td/><td/><td/><td/><td/>
 <td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/>
-<td><a href="#"><font color="white" size="3px">24x7 Customer Support  -  </font></a></td>
+<!-- <td><a href="#"><font color="white" size="3px">24x7 Customer Support  -  </font></a></td>
 <td><a href="#"><font color="white" size="3px">&nbsp;Contact Us</font></a></td>
-<td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
-<td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;Home</font></a></td>
+ --><td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
+
+<td><a href="home_after_login"><font color="white" size="3px">&nbsp;&nbsp;Home</font></a></td>
+<%-- <% if(ActionContext.getContext().getSession().get("email") == null){ %>
+<td><a href="categories"><font color="white" size="3px">&nbsp;&nbsp;Home</font></a></td>
+<%} %> --%>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
 <td><a href="account"><font color="white" size="3px">&nbsp;&nbsp;Account</font></a></td>
 <td><div style="width: 1px; height: 11px; background-color: white; float: left;"></div></td>
-<td><a href="#"><font color="white" size="3px">&nbsp;&nbsp;Wishlist</font></a></td>
 <td><a href="Wallet"><font color="white" size="3px">&nbsp;&nbsp;Wallet</font></a></td>
 <td><a href="BuyVoucher.jsp"><font color="white" size="3px">&nbsp;&nbsp;e-Gift Voucher</font></a></td>
 <!--  <td><a href="ViewCart"><font color="white" size="3px">&nbsp;&nbsp;Cart</font></a></td>-->
