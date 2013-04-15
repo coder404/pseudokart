@@ -55,17 +55,18 @@ border-collapse:collapse;
 			<th style="border: 1px solid black">Price</th>
 			<th style="border: 1px solid black">Quantity</th>
 			</tr>
-			<tr style="border: 1px solid black">
-			<s:iterator value="cart">
+			
+			 <s:iterator value="cart">
 				<s:iterator value="products">
+				<tr style="border: 1px solid black">
 					<td style="border: 1px solid black"><s:property value="name"/></td>
 					<td style="border: 1px solid black"><s:property value="description"/></td>
 					<td style="border: 1px solid black"><s:property value="%{order.orderstatus}"/></td>
 					<td style="border: 1px solid black"><s:property value="price"/></td>
 					<td style="border: 1px solid black"><s:property value="quantity"/></td>
-				</s:iterator>
-			</s:iterator>
-			</tr>
+				</tr></s:iterator>
+		 </s:iterator> 
+			
 			
 			</table>
 			
