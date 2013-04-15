@@ -37,6 +37,32 @@ public class RetrieveCategories {
 
 			
 	}
+	public static ArrayList<String> getSubCategorynames(String categoryname) {
+		
+		String categoryID=null;
+
+		ArrayList<Category> category=new ArrayList<Category>();
+		ArrayList<String> finallist=new ArrayList<String>();
+		
+		//getting category Id for passed category name
+		String selectionModifier="where name='"+categoryname+"';"; 
+		Category c=Category.findCategory(selectionModifier);
+		
+		///getting category Objects of all subcategories 
+		categoryID = c.getCategoryID();
+		String selectionModifier1="where parentCatID='"+categoryID+"';";
+		category=Category.findAll(selectionModifier1);
+	    
+		for(int i=0;i<category.size();i++)
+	    {
+			///getting category Objects of all subcategories names
+	        finallist.add(category.get(i).getName());	
+	    }
+		
+		return finallist;
+
+			
+	}
 	public static ArrayList<Product> getProducts(String subcategory) {
 		
 		String categoryID=null;
