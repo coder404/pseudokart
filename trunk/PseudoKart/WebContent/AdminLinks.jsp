@@ -32,18 +32,11 @@
 <td><a href="">Add New Product</a></td>
 </tr>
 <s:property value="email"/>
-<s:if test="MainAdmin">
+
 <tr>
 <td><img src="./images/glyph1.png"/></td>
 <td><a href="update_link">Update Stock</a></td>
 </tr>
-</s:if>
-<s:else>
-<tr>
-<td><img src="./images/glyph1.png"/></td>
-<td><a href="#">Update Stock</a></td>
-
-</s:else>
 </table>
 </div>
 </body>
