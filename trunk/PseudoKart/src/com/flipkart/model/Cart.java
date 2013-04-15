@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 import com.mast.util.DB;
 import com.mast.util.MyLog;
+import com.mysql.jdbc.Statement;
 
 public class Cart {
 	private int cartId;
 	public String productId;
 	public String ItemDesc;
 	public String DeliveryTime;
+	public double price;
 	public int quantity;
 	private String cartAppendNo;
 	private String email;
@@ -99,9 +101,11 @@ public class Cart {
 				obj.productId=resultSet.getString("productId");
 				obj.ItemDesc=Cart.getItemDescription(resultSet.getString("productId"));
 				System.out.println(obj.ItemDesc);
-				obj.subtotal=Cart.getsubTotal(resultSet.getString("productId"));
-				System.out.println(obj.subtotal);
+				obj.price=Cart.getPrice(resultSet.getString("productId"));
 				obj.quantity=resultSet.getInt("quantity");
+				obj.subtotal=(obj.quantity)*(Cart.getPrice(resultSet.getString("productId")));
+				System.out.println(obj.subtotal);
+				
 				//amount+=obj.subtotal;
 				CartList.add(obj);
 				
@@ -143,7 +147,31 @@ public class Cart {
 		
 	}
 	
-	public static double getsubTotal(String productId)
+	/*public static double getsubTotal(String productId)
+	{
+		double result=0;
+		ResultSet resultSet = null;
+		String query= "select price from product where productId='"+productId+"'";
+				
+		System.out.println("********"+query);
+		Connection connection = DB.getConnection();
+		resultSet = DB.readFromDB(query, connection);
+		try {
+			while(resultSet.next())
+			result=(double)resultSet.getDouble("price");
+			//System.out.println(result);
+			
+		} catch (SQLException e) {
+            MyLog.myCatch("Course.java",50, e);
+			e.printStackTrace();
+		}
+		DB.close(resultSet);
+		DB.close(connection);
+		return result;
+		
+	}
+*/
+	public static double getPrice(String productId)
 	{
 		double result=0;
 		ResultSet resultSet = null;
@@ -167,6 +195,8 @@ public class Cart {
 		
 	}
 
+	
+	
 	public static double getTotalAmount(ArrayList<Cart> CartItems)
 	{
 		double amt=0;
@@ -227,7 +257,86 @@ public class Cart {
 
 	}
 	
+	public static String checkProduct(String prodId,String mailid,String appendNo)
+	{
+		int count=0;
+		ResultSet resultSet = null;
+		 String query= "select count(*) from cart where email='"+mailid+"'and productId='"+prodId+"'and cartAppendNo='"+appendNo+"'";
+				
+		System.out.println("********"+query);
+		Connection connection = DB.getConnection();
+		resultSet = DB.readFromDB(query, connection);
+		try {
+			while(resultSet.next())
+			count=resultSet.getInt("count(*)");
+			//System.out.println(result);
+			
+		} catch (SQLException e) {
+            MyLog.myCatch("Product.java",50, e);
+			e.printStackTrace();
+		}
+		
+		DB.close(resultSet);
+		DB.close(connection);
 	
+		if(count!=0)
+			return "found";
+		else
+			return "notfound";
+		
+	}
+	
+	public static void updateQuantity(String email,String appendNo,String product_id,int qty ){
+		//ResultSet rs;
+		String query = "update cart set quantity='"+qty+"'"+" where email='"+email+"' and cartAppendNo='"+appendNo+"' and productId='"+product_id+"'";
+		System.out.println("********"+query);
+		Connection con = DB.getConnection();
+		//rs=DB.readFromDB(query, connection);
+		try{
+		Statement stmt= (Statement) con.createStatement();
+		stmt.executeUpdate(query);
+		}
+		catch(Exception e){
+			System.out.println("In Cart.java");
+		}
+		//DB.close(rs);
+		DB.close(con);
+		
+		
+	}
+	
+	/*
+	 * This method removes the cart item
+	 * */
+	
+	public static void removeItem(String email,String appendNo,String product_id ){
+		//ResultSet rs;
+		String query = "delete from cart  where email='"+email+"' and cartAppendNo='"+appendNo+"' and productId='"+product_id+"'";
+		System.out.println("********"+query);
+		Statement stmt=null;
+		Connection con = DB.getConnection();
+		//rs=DB.readFromDB(query, connection);
+		try{
+		stmt= (Statement) con.createStatement();
+		stmt.executeUpdate(query);
+		}
+		catch(Exception e){
+			System.out.println("In Cart.java");
+		}
+		//DB.close(rs);
+		try {
+			stmt.close();
+			DB.close(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+		
+	}
+
+
 	
 
 	public String getCartAppendNo() {
