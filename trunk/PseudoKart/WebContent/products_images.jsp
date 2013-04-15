@@ -56,7 +56,7 @@
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="200" height="170" align="center">
-											<img src="<s:property value="ProdImage"/>" alt="Mobile Phone" width="70" height="70"/></td>
+										<a href="displayProduct?productId=<s:property value = "prodid" />">	<img src="<s:property value="ProdImage"/>" alt="Mobile Phone" width="70" height="70"/></a></td>
 										<td>
 <!--												 PRODUCT DETAILS 			-->
 										
@@ -117,7 +117,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="allcomputers" style="color: white;"> View More>></a>
+					<a href="allcomputers" style="color: black;"> View More>></a>
 
 					</h4>
 					</td>
