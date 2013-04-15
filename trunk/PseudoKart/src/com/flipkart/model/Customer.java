@@ -229,12 +229,13 @@ public class Customer {
 	public int insert() {
 		// TODO Auto-generated method stub
 		String insertSQL = "insert into customer"
-				+ "(firstName,lastName,mobileNumber,landlineNumber,gender,email,profileName,updatedProfileName,CartAppendNo,updated_email) "
+				+ "(firstName,lastName,mobileNumber,landlineNumber,gender,email,profileName,updatedProfileName,CartAppendNo) "
 				+ "values(" + "'" + firstName + "','" + lastName + "', '"
 				+ mobileNumber + "','" + landlineNumber + "' , '" + gender
 				+ "' , '" + email + "','" + profileName + "','"
-				+ updatedProfileName + "', '" + 1 + "' , '" + updated_email + "');";
-
+				+ updatedProfileName + "', " + 1 + ");";
+		System.out.println("Inside customer insert.....");
+		
 		System.out.println(insertSQL);
 
 		return DB.update(insertSQL);
