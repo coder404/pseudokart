@@ -82,8 +82,8 @@ public class Categories_List extends ActionSupport {
 
 		this.setCategories_list(categories_list);
 
-		String query = "select name from product";
-		System.out.println(query);
+//		String query = "select name from product";
+//		System.out.println(query);
 		// Connection connection = DB.getConnection();
 		// rs1 = DB.readFromDB(query, connection);
 		//
@@ -98,10 +98,10 @@ public class Categories_List extends ActionSupport {
 		// e.printStackTrace();
 		// }
 		// this.setProducts_list(products_list);
-		mobiles = ProductSelection.getTwoProducts("Mobiles & Tablets");
+		mobiles = ProductSelection.getTwoProducts("Mobiles and Tablets");
 		this.setMobiles(mobiles);
 		System.out.println("mobiles size is " + mobiles.size());
-		allmobiles = ProductSelection.getAllProducts("Mobiles & Tablets");
+		allmobiles = ProductSelection.getAllProducts("Mobiles and Tablets");
 		this.setAllmobiles(allmobiles);
 		System.out.println("mobiles size is " + allmobiles.size());
 		computers = ProductSelection.getTwoProducts("Computers");
