@@ -12,7 +12,7 @@ import com.mast.util.MyLog;
 
 public class bankAccount {
 
-	int accountNo;
+	String accountNo;
 	String accountName;
 	String cardNo;
 	String cardType;
@@ -28,10 +28,10 @@ public class bankAccount {
 
 	String expiryDate;
 	int cvvNo;
-	public int getAccountNo() {
+	public String getAccountNo() {
 		return accountNo;
 	}
-	public void setAccountNo(int accountNo) {
+	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
 	public String getAccountName() {
@@ -75,6 +75,7 @@ public class bankAccount {
 	{
 
 		ResultSet rs=null;
+		System.out.println("selection mod :" + selectionModifier);
 		String query = "select * from bankProxy " + selectionModifier;
 		System.out.println(query);
 		Connection connection = DB.getConnection();
@@ -82,7 +83,7 @@ public class bankAccount {
 		try {
 			if (rs.next()) {
 				bankAccount account=new bankAccount();
-				account.accountNo = Integer.parseInt(rs.getString("accountNo"));
+				account.accountNo = rs.getString("accountNo");
 				account.accountName = rs.getString("accountName");
 				account.cardNo = rs.getString("cardNo");
 				account.cardType = rs.getString("cardType");
