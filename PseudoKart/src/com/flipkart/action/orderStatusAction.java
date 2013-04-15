@@ -17,79 +17,82 @@ public class orderStatusAction extends ActionSupport{
 	private String email;
 	private String orderstatus;
 	private String paidstatus;
-	
+
 	//cart table
 	private int cartId;
 	private String productId;
 	private int quantity;
 	private String cartAppendNo;
-	
+
 	//product table
 	private String name;
 	private Double price;
 	private String description;
-	
+
 	Order order=new Order();
 	ArrayList<Cart> cart=new ArrayList<Cart>();
 	Product product =new Product();
 	ArrayList<Product> products=new ArrayList<Product>();
 	ArrayList<Order> orders=new ArrayList<Order>();
 	ArrayList<Cart> carts=new ArrayList<Cart>();
-	
+
 	Map session=ActionContext.getContext().getSession();
-	
+
 	public String execute(){
 		email=(String)session.get("email");
 		String mod = "where orderNo='" + orderNo + "'" + "and email='" + email + "'" + "and paidstatus='Y'";
+		System.out.println("dhinkachaka...."+mod);
 		order=Order.findOne(mod);
-		if(order==null){
+		if((order==null)){
 			return "error";
+		}else{
+			System.out.println("ulalalalala"+order.getCartNo());
+			String mod1="where cartAppendNo='" + order.getCartNo() + "'" + "and email='" + email + "'";
+			System.out.println("lalalalalalala" +mod1);
+			cart=Cart.findAll(mod1);
+
+			for(int i=0;i<cart.size();i++){
+				String mod2="where productId='" + cart.get(i).getProductId() + "'";
+				Product product1=new Product();
+				product1=Product.findProduct(mod2);
+				products.add(product1);
+			}
+
+			for(int i=0;i<products.size();i++){
+				System.out.println(products.get(i).getName());
+				System.out.println(products.get(i).getPrice());
+				System.out.println(products.get(i).getDescription());
+			}
+			return SUCCESS;
 		}
-		
-		String mod1="where cartId='" + order.getCartNo() + "'" + "and email='" + email + "'";
-		cart=Cart.findAll(mod1);
-		
-		for(int i=0;i<cart.size();i++){
-			String mod2="where productId='" + cart.get(i).getProductId() + "'";
-			Product product1=new Product();
-			product1=Product.findProduct(mod2);
-			products.add(product1);
-		}
-		
-	/*	for(int i=0;i<products.size();i++){
-			System.out.println(products.get(i).getName());
-			System.out.println(products.get(i).getPrice());
-			System.out.println(products.get(i).getDescription());
-		}
-	*/	return SUCCESS;
 	}
-	
+
 	public String viewAllOrders(){
 		email=(String)session.get("email");
 		String mod = "where email='" + email +"'" ;
 		orders=Order.findAll(mod);
-		if(orders==null){
+		if(orders==null || orders.size()==0){
 			return "error";
 		}
-		
+
 		for(int i=0;i<orders.size();i++){
-			String mod1="where cartId='" + orders.get(i).getCartNo() + "'" + "and email='" + email + "'";
+			String mod1="where cartAppendNo='" + orders.get(i).getCartNo() + "'" + "and email='" + email + "'";
 			cart=Cart.findAll(mod1);
 			for(int j=0;j<cart.size();j++){
 				carts.add(cart.get(j));
 			}
 		}
-		
+
 		for(int i=0;i<carts.size();i++){
 			String mod2="where productId='" + carts.get(i).getProductId() + "'";
 			Product product1=new Product();
 			product1=Product.findProduct(mod2);
 			products.add(product1);
 		}
-	
-		
+
+
 		return SUCCESS;
-		
+
 	}
 
 	public int getOrderId() {
@@ -243,5 +246,5 @@ public class orderStatusAction extends ActionSupport{
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
+
 }
