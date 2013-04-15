@@ -26,7 +26,7 @@ public class productRatingsAction extends ActionSupport{
 	ProductRatings pr=new ProductRatings();
 	
 	public String execute(){
-		prodId=(String)session.get("productId");
+		prodId=(String)session.get("pro_id");
 	    //prodId="prod1";//now hard coded, remove it
 		//System.out.println("rating:"+rating);
 		String mod="where productId='"+prodId+"'";
