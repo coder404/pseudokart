@@ -14,7 +14,11 @@ public class displayProduct extends ActionSupport {
 	float product_rating;
 	String productId;
    boolean inStock;
+   
+   Map session = ActionContext.getContext().getSession();
+   private String email;
    	public boolean isInStock() {
+   		
 		return inStock;
 	}
 
@@ -41,7 +45,10 @@ public class displayProduct extends ActionSupport {
 
 	public String execute() {
 
-		Map session = ActionContext.getContext().getSession();
+		email=(String)session.get("email");
+		if(email==null){
+		return "error";
+		}else{
 		String sql = "where productId = '" + productId + "'";
 		System.out.println("sql=" + sql);
 		
@@ -62,6 +69,8 @@ public class displayProduct extends ActionSupport {
 		
 		
 		return "success";
+		}
+		
 	}
 
 	public Product getProduct() {
