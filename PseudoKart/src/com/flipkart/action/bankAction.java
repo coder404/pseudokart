@@ -116,7 +116,7 @@ public void validate(){
 	if(cardNo1.length()!=4 || cardNo2.length()!=4 || cardNo3.length()!=4 || cardNo4.length()!=4)
 		addFieldError( "cardNo", "Enter valid card details" );
 	
-	String sql = "where cardNo = " + cardNumber;
+	String sql = " where cardNo = " + cardNumber;
 	bankAccount account = bankAccount.findAccount(sql);
 	
 	if(account==null)
@@ -140,7 +140,7 @@ public void validate(){
 		
 		
 		String sql = "where cardNo = " + cardNumber;
-		
+		System.out.println("SQL : " + sql);
 		account = bankAccount.findAccount(sql);
 /*validate : 
 		- password
@@ -199,6 +199,8 @@ public void validate(){
 					e.printStackTrace();
 				}
 			}
+			sql = "where cardNo = " + cardNumber;
+			System.out.println("after SQL : " + sql);
 			account = bankAccount.findAccount(sql);
 			return "success";
 		}
