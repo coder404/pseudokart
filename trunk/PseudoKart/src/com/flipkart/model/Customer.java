@@ -197,7 +197,7 @@ public class Customer {
 				customer.gender = rs.getString("gender");
 				customer.profileName = rs.getString("profileName");
 				customer.updatedProfileName = rs.getString("updatedProfileName");
-				customer.updated_email=rs.getString("updated_email");
+				//customer.updated_email=rs.getString("updated_email");
 				customer.cartAppendNo = rs.getString("CartAppendNo");
 				DB.close(rs);
 				DB.close(connection);
