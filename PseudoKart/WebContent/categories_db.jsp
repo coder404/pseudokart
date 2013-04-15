@@ -27,7 +27,7 @@
 		<div class="span3">
 			<ul class="nav nav-tabs nav-stacked">
 				<s:iterator value="categories_list.{name}" status="text" id="c">
-					<li class="dropdown-submenu"><a href="#"> <s:property /></a>
+					<li class="dropdown-submenu"><a href="filterProducts?categoryname=<s:property />"> <s:property /></a>
 						<s:set scope="request" var="cat" value="#c" />
 						<ul class="dropdown-menu">
 
