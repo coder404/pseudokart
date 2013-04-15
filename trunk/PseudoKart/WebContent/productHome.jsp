@@ -14,7 +14,7 @@ var radioButtons = document.getElementsByName("rating");
 
 for (var i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
-       alert("You gave a rating of " + radioButtons[i].value + " out of 5. Thank you!");
+      // alert("You gave a rating of " + radioButtons[i].value + " out of 5. Thank you!");
          break;
     }
     
@@ -46,7 +46,11 @@ for (var i = 0; i < radioButtons.length; i++) {
 	<br>
 	<strong>Please rate it.</strong>
 	<br>
-	<s:form action="rating?productName=productName" method="get">
+	<s:form action="rating" method="get">
+	<s:if test="hasActionErrors()">
+	<div class="alert alert-error"><s:actionerror/></div>
+		
+	</s:if>
 	<div class="rating" id="rate" onclick="addRating()" >
 		<s:hidden  name="prodId" id="prodId" value="%{prodId}"/>
 	
