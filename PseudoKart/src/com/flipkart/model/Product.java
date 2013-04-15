@@ -113,6 +113,7 @@ product.price = Double.parseDouble((rs.getString("price")));
 				product.categoryID = rs.getString("categoryID");
 				product.price = Double.parseDouble((rs.getString("price")));
 				product.description = rs.getString("description");
+				product.prodImage=rs.getString("imageUrl");
 				selection.add(product);
 			}
 		} catch (SQLException e) {
@@ -152,6 +153,31 @@ product.price = Double.parseDouble((rs.getString("price")));
 		DB.close(connection);
 		return 0;
 	}
+	public static String getProductID(String selectionModifier)
+	{
+		String res=null;
+		ResultSet rs=null;
 		
+		String query = "select productId from product where description='" +selectionModifier+"'";
+		System.out.println(query);
+		Connection connection = DB.getConnection();
+		rs = DB.readFromDB(query, connection);
+		try {
+			if (rs.next()) 
+				
+					res=rs.getString("productId");
+				return res;
+			
+			
+			
+		} catch (SQLException e) {
+			MyLog.myCatch("Product.java", 70, e);
+			e.printStackTrace();
+		}
+		DB.close(rs);
+		DB.close(connection);
+		return res;
+	}
+	
 	
 }
