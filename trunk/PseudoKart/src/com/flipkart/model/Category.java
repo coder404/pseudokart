@@ -36,7 +36,7 @@ public class Category {
 	{
 
 		ResultSet rs=null;
-		String query = "select * from Category "+ selectionModifier;
+		String query = "select * from category "+ selectionModifier;
 		System.out.println(query);
 		Connection connection = DB.getConnection();
 		rs = DB.readFromDB(query, connection);
@@ -62,7 +62,7 @@ public class Category {
 	public static ArrayList<Category> findAll(String selectionModifier) {
 		ArrayList<Category> selection = new ArrayList<Category>();
 		ResultSet rs = null;
-		String query = "select * from Category "+ selectionModifier;
+		String query = "select * from category "+ selectionModifier;
 		System.out.println(query);
 		Connection connection = DB.getConnection();
 		rs = DB.readFromDB(query, connection);
