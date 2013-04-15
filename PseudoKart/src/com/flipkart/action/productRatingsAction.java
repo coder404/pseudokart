@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class productRatingsAction extends ActionSupport{
 	private String prodId;
+	
 	private int rating;
 	private int numberOfCustomers;
 	Product product;
@@ -27,8 +28,11 @@ public class productRatingsAction extends ActionSupport{
 	}
 	ProductRatings pr=new ProductRatings();
 	userRatings ur=new userRatings();
+	
 	public String execute(){
 		System.out.println("Rating"+rating);
+		
+		
 		email=(String)session.get("email");
 		if(email==null){
 			return "error";
@@ -53,15 +57,15 @@ public class productRatingsAction extends ActionSupport{
 				product = Product.findProduct(sql1);
 
 
-				/*String sql = "where name = '" + product.getName() + "'";
+				String sql = "where name = '" + product.getName() + "'";
 				System.out.println("sql=" + sql);
 
-				product = Product.findProduct(sql);*/
+				product = Product.findProduct(sql);
 
-				String sql = "where productId = '" + product.getProdid() + "'";
+				sql = "where productId = '" + product.getProdid() + "'";
 				System.out.println("SQL :" + sql);
 				product_rating = Product.ratingsProduct(sql);
-				//System.out.println(product_rating);
+				System.out.println("Average Product Ratings...."+product_rating);
 
 				Stock s=Stock.findOne("where stockProductID='"+product.getProdid()+"'");
 
@@ -99,21 +103,23 @@ public class productRatingsAction extends ActionSupport{
 				urRatings.insert(prodId,rating,email);
 				pr.update(prodId,rating,pr.getNumberOfCustomers());
 			}
+			
 			String sql1 = "where productId = '" + prodId + "'";
 			System.out.println("sql=" + sql1);
 
 			product = Product.findProduct(sql1);
 
 
-			/*String sql = "where name = '" + product.getName() + "'";
+			String sql = "where name = '" + product.getName() + "'";
 			System.out.println("sql=" + sql);
 
-			product = Product.findProduct(sql);*/
+			product = Product.findProduct(sql);
 
-			String sql = "where productId = '" + product.getProdid() + "'";
+			sql = "where productId = '" + product.getProdid() + "'";
 			System.out.println("SQL :" + sql);
 			product_rating = Product.ratingsProduct(sql);
-			//System.out.println(product_rating);
+			
+			System.out.println("Average Ratings...."+product_rating);
 
 			Stock s=Stock.findOne("where stockProductID='"+product.getProdid()+"'");
 
