@@ -12,15 +12,15 @@ import com.mast.util.MyLog;
 
 public class bankAccount {
 
-	private String accountNo;
-	private String accountName;
-	private String cardNo;
-	private String cardType;
-	private String pin;
+	String accountNo;
+	String accountName;
+	String cardNo;
+	String cardType;
+	String pin;
 	double balance;
-
 	String expiryDate;
-	
+	int cvvNo;
+
 	public double getBalance() {
 		return balance;
 	}
@@ -29,7 +29,6 @@ public class bankAccount {
 	}
 
 	
-	int cvvNo;
 	public String getAccountNo() {
 		return accountNo;
 	}

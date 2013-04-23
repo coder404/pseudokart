@@ -16,9 +16,17 @@ public class Product {
 	private String name;
 	private String categoryID;
 	private Double price;
+	private Double newprice=0.0;
 	private String description;
 	private String prodImage;
-
+	
+    
+	public Double getNewprice() {
+		return newprice;
+	}
+	public void setNewprice(Double newprice) {
+		this.newprice = newprice;
+	}
 	public String getProdImage() {
 		return prodImage;
 	}
@@ -80,9 +88,9 @@ public class Product {
 				product.prodid = rs.getString("productId");
 				product.name = rs.getString("name");
 				product.categoryID = rs.getString("categoryID");
-product.price = Double.parseDouble((rs.getString("price")));
+				product.price = Double.parseDouble((rs.getString("price")));
 				product.description = rs.getString("description");
-				
+				product.newprice=rs.getDouble("newprice");
 				product.prodImage= rs.getString("imageUrl");
 				DB.close(rs);
 				DB.close(connection);
@@ -103,6 +111,7 @@ product.price = Double.parseDouble((rs.getString("price")));
 		ResultSet rs = null;
 		String query = "select * " +
 				"from product " + selectionModifier;
+		System.out.println(query);
 		Connection connection = DB.getConnection();
 		rs = DB.readFromDB(query, connection);
 		try {
@@ -112,6 +121,7 @@ product.price = Double.parseDouble((rs.getString("price")));
 				product.name = rs.getString("name");
 				product.categoryID = rs.getString("categoryID");
 				product.price = Double.parseDouble((rs.getString("price")));
+				product.newprice = rs.getDouble("newprice");
 				product.description = rs.getString("description");
 				product.prodImage=rs.getString("imageUrl");
 				selection.add(product);
@@ -120,6 +130,7 @@ product.price = Double.parseDouble((rs.getString("price")));
 	        MyLog.myCatch("Product.java",50, e);
 			e.printStackTrace();
 		}
+		System.out.println("selection size"+selection.size());
 		DB.close(rs);
 		DB.close(connection);
 		return selection;

@@ -23,12 +23,12 @@ public class Address {
 
 	public int delete() {
 		String deleteSQL = 
-				"delete from address "+"where address_id = '" + address_id+"'";
+			    "delete from address "+"where address_id = '" + address_id+"'";
 		System.out.println(deleteSQL);
 		return DB.update(deleteSQL);
 	}
 
-
+	
 	public int insert(int customer_id) {
 		// TODO Auto-generated method stub
 		System.out.println("in insert"+customer_id);
@@ -37,7 +37,7 @@ public class Address {
 				+ "values(" + "'" + name + "','" + streetAddress + "', '"
 				+ landmark + "','" + city + "' , '" + state + "' , '" + country
 				+ "','" + pin + "','" + phone + "', '" +customer_id +"' );";
-
+		
 		System.out.println(insertSQL);
 
 		return DB.update(insertSQL);
@@ -66,116 +66,83 @@ public class Address {
 
 	public static Address findOne(String selectionModifier)
 	{
-		ResultSet rs=null;
-		String query = "select * from address " + selectionModifier;
-		System.out.println(query);
-		Connection connection = DB.getConnection();
-		rs = DB.readFromDB(query, connection);
-		try {
-			if (rs.next()) {
-				Address a = new Address();
-				a.address_id=rs.getInt("address_id");
-				a.name=rs.getString("name");
-				a.streetAddress=rs.getString("streetAdress");
-				a.city=rs.getString("city");
-				a.state=rs.getString("state");
-				a.pin=rs.getString("pin");
-				a.phone=rs.getString("phone");
-
-				DB.close(rs);
-				DB.close(connection);
-				return a;
-			}
-
-		} catch (SQLException e) {
-			MyLog.myCatch("Product.java", 70, e);
-			e.printStackTrace();
-		}
-		DB.close(rs);
-		DB.close(connection);
-		return null;
+		 ResultSet rs=null;
+         String query = "select * from address " + selectionModifier;
+         System.out.println(query);
+         Connection connection = DB.getConnection();
+         rs = DB.readFromDB(query, connection);
+         try {
+                 if (rs.next()) {
+                         Address a = new Address();
+                         a.address_id=rs.getInt("address_id");
+                         a.name=rs.getString("name");
+                         a.streetAddress=rs.getString("streetAdress");
+                         a.city=rs.getString("city");
+                         a.state=rs.getString("state");
+                         a.pin=rs.getString("pin");
+                         a.phone=rs.getString("phone");
+                         
+                         DB.close(rs);
+                         DB.close(connection);
+                         return a;
+                 }
+                 
+         } catch (SQLException e) {
+                 MyLog.myCatch("Product.java", 70, e);
+                 e.printStackTrace();
+         }
+         DB.close(rs);
+         DB.close(connection);
+         return null;
 	}
-
-	public static ArrayList<Address> findAll()
-	{
-		ArrayList<Address> addr_list=new ArrayList<Address>();
-		String email=(String)ActionContext.getContext().getSession().get("email");
-		ResultSet resultSet = null;
-		Customer cust=Customer.findOne("where email='"+email+"'");
-		Connection connection = DB.getConnection();
-		String findQuery = "select * from address where customer_id="+cust.getId()+";";
-		resultSet = DB.readFromDB(findQuery, connection);
-		try {
-			while (resultSet.next()) {
-				Address addr=new Address();
-				addr.setAddress_id(resultSet.getInt("address_id"));
-				addr.setName(resultSet.getString("name"));
-				addr.setStreetAddress(resultSet.getString("streetAdress"));
-				addr.setLandmark(resultSet.getString("landmark"));
-				addr.setCity(resultSet.getString("city"));
-				addr.setState(resultSet.getString("state"));
-				addr.setCountry(resultSet.getString("country"));
-				addr.setPhone(resultSet.getString("phone"));
-				addr.setPin(resultSet.getString("pin"));
-				addr.setCustomer_id(resultSet.getInt("customer_id"));
-				addr_list.add(addr);
-			}
-		} catch (SQLException e) {
-			MyLog.myCatch("Customer.java",50, e);
-			e.printStackTrace();
+	
+public static ArrayList<Address> findAll()
+{
+	ArrayList<Address> addr_list=new ArrayList<Address>();
+	String email=(String)ActionContext.getContext().getSession().get("email");
+	ResultSet resultSet = null;
+	Customer cust=Customer.findOne("where email='"+email+"'");
+	Connection connection = DB.getConnection();
+	String findQuery = "select * from address where customer_id="+cust.getId()+";";
+	resultSet = DB.readFromDB(findQuery, connection);
+	try {
+		while (resultSet.next()) {
+			Address addr=new Address();
+			addr.setAddress_id(resultSet.getInt("address_id"));
+			addr.setName(resultSet.getString("name"));
+			addr.setStreetAddress(resultSet.getString("streetAdress"));
+			addr.setLandmark(resultSet.getString("landmark"));
+			addr.setCity(resultSet.getString("city"));
+			addr.setState(resultSet.getString("state"));
+			addr.setCountry(resultSet.getString("country"));
+			addr.setPhone(resultSet.getString("phone"));
+			addr.setPin(resultSet.getString("pin"));
+			addr.setCustomer_id(resultSet.getInt("customer_id"));
+		  addr_list.add(addr);
 		}
-		DB.close(resultSet);
-		DB.close(connection);
-		return addr_list;
+	} catch (SQLException e) {
+        MyLog.myCatch("Customer.java",50, e);
+		e.printStackTrace();
 	}
+	DB.close(resultSet);
+	DB.close(connection);
+	return addr_list;
+}
 
 	public static boolean hasMultipleAddrress()
 	{
-
+		
 		String email=(String)ActionContext.getContext().getSession().get("email");
 		ResultSet resultSet = null;
 		Customer cust=Customer.findOne("where email='"+email+"'");
 		Connection connection = DB.getConnection();
 		String findQuery = "select * from address where customer_id="+cust.getId()+";";
 		resultSet = DB.readFromDB(findQuery, connection);
-		if(resultSet==null)
-			return false;
-		else
-			return true;
+	   if(resultSet==null)
+		   return false;
+	   else
+		   return true;
 	}
-
-	public static ArrayList<Address> findAll(String selectionModifier) {
-		ArrayList<Address> selection = new ArrayList<Address>();
-		ResultSet resultSet = null;
-		String query = "select * " +
-				"from address " + selectionModifier;
-		Connection connection = DB.getConnection();
-		resultSet = DB.readFromDB(query, connection);
-		try {
-			while (resultSet.next()) {
-				Address addr=new Address();
-				addr.setAddress_id(resultSet.getInt("address_id"));
-				addr.setName(resultSet.getString("name"));
-				addr.setStreetAddress(resultSet.getString("streetAdress"));
-				addr.setLandmark(resultSet.getString("landmark"));
-				addr.setCity(resultSet.getString("city"));
-				addr.setState(resultSet.getString("state"));
-				addr.setCountry(resultSet.getString("country"));
-				addr.setPhone(resultSet.getString("phone"));
-				addr.setPin(resultSet.getString("pin"));
-				addr.setCustomer_id(resultSet.getInt("customer_id"));
-				selection.add(addr);
-
-			}
-		} catch (SQLException e) {
-			MyLog.myCatch("Product.java",50, e);
-			e.printStackTrace();
-		}
-		DB.close(resultSet);
-		DB.close(connection);
-		return selection;
-	}
-
 
 
 	public int getAddress_id() {

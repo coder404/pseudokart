@@ -5,11 +5,11 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import com.mast.util.DB;
 import com.mast.util.MyLog;
+import com.mast.util.SendEmail;
 import com.opensymphony.xwork2.ActionContext;
 
 public class voucher {
@@ -66,16 +66,25 @@ public class voucher {
 		int Max=999999999;
 		
 		num = Min + (int)(Math.random() * (Max - Min));
-		pin = (int)(Math.random() * 9999);
+		pin = 1000 + (int)(Math.random() * 9999);
 		
 		System.out.println("num="+num);
 		System.out.println("pin="+pin);
+		
+		ActionContext.getContext().getSession().put("vouchernum",num);
+		ActionContext.getContext().getSession().put("voucherpin",pin);
 		
 		String insertSQL = 
 				"insert into voucher values"
 						+ "(NULL,"+num+","+pin+","+balance+","+"curdate()"+",'"+uemail+"')";
 		
 		System.out.println("query = " + insertSQL);
+		
+		System.out.println("Sending Email to receipient: " + (String)ActionContext.getContext().getSession().get("receiverEmail"));
+		SendEmail send = new SendEmail();
+		String mailID = (String)ActionContext.getContext().getSession().get("receiverEmail");
+		System.out.println("mailid: " + mailID);
+		send.Mail(mailID, 2);
 		
 		return DB.update(insertSQL);
 	}
