@@ -38,7 +38,7 @@ public class Login {
 	
 	public static int update_pwd(String emailAddr,String pwd)
 	{
-		String sql = "update login set password = '" + pwd + " ' where email='" + emailAddr +"'";
+		String sql = "update login set password = '" + pwd + "' where email='" + emailAddr +"'";
 		System.out.println(sql);
 		return DB.update(sql);
 	}
@@ -68,6 +68,9 @@ public class Login {
 		return selection;
 		
 	}
+	
+
+	
 	
 	public static Login findOne(String selectionModifier)
 	{
@@ -106,27 +109,6 @@ public class Login {
 		return DB.update(updateSQL);
 	
 		
-	}
-	
-	public int update_email(String updated_email, String email2) {
-		System.out.println("In login update..");
-		// TODO Auto-generated method stub
-		String updateSQL = 
-				"update login "
-						+ "set email= '" + updated_email +"'" 
-						+" where email='"+email2 +"'";
-		System.out.println("query = " + updateSQL);
-		return DB.update(updateSQL);
-	
-		
-	}
-
-	public int delete(String email2) {
-		// TODO Auto-generated method stub
-		String deleteSQL = 
-			    "delete from login "+"where email= '" + email2+"'";
-		System.out.println(deleteSQL);
-		return DB.update(deleteSQL);
 	}
 	
 }

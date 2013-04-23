@@ -71,8 +71,8 @@ public static void reduceQunatity(ArrayList<Cart> items)
 	
 	for(int i=0;i<items.size();i++)
 	{
-		Stock s = Stock.findOne("where stockProductId='"+items.get(i).productId+"';");
-		s.quantity=s.quantity-1;
+		Stock s = Stock.findOne("where stockProductId='"+items.get(i).getProductId()+"';");
+		s.quantity=s.quantity-items.get(i).getQuantity();
 		String query="update stock set quantity="+s.quantity+" where stockProductId='"+s.stockProductID+"';";
 		System.out.println(query);
 		Stock.updatequantity(query);
@@ -114,13 +114,7 @@ public static ArrayList<String> findAllNotifyMe(String sql)
 	
 }
 
-public static void insertNotifyMe(String sql)
-{
-	String query = "insert into notifyme(email,productId) values(" + sql + ")";
-	DB.update(query);
-	
-	
-}
+
 
 public static void updateStock(String sql){
 	
@@ -140,14 +134,7 @@ public static void insertStock(String sql){
 	
 	
 }
-public static void deleteNotifyme(String sql) {
-	
-	String query = "delete from notifyme " +  sql ;
-	
-System.out.println(query);
-	DB.update(query);
-	
-}
+
 
 
 }
