@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.flipkart.model.Product;
 import com.flipkart.model.Stock;
+import com.flipkart.model.notifyMe;
 import com.flipkart.model.stock_prod;
 import java.util.Properties;
 
@@ -61,15 +62,23 @@ public class stockAction extends ActionSupport{
 		System.out.println("Category..."+this.language1+"..subcat.."+this.language2);
 		String query="where categoryID=(select categoryID from category where name='"+ this.language2 +"' and parentCatID=(select categoryID from category where name='"+ this.language1+"'));";
 		list=Product.findAll(query);
+//		session.put("stock_list", list);
+//		return SUCCESS;
+		if(list==null || list.isEmpty())
+		{
+			return "no_stock";
+		}
+		else{
 		session.put("stock_list", list);
+		return SUCCESS;
+		}
+	}
+	public String updatetheStock(){
+		list=Product.findAll("");
+		session.put("stk_list", list);
 		return SUCCESS;
 	}
 
-public String updatetheStock(){
-	list=Product.findAll("");
-	session.put("stk_list", list);
-	return SUCCESS;
-}
 
 
 	public String back()
@@ -208,11 +217,6 @@ public String updatetheStock(){
 
 	@SuppressWarnings("unchecked")
 	public String update_stock(){
-	
-	//System.out.println("Category..."+this.language1+"..subcat.."+this.language2);
-	//	String query="where categoryID=(select categoryID from category where name='"+ this.language2 +"' and parentCatID=(select categoryID from category where name='"+ this.language1+"'));";
-		//stklist=Product.findAll("");
-		System.out.println("in update stock");
 		stklist = (ArrayList<Product>)session.get("stk_list");
 		for(int i=0 ; i<stklist.size() ; i++)
 			System.out.println(stklist.get(i).getProdid());
@@ -324,7 +328,8 @@ public String updatetheStock(){
 
 		}
 
-		Stock.deleteNotifyme(sql);	
+	
+		notifyMe.deleteNotifyme(sql);
 
 	}
 
