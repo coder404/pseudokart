@@ -3,6 +3,7 @@ package com.flipkart.DAO;
 import java.sql.*;
 
 import com.flipkart.model.Product;
+import com.flipkart.model.Stock;
 import com.mast.util.DB;
 import com.mast.util.MyLog;
 import com.mast.util.RuntimeSettings;
@@ -10,37 +11,48 @@ import com.mast.util.RuntimeSettings;
 public class AddProducts {
 	
 	
-	public static int addProducts(String category, String ProductID,String name,String price,String Description) {
+	public static int addProducts(String category,String name,String price,String Description) {
 		
-		String categoryID;
-		String insertSQL=null;
-		ResultSet rs=null;
-		String query = "select categoryID from category where name='" + category+"'";
+		ResultSet rs = null;
+		String productId;
+		int count=0;
+		String query = "select count(*) from product";
 		System.out.println(query);
 		Connection connection = DB.getConnection();
 		rs = DB.readFromDB(query, connection);
+		try {
+			while (rs.next()) {
+
+				count = rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			MyLog.myCatch("Product.java", 50, e);
+			e.printStackTrace();
+		}
+		count+=1;
+		productId="prod"+count;		
+		DB.close(rs);
+		DB.close(connection);
 		
-	
-			try {
-				if (rs.next()) {
-					
-					categoryID=rs.getString("categoryID");
+		
+		String insertSQL=null;
 			
-		
 		System.out.println("in insert products ");
 		insertSQL = "insert into product"
-				+ "(productId,name,categoryID,price,description) "
-				+ "values(" + "'" + ProductID + "','" + name + "', '"
-				+ categoryID + "','" + price + "' , '" + Description +"' );";
+				+ "(productId,name,categoryID,price,description,imageUrl) "
+				+ "values('" + productId + "','" + name + "', '"
+				+ category + "','" + price + "' , '" + Description +"','./images/default.png' );";
 		
 		System.out.println(insertSQL);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				
-		return DB.update(insertSQL);
+		int a= DB.update(insertSQL);
+		if(a!=0)
+		{
+		String modifier="'"+productId+"',5";
+		System.out.println(modifier);
+		Stock.insertStock(modifier);
+		}
+
+		return a;
 	}
 	
 	
